@@ -1,0 +1,13 @@
+<start>        ::= <turtleDoc>
+<turtleDoc>    ::= <statement> | <statement> <turtleDoc>
+<statement>    ::= <directive> | <triple> ".\n"
+<directive>    ::= "@prefix " <PNAME_NS> <IRIREF> "\n"
+<triple>       ::= <subject> " " <predicate> " " <object>
+<subject>      ::= <IRI>
+<predicate>    ::= <IRI>
+<object>       ::= <IRI>
+<IRI>          ::= <PREFIXEDNAME>                             #| <IRIREF>
+<PREFIXEDNAME> ::= <PNAME_LN>                                 #| <PNAME_NS>
+<IRIREF>       ::= "<b>" | "<e>"
+<PNAME_NS>     ::= "p1:" | "p2:"
+<PNAME_LN>     ::= <PNAME_NS> "c" | <PNAME_NS> "d"
