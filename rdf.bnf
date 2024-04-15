@@ -1,7 +1,7 @@
 <start>        ::= <turtleDoc>
 <turtleDoc>    ::= <statement> | <statement> <turtleDoc>
 <statement>    ::= <directive> | <triple> ".\n"
-<directive>    ::= "@prefix " <PNAME_NS> <IRIREF> "\n"
+<directive>    ::= "@prefix " <PNAME_NS> <IRIREF> ".\n"
 <triple>       ::= <subject> " " <predicate> " " <object>
 <subject>      ::= <IRI>
 <predicate>    ::= <IRI>

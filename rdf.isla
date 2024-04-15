@@ -1,10 +1,10 @@
 (
 forall <PNAME_NS> x in <triple>: 
-  exists <directive> y = "@prefix {<PNAME_NS> z}<IRIREF>\n": x=z
+  exists <directive> y = "@prefix {<PNAME_NS> z}<IRIREF>.\n": x=z
 ) 
 and
 (
-forall <directive> x = "@prefix {<PNAME_NS> xy}{<IRIREF> xz}\n":
-  forall <directive> y = "@prefix {<PNAME_NS> yy}{<IRIREF> yz}\n":
-  ((not xy = yy) implies different_position(x,y))
+forall <directive> a = "@prefix {<PNAME_NS> xy}<IRIREF>.\n":
+  forall <directive> b = "@prefix {<PNAME_NS> yy}<IRIREF>.\n":
+    (xy = yy implies same_position(a,b))
 )
