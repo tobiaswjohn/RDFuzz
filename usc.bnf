@@ -1,0 +1,25 @@
+<start>        ::= "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>\nPREFIX epo: <http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo#>\nPREFIX a4g: <http://data.europa.eu/a4g/ontology#>\n"<turtleDoc>
+<turtleDoc>    ::= <statement><statement><statement><statement><statement><statement> | <statement> <turtleDoc>
+<statement>    ::= <triple> ".\n"
+<triple>       ::= <addProp> | <addDProp> | <addClass> | <addSubClass> | <addDomainProp> | <addRangeProp> | <addDomainDProp> | <addRangeDProp>
+<addProp>      ::= <newProp> " rdf:type omv:AddObjectProperty"
+<addDProp>     ::= <newDProp> " rdf:type omv:AddDataProperty"
+<addClass>     ::= <newClass> " rdf:type omv:AddClass"
+<addSubClass>     ::= <someClass> " omv:subAddSubClass "<someClass>
+<addDomainProp>  ::= <someProp> " omv:domainAddObjectProperty "<someClass>
+<addDomainDProp>  ::= <someDProp> " omv:domainAddDataProperty "<someClass>
+<addRangeProp>  ::= <someProp> " omv:rangeAddObjectProperty "<someClass>
+<addRangeDProp>  ::= <someDProp> " omv:rangeAddDataProperty "<someData>
+
+
+<newProp> ::= "epo:"<newPropName>
+<newDProp> ::= "epo:"<newDPropName>
+<newClass> ::= "epo:"<newClassName>
+<someProp> ::= "a4g:"<newPropName> 
+<someDProp> ::= "a4g:"<newDPropName> 
+<someClass> ::= "a4g:"<newClassName> 
+<someData> ::= "xsd:int" | "xsd:String"
+
+<newPropName> ::= "prop1" | "prop2"
+<newDPropName> ::= "dataprop1" | "dataprop2"
+<newClassName> ::= "class1" | "class2"

@@ -1,0 +1,14 @@
+(
+forall <newClassName> x in <triple>: 
+  exists <triple> y =  "epo:{<newClassName> z} rdf:type omv:AddClass": x=z
+) 
+and 
+(
+forall <newDPropName> x2 in <triple>: 
+  exists <triple> y2 =  "epo:{<newDPropName> z2} rdf:type omv:AddDataProperty": x2=z2
+) 
+and 
+(
+forall <newPropName> x3 in <triple>: 
+  exists <triple> y3 =  "epo:{<newPropName> z3} rdf:type omv:AddObjectProperty": x3=z3
+) 
