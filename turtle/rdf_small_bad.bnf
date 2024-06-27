@@ -1,0 +1,25 @@
+# see https://www.w3.org/TR/turtle/#sec-grammar
+
+# non-terminals
+
+<start>                 ::= <turtleDoc> "\n\n"
+<turtleDoc>             ::= <statement> | <statement> "\n" <turtleDoc>
+<statement>             ::= <directive> | <triples> " ."
+<directive>             ::= "@prefix " <PNAME_NS> " " <IRIREF> " ."
+
+<triples>               ::= <subject> " " <predicateObjectList>
+<predicateObjectList>   ::= <verb> " " <objectList> | <verb> " " <objectList> " " <predicateObjectListInner>
+<predicateObjectListInner>  ::= ";\n" | ";\n" <verb> " " <objectList> | <predicateObjectListInner> " " <predicateObjectListInner>
+<objectList>            ::= <object> 
+<verb>                  ::= <iri>
+<subject>               ::= <iri> 
+<object>                ::= <iri> | "_:blank"  | "\"s\""
+
+<iri>                   ::= <IRIREF> " " | <prefixedName> " "       
+<prefixedName>          ::= <PNAME_NS> "c" | <PNAME_NS> "d"
+
+<IRIREF>            ::= "<i>" 
+<PNAME_NS>          ::= "p1:" | "p2:"
+
+
+

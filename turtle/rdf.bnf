@@ -21,7 +21,7 @@
 <literal>               ::= <rdfLiteral> | <numericLiteral> | <booleanLiteral>
 <blankNodePropertyList> ::= "[" <predicateObjectList> "]"
 <collection>            ::= "()" | "(" <collectionInner> ")"
-<collectionInner>       ::= <object> | <object> <collectionInner>
+<collectionInner>       ::= <object> | <object> " " <collectionInner>
 <numericLiteral>        ::= <INTEGER> | <DECIMAL> | <DOUBLE> 
 <rdfLiteral>            ::= <string> | <string> <LANGTAG> | <string> "^^" <iri>
 <booleanLiteral>        ::= "true" | "false"

@@ -1,10 +1,9 @@
 (
-exists <triples> t:
-  exists <PNAME_NS> x in t: true
+exists <triples> t1:
+  exists <PNAME_NS> x1 in t1: true
 )
 and
 (
-forall <triples> t:
-  forall <PNAME_NS> x in t: 
+forall <PNAME_NS> x in <triples>: 
      exists <directive> y = "@prefix {<PNAME_NS> z} <IRIREF> .": x=z
 ) 
