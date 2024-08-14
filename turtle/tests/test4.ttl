@@ -1,0 +1,25 @@
+@base <k> .
+@prefix p2: <n> .
+@prefix p1: <m> .
+@prefix p1: <j> .
+[ a  () ;
+]  a  [ a  ()] .
+
+()  a  () .
+
+()  a  () ;
+ .
+
+@prefix p2: <l> .
+()  a  () ;
+ ;
+ .
+
+: <k> p1:  , () ;
+ a  () .
+<n> <i> """v""" ;
+p2:d  false .
+
+([	] -.2e3) <m> 5 ;
+<i> 0 .
+_:b2 p1:c  '''u'''@lang , "s"^^<l> .

@@ -2,14 +2,13 @@
 
 # non-terminals
 
-<start>                 ::= <turtleDoc> "\n\n"
-<turtleDoc>             ::= <statement> | <statement> "\n" <turtleDoc>
+<start>                 ::= <turtleDoc> "\n"
+<turtleDoc>             ::= <statement> | <statement> "\n\n" <turtleDoc>
 <statement>             ::= <directive> | <triples> " ."
-<directive>             ::= <prefixID> | <base> | <sparqlPrefix> | <sparqlBase>
+<directive>             ::= <prefixID> 
 <prefixID>              ::= "@prefix " <PNAME_NS> " " <IRIREF> " ."
-<base>                  ::= "@base " <IRIREF> " ."
-<sparqlBase>            ::= "BASE " <IRIREF> 
-<sparqlPrefix>          ::= "PREFIX " <PNAME_NS> " " <IRIREF>
+# dont use the following, see open issue: https://github.com/owlcs/owlapi/issues/1149
+# <sparqlPrefix>          ::= "PREFIX " <PNAME_NS> " " <IRIREF>
 <triples>               ::= <subject> " " <predicateObjectList> | <blankNodePropertyList> " " <predicateObjectList>
 <predicateObjectList>   ::= <verb> " " <objectList> | <verb> " " <objectList> " " <predicateObjectListInner>
 <predicateObjectListInner>  ::= ";\n" | ";\n" <verb> " " <objectList> | <predicateObjectListInner> " " <predicateObjectListInner>
