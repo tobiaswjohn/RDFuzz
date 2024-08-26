@@ -1,0 +1,7 @@
+OWL API can not parse "predicateObjectList" if there are empty elements between semicolons (which is allowed following turtle grammar)
+
+
+load file via:
+
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new TurtleDocumentFormat());
+OWLOntology ont = manager.loadOntologyFromOntologyDocument(source);

@@ -1,0 +1,17 @@
+Can not parse blank node as class
+
+Call to API:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new TurtleDocumentFormat());
+OWLOntology ont = manager.loadOntologyFromOntologyDocument(source);
+
+
+Produced triple:
+ClassAssertion(<http://org.semanticweb.owlapi/error#Error1> <file:/home/tobias/Documents/programming/ontologies/RDFuzz/turtle/reduced_bugs/bug2/iri>)
+
+
+Additional fact:
+
+
+parsing works if blank node is an IRI.
+
+<iri> a <iri2>.

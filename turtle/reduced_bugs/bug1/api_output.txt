@@ -1,0 +1,47 @@
+Could not parse ontology.  Either a suitable parser could not be found, or parsing failed.  See parser logs below for explanation.
+The following parsers were tried:
+1) org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser@2cf3d63b
+
+
+Detailed logs:
+--------------------------------------------------------------------------------
+Parser: org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser@2cf3d63b
+    Stack trace:
+org.semanticweb.owlapi.rdf.turtle.parser.ParseException: Encountered unexpected token: ";" ";"
+    at line 2, column 2.
+
+Was expecting:
+
+    "."
+        org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser.parse(TurtleOntologyParser.java:58)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:195)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
+        org.example.Main.loadTurtle(Main.java:87)
+        org.example.Main.main(Main.java:23)
+Encountered unexpected token: ";" ";"
+    at line 2, column 2.
+
+Was expecting:
+
+    "."
+        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.generateParseException(TurtleParser.java:1034)
+        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.jj_consume_token(TurtleParser.java:902)
+        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.parseDocument(TurtleParser.java:160)
+        org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser.parse(TurtleOntologyParser.java:54)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:195)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
+        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
+        org.example.Main.loadTurtle(Main.java:87)
+        org.example.Main.main(Main.java:23)
+
+
+
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:236)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
+	at org.example.Main.loadTurtle(Main.java:87)
+	at org.example.Main.main(Main.java:23)
