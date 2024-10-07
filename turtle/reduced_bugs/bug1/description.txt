@@ -5,3 +5,7 @@ load file via:
 
 OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new TurtleDocumentFormat());
 OWLOntology ont = manager.loadOntologyFromOntologyDocument(source);
+
+
+reported (and confirmed bug):
+https://github.com/owlcs/owlapi/issues/1151#issuecomment-2334850585

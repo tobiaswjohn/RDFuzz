@@ -1,73 +1,38 @@
-Found error while parsing file tests/test3.ttl
+Found error while parsing file tests/test25.ttl
+Error occured while testing Resoner comparison
 
-org.semanticweb.owlapi.io.UnparsableOntologyException: Problem parsing file:/home/tobias/Documents/programming/ontologies/RDFuzz/turtle/tests/test3.ttl
-Could not parse ontology.  Either a suitable parser could not be found, or parsing failed.  See parser logs below for explanation.
-The following parsers were tried:
-1) org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser@16a0ee18
-
-
-Detailed logs:
---------------------------------------------------------------------------------
-Parser: org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser@16a0ee18
-    Stack trace:
-org.semanticweb.owlapi.rdf.turtle.parser.ParseException: Encountered unexpected token: ";" ";"
-    at line 15, column 2.
-
-Was expecting:
-
-    "."
-        org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser.parse(TurtleOntologyParser.java:58)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:195)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
-        org.example.Main.loadTurtle(Main.java:82)
-        org.example.Main.runOwlApi(Main.java:27)
-        org.example.Main.main(Main.java:21)
-Encountered unexpected token: ";" ";"
-    at line 15, column 2.
-
-Was expecting:
-
-    "."
-        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.generateParseException(TurtleParser.java:1034)
-        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.jj_consume_token(TurtleParser.java:902)
-        org.semanticweb.owlapi.rdf.turtle.parser.TurtleParser.parseDocument(TurtleParser.java:160)
-        org.semanticweb.owlapi.rdf.turtle.parser.TurtleOntologyParser.parse(TurtleOntologyParser.java:54)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:195)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
-        uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
-        org.example.Main.loadTurtle(Main.java:82)
-        org.example.Main.runOwlApi(Main.java:27)
-
-
-
+java.lang.Exception: Hermit and Openllet infer different number of axioms.
 ––––––––––––––––––––––––––––––––––––––––––
 –––––––––––    Turtle File    ––––––––––––
 ––––––––––––––––––––––––––––––––––––––––––
 
-@base <k> .
-@prefix p2: <n> .
-@prefix p1: <m> .
-[ ] <j> '''u'''^^p1:  ;
- a  _:b2 , [<n> <l> , () , (-12) , true] .
-@prefix p2: <i> .
-
-()  a  () ;
- .
-
-[ a  false , () , () ;
-]  a  () ;
- .
-<k> <m> () , () ;
- ;
- .
-
-@prefix p2: <i> .
-
-<k>  a  () ;
- .
-: p1:d  1234E-3 .
-[	] <l> """v""" ;
-p2:c  't'@some-lang .
+1	@base <k> .
+2	@prefix p2: <n> .
+3	@prefix p1: <m> .
+4	@prefix : <apiTester#> .
+5	@prefix owl: <http://www.w3.org/2002/07/owl#> .
+6	@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+7	@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+8	@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+9	@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+10	
+11	:A rdf:type owl:Class .
+12	:B rdf:type owl:Class .
+13	:C rdf:type owl:Class .
+14	:D rdf:type owl:Class .
+15	:p rdf:type owl:ObjectProperty .
+16	:q rdf:type owl:ObjectProperty .
+17	:r rdf:type owl:ObjectProperty .
+18	:s rdf:type owl:ObjectProperty .
+19	
+20	:b :q :c .
+21	:B owl:disjointWith :B .    
+22	:q rdfs:subPropertyOf :r .   
+23	:p rdf:type owl:TransitiveProperty .      
+24	:d owl:sameAs :a .  
+25	[ rdf:type owl:AllDifferent ; owl:distinctMembers ( :b :c ) ] .    
+26	:s rdfs:range :B .    
+27	:a rdf:type :D .   
+28	:r rdfs:domain :C . 
+29	:A rdfs:subClassOf :D .    
+30	

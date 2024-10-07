@@ -25,7 +25,7 @@ do
 
     ontFile="tests/test$i.ttl"
 
-    python turtle_generator.py $ontFile
+    python turtle_generator_reasoner.py $ontFile
 
 
     # test parsing with OWL API

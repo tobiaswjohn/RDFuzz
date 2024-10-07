@@ -1,0 +1,57 @@
+# see https://www.w3.org/TR/turtle/#sec-grammar
+
+# non-terminals
+
+<start>         ::= <turtleDoc> "\n"
+<turtleDoc>     ::= <prefixes> <ClasseDecl> <ObjectPropertiesDecl> "\n" <triples>
+
+<triples>       ::= <TenTriples> | <TenTriples>  <triples> 
+
+<TenTriples>    ::= <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" <triple> "\n" 
+
+<triple>        ::= <ClassRelationTriple> | <ABoxTriple> | <PropertyTriple>
+<ClassRelationTriple>    ::= <SubClassTriple> | <DisjointClassTriple> 
+<ABoxTriple>    ::= <TypeTriple> | <SameInd> |<DifferentInd> | <PropertyAssertion> 
+<PropertyTriple>        ::= <SubPropertyOf> | <DomainTriple> | <RangeTriple>  | <TransitiveProperty>
+
+
+<SubClassTriple>        ::= <Class> " rdfs:subClassOf " <Class> " ." <Empty>
+<DisjointClassTriple>   ::= <Class> " owl:disjointWith " <Class> " ." <Empty>
+<TypeTriple>            ::= <Individual> " rdf:type " <Class> " ." <Empty>
+<SameInd>               ::= <Individual> " owl:sameAs " <Individual> " ." <Empty>
+<DifferentInd>          ::= "[ rdf:type owl:AllDifferent ; owl:distinctMembers ( " <Individual> " " <Individual> " ) ] ." <Empty>
+<PropertyAssertion>     ::= <Individual> " " <Property> " " <Individual> " ."
+
+<SubPropertyOf>         ::= <Property> " rdfs:subPropertyOf " <Property>  " ." <Empty>
+<DomainTriple>          ::= <Property> " rdfs:domain " <Class> " ." <Empty>
+<RangeTriple>           ::= <Property> " rdfs:range " <Class> " ." <Empty>
+# something is wrong with the following...
+<TransitiveProperty>    ::= <Property> " rdf:type owl:TransitiveProperty ." <Empty><Empty>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# terminals
+<prefixes>      ::= "@prefix : <apiTester#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix xml: <http://www.w3.org/XML/1998/namespace> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n\n"
+
+
+<Class>         ::= ":A" | ":B" | ":C" | ":D"
+<Individual>    ::= ":a" | ":b" | ":c" | ":d"
+<Property>      ::= ":p" | ":q" | ":r" | ":s"
+<Empty>         ::= " " | "  " | "   " | "    " # used to balance probabilities of rules being choosen
+
+<ClasseDecl>    ::= ":A rdf:type owl:Class .\n:B rdf:type owl:Class .\n:C rdf:type owl:Class .\n:D rdf:type owl:Class .\n"
+<ObjectPropertiesDecl>  ::= ":p rdf:type owl:ObjectProperty .\n:q rdf:type owl:ObjectProperty .\n:r rdf:type owl:ObjectProperty .\n:s rdf:type owl:ObjectProperty .\n"

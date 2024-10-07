@@ -22,11 +22,11 @@ with open(grammar_file, 'r') as file:
 	grammar = file.read()
 
 cost_vector = CostWeightVector(
-    tree_closing_cost=5,
+    tree_closing_cost=2,
     constraint_cost=0,
-    derivation_depth_penalty=1,
-    low_k_coverage_penalty=-3,
-    low_global_k_path_coverage_penalty=7,
+    derivation_depth_penalty=-5,
+    low_k_coverage_penalty=10,
+    low_global_k_path_coverage_penalty=2,
 )
 
 solver = ISLaSolver(

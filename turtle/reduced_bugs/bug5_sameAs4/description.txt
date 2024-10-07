@@ -1,0 +1,60 @@
+error in jena api
+
+call of api:
+Model jenaModel = RDFDataMgr.loadDataset(ontFile.getAbsolutePath()).getDefaultModel();
+
+
+
+Sep 17, 2024 3:19:07 PM org.apache.jena.riot.system.ErrorHandlerFactory$ErrorLogger logError
+SEVERE: [line: 1, col: 15] Unrecognized (expected an RDF Term): [MINUS]
+Exception in thread "main" org.apache.jena.riot.RiotException: [line: 1, col: 15] Unrecognized (expected an RDF Term): [MINUS]
+	at org.apache.jena.riot.system.ErrorHandlerFactory$ErrorHandlerStd.fatal(ErrorHandlerFactory.java:155)
+	at org.apache.jena.riot.lang.LangEngine.raiseException(LangEngine.java:148)
+	at org.apache.jena.riot.lang.LangEngine.exceptionDirect(LangEngine.java:143)
+	at org.apache.jena.riot.lang.LangEngine.exception(LangEngine.java:137)
+	at org.apache.jena.riot.lang.LangTurtleBase.triplesNodeCompound(LangTurtleBase.java:489)
+	at org.apache.jena.riot.lang.LangTurtleBase.triplesNode(LangTurtleBase.java:469)
+	at org.apache.jena.riot.lang.LangTurtleBase.objectList(LangTurtleBase.java:419)
+	at org.apache.jena.riot.lang.LangTurtleBase.predicateObjectItem(LangTurtleBase.java:352)
+	at org.apache.jena.riot.lang.LangTurtleBase.predicateObjectList(LangTurtleBase.java:333)
+	at org.apache.jena.riot.lang.LangTurtleBase.triples(LangTurtleBase.java:314)
+	at org.apache.jena.riot.lang.LangTurtleBase.triplesSameSubject(LangTurtleBase.java:178)
+	at org.apache.jena.riot.lang.LangTurtle.oneTopLevelElement(LangTurtle.java:46)
+	at org.apache.jena.riot.lang.LangTurtleBase.runParser(LangTurtleBase.java:79)
+	at org.apache.jena.riot.lang.LangBase.parse(LangBase.java:43)
+	at org.apache.jena.riot.lang.RiotParsers$AbstractReaderRIOTLang.read(RiotParsers.java:133)
+	at org.apache.jena.riot.lang.RiotParsers$AbstractReaderRIOTLang.read(RiotParsers.java:91)
+	at org.apache.jena.riot.RDFParser.read(RDFParser.java:452)
+	at org.apache.jena.riot.RDFParser.parseURI(RDFParser.java:421)
+	at org.apache.jena.riot.RDFParser.parse(RDFParser.java:383)
+	at org.apache.jena.riot.RDFParserBuilder.parse(RDFParserBuilder.java:547)
+	at org.apache.jena.riot.RDFDataMgr.parseFromURI(RDFDataMgr.java:564)
+	at org.apache.jena.riot.RDFDataMgr.read(RDFDataMgr.java:429)
+	at org.apache.jena.riot.RDFDataMgr.read(RDFDataMgr.java:406)
+	at org.apache.jena.riot.RDFDataMgr.read(RDFDataMgr.java:386)
+	at org.apache.jena.riot.RDFDataMgr.read(RDFDataMgr.java:377)
+	at org.apache.jena.riot.RDFDataMgr.loadDataset(RDFDataMgr.java:337)
+	at org.example.Main.runJenaApi(Main.java:78)
+	at org.example.Main.main(Main.java:35)
+
+
+problem seems to be parsing double numbers
+jena api accepts
+<iri1> <iri2> -0.2e3 .
+and
+<iri1> <iri2> .2e3 .
+
+
+i.e. leading zero seems to be required for the api if sign is used
+
+--> similar to bug4
+
+
+grammar version: rdf_generator_2
+
+
+reported (and confirmed) together with bug4:
+https://github.com/apache/jena/issues/2715
+
+fixed:
+https://github.com/apache/jena/pull/2726

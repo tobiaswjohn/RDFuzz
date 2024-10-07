@@ -1,4 +1,4 @@
-Found error while parsing file tests/test22.ttl
+Found error while parsing file tests/test31.ttl
 Error occured while testing Resoner comparison
 
 java.lang.Exception: Hermit and Openllet infer different number of axioms.
@@ -25,24 +25,24 @@ java.lang.Exception: Hermit and Openllet infer different number of axioms.
 17	:r rdf:type owl:ObjectProperty .
 18	:s rdf:type owl:ObjectProperty .
 19	
-20	:s rdf:type owl:TransitiveProperty .    
-21	:s rdfs:domain :A .    
-22	:p rdfs:subPropertyOf :p .   
-23	:p rdfs:subPropertyOf :q .   
-24	:D rdfs:subClassOf :B . 
-25	:r rdfs:range :B .   
-26	:c owl:sameAs :c .  
-27	:r rdfs:range :C .   
-28	:q rdfs:subPropertyOf :s . 
-29	:q rdfs:subPropertyOf :p .  
-30	:r rdfs:subPropertyOf :p .    
-31	:d :s :b .
-32	:p rdfs:subPropertyOf :s .  
-33	:p rdfs:domain :A . 
-34	:p rdf:type owl:TransitiveProperty .      
-35	:p rdf:type owl:TransitiveProperty .       
-36	:c owl:sameAs :b .  
-37	:c rdf:type :B . 
-38	:B owl:disjointWith :C .    
-39	[ rdf:type owl:AllDifferent ; owl:distinctMembers ( :a :a ) ] .  
+20	[ rdf:type owl:AllDifferent ; owl:distinctMembers ( :a :c ) ] .  
+21	:B rdfs:subClassOf :A . 
+22	:p rdfs:domain :A .   
+23	:p rdfs:domain :B .   
+24	:p rdfs:domain :D .    
+25	:q rdfs:domain :C .  
+26	:q rdfs:range :B .   
+27	:D owl:disjointWith :B . 
+28	:q rdfs:domain :A . 
+29	:s rdfs:domain :D .  
+30	:q rdfs:domain :C .    
+31	:s rdf:type owl:TransitiveProperty .   
+32	:p rdfs:domain :C .  
+33	:d :s :a .
+34	:b rdf:type :C .    
+35	:p rdfs:subPropertyOf :r .  
+36	:D owl:disjointWith :A .  
+37	:a owl:sameAs :a .   
+38	:b owl:sameAs :a .   
+39	:b owl:sameAs :b .   
 40	
