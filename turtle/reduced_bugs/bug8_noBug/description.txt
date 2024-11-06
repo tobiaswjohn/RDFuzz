@@ -1,0 +1,69 @@
+
+exception in reasoners (probably due to OWL API)
+
+--> reasoner computes that "owl:Nothing" is one of the disjoint classes of "owl:Nothing"
+--> OWL API can not create such an assertion 
+
+error might be in OWL-API, in reasoners or that the input violates some OWL stuff (in the latter case, this should be detected while parsing, not while during inference)
+
+
+
+call:
+
+OWLOntology ont = loadTurtle(ontFile);
+OWLReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredDisjointClassesAxiomGenerator());
+InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
+Oct 07, 2024 3:03:17 PM org.semanticweb.owlapi.util.InferredOntologyGenerator generate
+WARNING: Error generating Disjoint classes axioms using Openllet, version 0.0.0
+org.semanticweb.owlapi.model.OWLRuntimeException: DisjointClasses(owl:Nothing) cannot be created. It is not a syntactically valid OWL 2 axiom. If the intent is to declare owl:Nothing as disjoint with itself and therefore empty, it cannot be created as a DisjointClasses axiom, and it is also redundant as owl:Nothing is always empty. Please rewrite it as SubClassOf(owl:Nothing, owl:Nothing) or remove the axiom. To disable this check, see ConfigurationOptions.ALLOW_DUPLICATES_IN_CONSTRUCT_SET
+	at uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl.getOWLDisjointClassesAxiom(OWLDataFactoryImpl.java:733)
+	at org.semanticweb.owlapi.model.axiomproviders.DisjointAxiomProvider.getOWLDisjointClassesAxiom(DisjointAxiomProvider.java:42)
+	at org.semanticweb.owlapi.model.axiomproviders.DisjointAxiomProvider.getOWLDisjointClassesAxiom(DisjointAxiomProvider.java:52)
+	at org.semanticweb.owlapi.util.InferredDisjointClassesAxiomGenerator.lambda$addAxioms$0(InferredDisjointClassesAxiomGenerator.java:37)
+	at java.base/java.util.HashMap$KeySpliterator.forEachRemaining(HashMap.java:1707)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.semanticweb.owlapi.util.InferredDisjointClassesAxiomGenerator.lambda$addAxioms$1(InferredDisjointClassesAxiomGenerator.java:37)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.semanticweb.owlapi.util.InferredDisjointClassesAxiomGenerator.addAxioms(InferredDisjointClassesAxiomGenerator.java:36)
+	at org.semanticweb.owlapi.util.InferredDisjointClassesAxiomGenerator.addAxioms(InferredDisjointClassesAxiomGenerator.java:29)
+	at org.semanticweb.owlapi.util.InferredEntityAxiomGenerator.lambda$createAxioms$0(InferredEntityAxiomGenerator.java:39)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:174)
+	at java.base/java.util.ArrayList$Itr.forEachRemaining(ArrayList.java:1003)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.TreeMap$KeySpliterator.forEachRemaining(TreeMap.java:3064)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.semanticweb.owlapi.util.InferredEntityAxiomGenerator.createAxioms(InferredEntityAxiomGenerator.java:39)
+	at org.semanticweb.owlapi.util.InferredOntologyGenerator.generate(InferredOntologyGenerator.java:128)
+	at org.semanticweb.owlapi.util.InferredOntologyGenerator.lambda$fillOntology$0(InferredOntologyGenerator.java:120)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:273)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.semanticweb.owlapi.util.InferredOntologyGenerator.fillOntology(InferredOntologyGenerator.java:122)
+	at org.example.Main.inferAxioms(Main.java:176)
+	at org.example.Main.runOpenlletReasoner(Main.java:123)
+	at org.example.Main.main(Main.java:44)
+
+
+grammar version: rdf_reasoner_generator.bnf with script turtle_generator_reasoner
+BUT: used some analysis of other test cases
+
+

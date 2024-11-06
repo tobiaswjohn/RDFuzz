@@ -1,0 +1,183 @@
+# see https://www.w3.org/TR/owl2-profiles/#OWL_2_EL_2
+# see https://www.w3.org/TR/owl2-mapping-to-rdf/
+
+# TODO: add annotationAxiom as an axiom
+# TODO: consider "global restrictions" for EL profile from https://www.w3.org/TR/owl2-profiles/
+
+
+# comment: additional <xyzList> non-terminals represent (possibly empty) lists of these nonterminals
+
+
+################# non-terminals ####################################
+
+<start>         ::= <ontologyDocument>
+
+<ontologyDocument>	::= <Prefixes> <ontology>
+<ontology>	::= "Ontology (\n\n" <ontologyAnnotations> <declarations> <axioms> " \n)\n"
+
+<axioms>     ::= <axiom> "\n" <axiom> "\n" <axiom> "\n" <axiom> "\n" <axiom>"\n" <axiom> "\n" <axiom>"\n" <axiom> "\n" <axiom> | <axiom> "\n" <axiom> "\n" <axiom> "\n" <axioms>
+
+# general part
+
+<ontologyAnnotations>	::= <annotationList>
+
+<axiomAnnotations>	::= <annotationList>
+
+<annotation>	::= "Annotation(" <annotationAnnotations> " " <AnnotationProperty> " " <AnnotationValue> ")"
+<annotationList>	::= "" | <annotation> " " <annotationList>
+<annotationAnnotations>	::= <annotationList>
+
+# EL specific
+
+<individualList>	::= "" | <Individual> " " <individualList>
+
+<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> | <stringLiteralWithLanguage>
+<typedLiteral>	::= <lexicalForm> "^^" <Datatype>
+<lexicalForm>	::= <QuotedString>
+<stringLiteralNoLanguage> 	::= <QuotedString>
+<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
+
+
+<objectPropertyExpression>	::= <ObjectProperty>
+<objectPropertyExpressionList>	::= "" | <objectPropertyExpression> " " <objectPropertyExpressionList>
+
+<dataPropertyExpression>	::= <DataProperty>
+<dataPropertyExpressionList>	::= "" | <dataPropertyExpression> " " <dataPropertyExpressionList>
+
+<dataRange>	::= <Datatype> | <dataIntersectionOf> | <dataOneOf>
+<dataRangeList>	::= "" | <dataRange> " " <dataRangeList>
+
+<dataIntersectionOf>	::= "DataIntersectionOf(" <dataRange>  " " <dataRange> " " <dataRangeList> ") \n"
+
+<dataOneOf>	::= "DataOneOf(" <literal> ") \n"
+
+
+<classExpression>	::= <Class> | <objectIntersectionOf> | <objectOneOf> | <objectSomeValuesFrom> | <objectHasValue> | <objectHasSelf> | <dataSomeValuesFrom> | <dataHasValue>
+
+<classExpressionList>	::= "" | <classExpression> " " <classExpressionList>
+
+<objectIntersectionOf>	::= "ObjectInersectionOf(" <classExpression> " " <classExpression> " " <classExpressionList> ")"
+
+<objectOneOf>	::= "ObjectOneOf(" <Individual> ")"
+
+<objectSomeValuesFrom>	::= "ObjectSomeValuesFrom(" <objectPropertyExpression> " " <classExpression> ")"
+
+<objectHasValue>	::= "ObjectHasValue(" <objectPropertyExpression> " " <Individual> ")"
+
+<objectHasSelf>		::= "ObjectHasSelf(" <objectPropertyExpression> ")"
+
+<dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataPropertyExpressionList> " " <dataRange>")"
+
+<dataHasValue>		::= "DataHasValue(" <dataPropertyExpression> " " <literal> ")"	
+
+
+
+# main production rule
+<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <dataTypeDefinition> | <hasKey> | <assertion> #| <annotationAxiom>
+
+
+<classAxiom>	::= <subClassOf> | <equivalentClasses> | <disjointClasses>
+
+<subClassOf>	::= "SubClassOf(" <axiomAnnotations> " " <subClassExpression> " " <superClassExpression> ")"
+<subClassExpression>	::= <classExpression>
+<superClassExpression>	::= <classExpression>
+
+<equivalentClasses>	::= "EquivalentClasses(" <axiomAnnotations> " " <classExpression> " " <classExpression> " " <classExpressionList> ")"
+
+<disjointClasses>	::= "DisjointClasses(" <axiomAnnotations> " " <classExpression> " " <classExpression> " " <classExpressionList> ")"
+
+
+<objectPropertyAxiom>	::= <equivalentObjectProperties> | <subObjectPropertyOf> | <objectPropertyDomain> | <objectPropertyRange> | <reflexiveObjectProperty> | <transitiveObjectProperty>
+
+<subObjectPropertyOf>	::= "SubObjectPropertyOf(" <axiomAnnotations> " " <subObjectPropertyExpression> " " <superObjectPropertyExpression> ")" 
+<subObjectPropertyExpression>	::= <objectPropertyExpression> | <propertyExpressionChain>
+<propertyExpressionChain>	::= "ObjectPropertyChain(" <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList> ")"
+<superObjectPropertyExpression>	::= <objectPropertyExpression>
+
+<equivalentObjectProperties>	::= "EquivalentObjectProperties(" <axiomAnnotations> " " <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList>")"
+
+<objectPropertyDomain>	::= "ObjectPropertyDomain(" <axiomAnnotations> " " <objectPropertyExpression> " " <classExpression> ")"
+
+<objectPropertyRange>	::= "ObjectPropertyRange(" <axiomAnnotations> " " <objectPropertyExpression> " " <classExpression> ")"
+
+<reflexiveObjectProperty>	::= "ReflexiveObjectProperty(" <axiomAnnotations> " " <objectPropertyExpression> ")"
+
+<transitiveObjectProperty>	::= "TransitiveObjectProperty(" <axiomAnnotations> " " <objectPropertyExpression> ")"
+
+
+<dataPropertyAxiom>	::= <subDataPropertyOf> | <equivalentDataProperties> | <dataPropertyDomain> | <dataPropertyRange> | <functionalDataProperty>
+
+
+<subDataPropertyOf>	::= "SubDataPropertyOf(" <axiomAnnotations> " " <subDataPropertyExpression> " " <superDataPropertyExpression> ")"
+<subDataPropertyExpression>	::= <dataPropertyExpression>
+<superDataPropertyExpression>	::= <dataPropertyExpression>
+
+<equivalentDataProperties>	::= "EquivalentDataProperties(" <axiomAnnotations> " " <dataPropertyExpression> " " <dataPropertyExpression> " " <dataPropertyExpressionList> ")"
+
+<dataPropertyDomain>    ::= "DataPropertyDomain(" <axiomAnnotations> " " <dataPropertyExpression> " " <classExpression> ")"
+
+<dataPropertyRange>	::= "DataPropertyRange(" <axiomAnnotations> " " <dataPropertyExpression> " " <dataRange> ")"
+
+<functionalDataProperty>	::= "FunctionalDataProperty(" <axiomAnnotations> " " <dataPropertyExpression> ")"
+
+
+<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <Datatype> " " <dataRange> ")"
+
+
+<hasKey>	::=  "HasKey(" <axiomAnnotations> " " <classExpression> " ( " <objectPropertyExpressionList> " ) ( " <dataPropertyExpressionList> " ) )"
+
+
+<assertion>	::= <sameIndividual> | <differentIndividuals> | <classAssertion> | <objectPropertyAssertion> | <negativeObjectPropertyAssertion> | <dataPropertyAssertion> | <negativeDataPropertyAssertion>
+
+<sourceIndividual>	::= <Individual>
+<targetIndividual>	::= <Individual>
+<targetValue>		::= <literal>
+
+<sameIndividual>	::= "SameIndividual(" <axiomAnnotations> " " <Individual> " " <Individual> " " <individualList> ")" 
+
+<differentIndividuals>	::= "DifferentIndividuals(" <axiomAnnotations> " " <Individual> " " <Individual> " " <individualList> ")" 
+
+<classAssertion>	::= "ClassAssertion(" <axiomAnnotations> " " <classExpression> " " <Individual> ")" 
+
+<objectPropertyAssertion>	::= "ObjectPropertyAssertion(" <axiomAnnotations> " " <objectPropertyExpression> " " <sourceIndividual> " " <targetIndividual> ")"
+
+<negativeObjectPropertyAssertion>	::= "NegativeObjectPropertyAssertion(" <axiomAnnotations> " " <objectPropertyExpression> " " <sourceIndividual> " " <targetIndividual> ")"
+
+<dataPropertyAssertion>	::= "DataPropertyAssertion(" <axiomAnnotations> " " <dataPropertyExpression> " " <sourceIndividual> " "  <targetValue> ")"
+
+<negativeDataPropertyAssertion>	::= "NegativeDataPropertyAssertion(" <axiomAnnotations> " " <dataPropertyExpression> " " <sourceIndividual> " "  <targetValue> ")"
+
+
+
+
+
+##################### terminals #########################
+
+
+<Prefixes>      ::= "Prefix(:=<http://www.example.org/reasonerTester#>)\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nPrefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)\nPrefix(xml:=<http://www.w3.org/XML/1998/namespace>)\nPrefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)\nPrefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)\n\n"
+
+<declarations> ::= <ClassDeclarations> <IndividualsDeclarations> <ObjectPropertiesDeclarations> <DataPropertiesDeclarations> <AnnotationPropertiesDeclaration>"\n"
+
+<ClassDeclarations>		::= "Declaration(Class(:A))\nDeclaration(Class(:B))\nDeclaration(Class(:C))\nDeclaration(Class(:D))\n"
+
+<IndividualsDeclarations>	::= "Declaration(NamedIndividual(:a))\nDeclaration(NamedIndividual(:b))\nDeclaration(NamedIndividual(:c))\nDeclaration(NamedIndividual(:d))\n"
+
+<ObjectPropertiesDeclarations>	::= "Declaration(ObjectProperty(:p))\nDeclaration(ObjectProperty(:q))\nDeclaration(ObjectProperty(:r))\nDeclaration(ObjectProperty(:s))\n"
+
+<DataPropertiesDeclarations>	::= "Declaration(DataProperty(:dp))\nDeclaration(DataProperty(:dq))\nDeclaration(DataProperty(:dr))\nDeclaration(DataProperty(:ds))\n"
+
+<AnnotationPropertiesDeclaration> ::= "Declaration(AnnotationProperty(:anp))\nDeclaration(AnnotationProperty(:anq))\nDeclaration(AnnotationProperty(:anr))\nDeclaration(AnnotationProperty(:ans))\n"
+
+
+<Class>         ::= ":A" | ":B" | ":C" | ":D"
+<Individual>    ::= ":a" | ":b" | ":c" | ":d"
+<ObjectProperty>      ::= ":p" | ":q" | ":r" | ":s"
+<DataProperty>	::= ":dp" | ":dq" | ":dr" | ":ds"
+<Datatype>	::= "owl:real" | "rdf:PlainLiteral" | "rdfs:Literal"
+
+<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
+<QuotedString>	::=  "\"s1\"" | "\"s2\"" | "\"s3\"" | "\"s4\""
+
+<AnnotationProperty>	::= ":anp" | ":anq" | ":anr" | ":ans"
+
+<AnnotationValue>	::= ":annotation1" | ":annotation2" | ":annotation3" | ":annotation4"

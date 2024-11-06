@@ -1,0 +1,150 @@
+# see https://www.w3.org/TR/owl2-profiles/#OWL_2_EL_2
+# see https://www.w3.org/TR/owl2-mapping-to-rdf/
+
+# TODO: add annotations
+# TODO: consider "global restrictions" for EL profile from https://www.w3.org/TR/owl2-profiles/
+
+# non-terminals
+
+<start>         ::= <prefixes> <declarations> <turtleDoc> "\n"
+
+<turtleDoc>     ::= <axiom> "\n" <axiom> | <axiom> "\n" <axiom> "\n" <axiom> "\n" <turtleDoc>
+
+<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> | <stringLiteralWithLanguage>
+<typedLiteral>	::= <lexicalForm> "^^" <Datatype>
+<lexicalForm>	::= <QuotedString>
+<stringLiteralNoLanguage> 	::= <QuotedString>
+<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
+
+
+<objectPropertyExpression>	::= <ObjectProperty>
+
+<dataPropertyExpression>	::= <DataProperty>
+
+<dataRange>	::= <Datatype> | <dataIntersectionOf> | <dataOneOf>
+
+<dataIntersectionOf>	::= "[\n rdf:type rdfs:Datatype ; \n owl:intersectionOf ( " <dataRange>  " " <dataRange> " ) \n] "	# TODO: consider case with more elements
+
+<dataOneOf>	::= "[\n rdf:type rdfs:Datatype ; \n owl:oneOf ( " <literal> " ) \n] "
+
+
+<classExpression>	::= <Class> | <objectIntersectionOf> | <objectOneOf> | <objectSomeValuesFrom> | <objectHasValue> | <objectHasSelf> | <dataSomeValuesFrom> | <dataHasValue>
+
+<objectIntersectionOf>	::= "[\n rdf:type owl:Class ;\n owl:intersectionOf ( " <classExpression> <classExpression> " )\n]"
+
+<objectOneOf>	::= "[\n rdf:type owl:Class ;\n owl:oneOf ( " <Individual> " )\n ]"
+
+<objectSomeValuesFrom>	::= "[\n rdf:type owl:Restriction ;\n owl:onProperty " <objectPropertyExpression> " ; owl:someValuesFrom " <classExpression> " \n ]"
+
+<objectHasValue>	::= "[\n rdf:type owl:Restriction ;\n owl:onProperty " <objectPropertyExpression> " ; owl:hasValue " <Individual> " \n ]"
+
+<objectHasSelf>		::= "[\n rdf:type owl:Restriction ;\n owl:onProperty " <objectPropertyExpression> " ; owl:hasSelf \"true^^xsd:boolean\" \n ]"
+
+<dataSomeValuesFrom>	::= "[\n rdf:type owl:Restriction ;\n owl:onProperty " <dataPropertyExpression> " ; owl:someValuesFrom " <dataRange> " \n ]"	# TODO: case with multiple properties
+
+<dataHasValue>		::= "[\n rdf:type owl:Restriction ;\n owl:onProperty " <dataPropertyExpression> " ; owl:hasValue " <literal> " \n ]"	
+
+
+
+# main production rule
+<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <dataTypeDefinition> | <hasKey> | <assertion> 
+
+
+<classAxiom>	::= <subClassOf> | <equivalentClasses> | <disjointClasses>
+
+<subClassOf>	::= <subClassExpression> " rdfs:subClassOf " <superClassExpression> " . "
+<subClassExpression>	::= <classExpression>
+<superClassExpression>	::= <classExpression>
+
+<equivalentClasses>	::= <classExpression> " owl:equivalentClass " <classExpression> " . "# omit case with three classExpressions --> hard to encode in grammar / maybe use different encoding than from standard, e.g. all classes equivalent to first one
+
+<disjointClasses>	::= <classExpression> " owl:disjointWith " <classExpression> " . "# TODO: case with three classes --> encode as list
+
+
+<objectPropertyAxiom>	::= <equivalentObjectProperties> | <subObjectPropertyOf> | <objectPropertyDomain> | <objectPropertyRange> | <reflexiveObjectProperty> | <transitiveObjectProperty>
+
+<subObjectPropertyOf>	::= <subObjectPropertyExpression> " rdfs:subPropertyOf " <superObjectPropertyExpression> " . " # TODO: consider case where subObjectPropertyExpression is a chain
+<subObjectPropertyExpression>	::= <objectPropertyExpression> 
+<superObjectPropertyExpression>	::= <objectPropertyExpression>
+
+<equivalentObjectProperties>	::= <objectPropertyExpression> " owl:equivalentProperty " <objectPropertyExpression> " . " # TODO: add case with three expressions
+
+<objectPropertyDomain>	::= <objectPropertyExpression> " rdfs:domain " <classExpression> " . "
+
+<objectPropertyRange>	::= <objectPropertyExpression> " rdfs:range " <classExpression> " . "
+
+<reflexiveObjectProperty>	::= <objectPropertyExpression> " rdf:type owl:ReflexiveProperty . "
+
+<transitiveObjectProperty>	::= <objectPropertyExpression> " rdf:type owl:TransitiveProperty . "
+
+
+<dataPropertyAxiom>	::= <subDataPropertyOf> | <equivalentDataProperties> | <dataPropertyDomain> | <dataPropertyRange> | <functionalDataProperty>
+
+
+<subDataPropertyOf>	::= <subDataPropertyExpression> " rdfs:subPropertyOf " <superDataPropertyExpression> " . "
+<subDataPropertyExpression>	::= <dataPropertyExpression>
+<superDataPropertyExpression>	::= <dataPropertyExpression>
+
+<equivalentDataProperties>	::= <dataPropertyExpression> " owl:equivalentProperty " <dataPropertyExpression> " . " 	#TODO: add case with three properties
+
+<dataPropertyDomain>    ::= <dataPropertyExpression> " rdfs:domain " <classExpression> " . "
+
+<dataPropertyRange>	::= <dataPropertyExpression> " rdfs:range " <classExpression> " . "
+
+<functionalDataProperty>	::= <dataPropertyExpression> " rdf:type owl:FunctionalProperty . "
+
+
+<dataTypeDefinition>	::= <Datatype> " owl:equivalentClass " <dataRange> " . "
+
+
+<hasKey>	::= <classExpression> " owl:hasKey ( " <objectPropertyExpression> " ) . " |
+<classExpression> " owl:hasKey ( " <dataPropertyExpression> " ) . " | <classExpression> " owl:hasKey ( " <objectPropertyExpression> " " <dataPropertyExpression> " ) . " # TODO: only simple cases so far
+
+
+<assertion>	::= <sameIndividual> | <differentIndividuals> | <classAssertion> | <objectPropertyAssertion> | <negativeObjectPropertyAssertion> | <dataPropertyAssertion> | <negativeDataPropertyAssertion>
+
+<sourceIndividual>	::= <Individual>
+<targetIndividual>	::= <Individual>
+<targetValue>		::= <literal>
+
+<sameIndividual>	::= <Individual> " owl:sameAs " <Individual> " . " # TODO: case with more individuals
+
+<differentIndividuals>	::= <Individual> " owl:differentFrom " <Individual> " . " # TODO: case with more individuals
+
+<classAssertion>	::= <Individual> " rdf:type " <classExpression> " . "
+
+<objectPropertyAssertion>	::= <sourceIndividual> " " <objectPropertyExpression> " " <targetIndividual> " . "
+
+<negativeObjectPropertyAssertion>	::= "[\n rdf:type owl:NegativePropertyAssertion ; \n owl:sourceIndividual " <sourceIndividual> " ;\n owl:assertionProperty " <objectPropertyExpression> " ;\n owl:targetIndividual " <targetIndividual> " \n] . "
+
+<dataPropertyAssertion>	::= <sourceIndividual> " " <dataPropertyExpression> " " <targetValue> " . "
+
+<negativeDataPropertyAssertion>	::= "[\n rdf:type owl:NegativePropertyAssertion ; \n owl:sourceIndividual " <sourceIndividual> " ;\n owl:assertionProperty " <objectPropertyExpression> " ;\n owl:targetValue " <targetValue> "\n] . "
+
+
+
+
+
+# terminals
+<prefixes>      ::= "@prefix : <apiTester#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix xml: <http://www.w3.org/XML/1998/namespace> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n\n"
+
+<declarations> ::= <ClassDeclarations> <IndividualsDeclarations> <ObjectPropertiesDeclarations> <DataPropertiesDeclarations> "\n"
+
+<ClassDeclarations>		::= ":A rdf:type owl:Class .\n:B rdf:type owl:Class .\n:C rdf:type owl:Class .\n:D rdf:type owl:Class .\n"
+
+<IndividualsDeclarations>	::= ":a rdf:type owl:NamedIndividual .\n:b rdf:type owl:NamedIndividual .\n:c rdf:type owl:NamedIndividual .\n:d rdf:type owl:NamedIndividual .\n"
+
+<ObjectPropertiesDeclarations>	::= ":p rdf:type owl:ObjectProperty .\n:q rdf:type owl:ObjectProperty .\n:r rdf:type owl:ObjectProperty .\n:s rdf:type owl:ObjectProperty .\n"
+
+<DataPropertiesDeclarations>	::= ":dp rdf:type owl:DatatypeProperty .\n:dq rdf:type owl:DatatypeProperty .\n:dr rdf:type owl:DatatypeProperty .\n:ds rdf:type owl:DatatypeProperty .\n"
+
+
+<Class>         ::= ":A" | ":B" | ":C" | ":D"
+<Individual>    ::= ":a" | ":b" | ":c" | ":d"
+<ObjectProperty>      ::= ":p" | ":q" | ":r" | ":s"
+<DataProperty>	::= ":dp" | ":dq" | ":dr" | ":ds"
+<Datatype>	::= "owl:real" | "rdf:PlainLiteral" | "rdfs:Literal"
+
+<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
+<QuotedString>	::=  "\"s\"" | "'t'" | "'''u'''" | "\"\"\"v\"\"\""
