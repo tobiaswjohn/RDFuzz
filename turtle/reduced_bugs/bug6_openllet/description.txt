@@ -1,0 +1,29 @@
+
+error in reasoners
+
+calling hermit and openllet leads to different results
+
+call:
+OWLOntology ont = loadTurtle(ontFile);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredEquivalentObjectPropertyAxiomGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(openllet, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
+Hermit infers:
+EquivalentObjectProperties(<file:/home/tobias/Documents/programming/ontologies/RDFuzz/turtle/reduced_bugs/bug6/apiTester#r> owl:bottomObjectProperty)
+i.e. EquivalentObjectProperties(:r owl:bottomObjectProperty)
+
+Openllet does not infer this axiom
+
+
+grammar version: rdf_reasoner_generator.bnf with script turtle_generator_reasoner
+
+
+reported:
+https://github.com/Galigator/openllet/issues/85

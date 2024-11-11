@@ -1,0 +1,5 @@
+
+(
+forall <PNAME_NS> x in <triples>: 
+     exists <directive> y = "@prefix {<PNAME_NS> z} <IRIREF> .": x=z
+) 
