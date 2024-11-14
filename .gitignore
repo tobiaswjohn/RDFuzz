@@ -2,4 +2,13 @@ venv/
 .idea/
 
 turtle/tests
+
+# java stuff
 *.jar
+*.class
+
+# temporary ontologies
+*temp*.ttl
+*temp*.owl
+
+

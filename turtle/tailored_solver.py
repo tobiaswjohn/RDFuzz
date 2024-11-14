@@ -35,7 +35,7 @@ if (not(no_contraints)):
 
 
 cost_vector = CostWeightVector(
-    tree_closing_cost=-100,
+    tree_closing_cost=0,
     constraint_cost=0,
     derivation_depth_penalty=0,
     low_k_coverage_penalty=20,

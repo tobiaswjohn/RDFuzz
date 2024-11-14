@@ -16,22 +16,30 @@ if (len(sys.argv) != 2):
 
 output_file = sys.argv[1]
 
+
+# grammar
 grammar_file = "functional_owl_el.bnf"
 #print("using grammar:", grammar_file)
 with open(grammar_file, 'r') as file:
 	grammar = file.read()
 	
+# constraints
+constraint_file = "functional_owl_el.isla"
+with open(constraint_file, 'r') as file:
+	    constraint = file.read()
+	
 
 cost_vector = CostWeightVector(
-    tree_closing_cost=0,
-    constraint_cost=0,
-    derivation_depth_penalty=0,
-    low_k_coverage_penalty=10,
+    tree_closing_cost=1,
+    constraint_cost=1,
+    derivation_depth_penalty=1,
+    low_k_coverage_penalty=0,
     low_global_k_path_coverage_penalty=0,
 )
 
 solver = ISLaSolver(
     grammar,
+    constraint,
     cost_computer=GrammarBasedBlackboxCostComputer(
         CostSettings(cost_vector, k=3),
         gg.GrammarGraph.from_grammar(parse_bnf(grammar)),

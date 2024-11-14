@@ -1,7 +1,5 @@
 # see https://www.w3.org/TR/owl2-profiles/#OWL_2_EL_2
-# see https://www.w3.org/TR/owl2-mapping-to-rdf/
 
-# TODO: add annotationAxiom as an axiom
 # TODO: consider "global restrictions" for EL profile from https://www.w3.org/TR/owl2-profiles/
 
 
@@ -15,7 +13,7 @@
 <ontologyDocument>	::= <Prefixes> <ontology>
 <ontology>	::= "Ontology (\n\n" <ontologyAnnotations> <declarations> <axioms> " \n)\n"
 
-<axioms>     ::= <axiom> "\n" <axiom> "\n" <axiom> "\n" <axiom> "\n" <axiom>"\n" <axiom> "\n" <axiom>"\n" <axiom> "\n" <axiom> | <axiom> "\n" <axiom> "\n" <axiom> "\n" <axioms>
+<axioms>     ::= <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axiom> | <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axioms>
 
 # general part
 
@@ -56,7 +54,7 @@
 
 <classExpressionList>	::= "" | <classExpression> " " <classExpressionList>
 
-<objectIntersectionOf>	::= "ObjectInersectionOf(" <classExpression> " " <classExpression> " " <classExpressionList> ")"
+<objectIntersectionOf>	::= "ObjectIntersectionOf(" <classExpression> " " <classExpression> " " <classExpressionList> ")"
 
 <objectOneOf>	::= "ObjectOneOf(" <Individual> ")"
 
@@ -66,7 +64,8 @@
 
 <objectHasSelf>		::= "ObjectHasSelf(" <objectPropertyExpression> ")"
 
-<dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataPropertyExpressionList> " " <dataRange>")"
+#<dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataPropertyExpressionList> " " <dataRange>")"
+<dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataRange>")"	# we only have data ranges with arity 1
 
 <dataHasValue>		::= "DataHasValue(" <dataPropertyExpression> " " <literal> ")"	
 

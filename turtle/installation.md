@@ -14,6 +14,6 @@
 	pip install isla-solver
  ```
  - java + maven
-	 + `sudo apt install default-jre`
-	 + `sudo apt install default-sdk`
+	 + `sudo apt install openjdk-17-jre`
+	 + `sudo apt install openjdk-17-jdk`
 	 + `sudo apt -y install git maven`

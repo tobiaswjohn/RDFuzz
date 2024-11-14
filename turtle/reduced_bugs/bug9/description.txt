@@ -1,0 +1,60 @@
+parsing of "DataSomeValuesFrom(:d1 :d2 rdfs:Literal)" fails as multiple data properties seem to result in problem
+
+problem in parser of OWL API
+
+is allowed to specify multiple data properties (see https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Existential_Quantification_2 )
+
+BUT data property MUST have matching arity. Issue: "All datatypes have arity one. This specification currently does not define data ranges of arity more than one; however, by allowing for n-ary data ranges, the syntax of OWL 2 provides a "hook" allowing implementations to introduce extensions such as comparisons and arithmetic." (from https://www.w3.org/TR/owl2-syntax/#Data_Ranges)
+
+call:
+File ontFile;
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager()
+manager.loadOntologyFromOntologyDocument(source);
+
+
+
+
+exception:
+
+Encountered unexpected token: "rdfs:Literal" <PNAME_LN>
+    at line 15, column 40.
+
+Was expecting:
+
+    ")"
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.generateParseException(OWLFunctionalSyntaxParser.java:2479)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.jj_consume_token(OWLFunctionalSyntaxParser.java:2405)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.DataSomeValuesFrom(OWLFunctionalSyntaxParser.java:636)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.ClassExpression(OWLFunctionalSyntaxParser.java:327)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.SubClassOf(OWLFunctionalSyntaxParser.java:1133)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.ClassAxiom(OWLFunctionalSyntaxParser.java:1104)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.Axiom(OWLFunctionalSyntaxParser.java:1026)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.Ontology(OWLFunctionalSyntaxParser.java:218)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxParser.parse(OWLFunctionalSyntaxParser.java:101)
+        org.semanticweb.owlapi.functional.parser.OWLFunctionalSyntaxOWLParser.parse(OWLFunctionalSyntaxOWLParser.java:47)
+
+
+
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyFactoryImpl.loadOWLOntology(OWLOntologyFactoryImpl.java:236)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.load(OWLOntologyManagerImpl.java:1105)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntology(OWLOntologyManagerImpl.java:1055)
+	at uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl.loadOntologyFromOntologyDocument(OWLOntologyManagerImpl.java:1005)
+	at org.example.Main.loadFunctionalSyntaxFile(Main.java:348)
+	at org.example.Main.loadOntologyFile(Main.java:333)
+	at org.example.Main.main(Main.java:37)
+	
+
+
+	
+	
+grammar version: functional_owl_el.bnf
+constraint: functional_owl_el.isla
+cost vector: 
+cost_vector = CostWeightVector(
+    tree_closing_cost=1,
+    constraint_cost=1,
+    derivation_depth_penalty=1,
+    low_k_coverage_penalty=0,
+    low_global_k_path_coverage_penalty=0,
+)

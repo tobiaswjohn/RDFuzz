@@ -1,0 +1,11 @@
+(
+exists <classAxiom> c: true
+) 
+and
+(
+exists <assertion> a: true
+)
+and
+(
+exists <objectPropertyAssertion> opa: true
+)

@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.semanticweb.elk.owlapi.ElkReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
 import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
 import org.semanticweb.owlapi.io.FileDocumentSource;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
@@ -28,15 +29,12 @@ public class Main {
         File ontFile = new File(fileName);
 
         if (args.length == 2 && Objects.equals(args[1], "--no-export")) {
-            /*OWLOntology o = loadTurtle(ontFile);
-            for (OWLAxiom a : o.getAxioms()) {
-                System.out.println(a);
-            }*/
+            // run to examine bugs in detail
 
             //runJenaApi(ontFile);
             System.out.println("test Hermit reasoner");
 
-            OWLOntology ont = loadTurtle(ontFile);
+            OWLOntology ont = loadOntologyFile(ontFile);
 
             Set<OWLAxiom> inferredHermit = runHermitReasoner(ont, ontFile);
             System.out.println("test Openllet reasoner");
@@ -64,11 +62,13 @@ public class Main {
 
         }
         else {
+            // regular test run
+
             System.out.println("test OWL API");
             runOwlApi(ontFile);
 
             // load ontology to reasoner
-            OWLOntology ont = loadTurtle(ontFile);
+            OWLOntology ont = loadOntologyFile(ontFile);
 
             System.out.println("test Hermit reasoner");
             Set<OWLAxiom> axiomsHermit = runHermitReasoner(ont, ontFile);
@@ -159,7 +159,7 @@ public class Main {
     // tries to load ontology using owl api
     public static void runOwlApi(File ontFile) {        
         try {
-            loadTurtle(ontFile);
+            loadOntologyFile(ontFile);
         } catch (OWLOntologyCreationException e) {
             // if error occurred: save log file
             logException(e, ontFile, "Owl API");
@@ -325,19 +325,27 @@ public class Main {
         writer.close();
     }
 
-    public static OWLOntology loadTurtle(File ontFile)  throws OWLOntologyCreationException {
-        //System.out.println("loading file "+ ontFile);
-        // try to load the ontology in turtle format
+    public static OWLOntology loadOntologyFile(File ontFile)  throws OWLOntologyCreationException {
+        // check, if ontology is in turtle format
+        if (ontFile.getName().endsWith(".ttl"))
+            return loadTurtleFile(ontFile);
+        else {
+            return loadFunctionalSyntaxFile(ontFile);
+        }
+    }
+
+    public static OWLOntology loadTurtleFile(File ontFile)  throws OWLOntologyCreationException {
         OWLOntologyDocumentSource source =
                 new FileDocumentSource(ontFile, new TurtleDocumentFormat());
-        
-        return manager.loadOntologyFromOntologyDocument(source);
-        //System.out.println("Loading was successful. Ontology has " + ont.getAxiomCount() + " axioms.");
-        /*for (OWLAxiom a : ont.getAxioms()) {
-            System.out.println(a);
-        }
 
-         */
+        return manager.loadOntologyFromOntologyDocument(source);
+    }
+
+    public static OWLOntology loadFunctionalSyntaxFile(File ontFile)  throws OWLOntologyCreationException {
+        OWLOntologyDocumentSource source =
+                new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+
+        return manager.loadOntologyFromOntologyDocument(source);
     }
 }
 
