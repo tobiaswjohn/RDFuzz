@@ -30,7 +30,7 @@
 <individualList>	::= "" | <Individual> " " <individualList>
 
 <literal>	::= <typedLiteral> | <stringLiteralNoLanguage> | <stringLiteralWithLanguage>
-<typedLiteral>	::= <lexicalForm> "^^" <Datatype>
+<typedLiteral>	::= <lexicalForm> "^^" <Datatype> | <lexicalForm> "^^" <NewDatatype> 
 <lexicalForm>	::= <QuotedString>
 <stringLiteralNoLanguage> 	::= <QuotedString>
 <stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
@@ -42,7 +42,7 @@
 <dataPropertyExpression>	::= <DataProperty>
 <dataPropertyExpressionList>	::= "" | <dataPropertyExpression> " " <dataPropertyExpressionList>
 
-<dataRange>	::= <Datatype> | <dataIntersectionOf> | <dataOneOf>
+<dataRange>	::= <Datatype> | <NewDatatype> | <dataIntersectionOf> | <dataOneOf>
 <dataRangeList>	::= "" | <dataRange> " " <dataRangeList>
 
 <dataIntersectionOf>	::= "DataIntersectionOf(" <dataRange>  " " <dataRange> " " <dataRangeList> ") \n"
@@ -120,7 +120,7 @@
 <functionalDataProperty>	::= "FunctionalDataProperty(" <axiomAnnotations> " " <dataPropertyExpression> ")"
 
 
-<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <Datatype> " " <dataRange> ")"
+<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <NewDatatype> " " <dataRange> ")"
 
 
 <hasKey>	::=  "HasKey(" <axiomAnnotations> " " <classExpression> " ( " <objectPropertyExpressionList> " ) ( " <dataPropertyExpressionList> " ) )"
@@ -155,7 +155,7 @@
 
 <Prefixes>      ::= "Prefix(:=<http://www.example.org/reasonerTester#>)\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nPrefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)\nPrefix(xml:=<http://www.w3.org/XML/1998/namespace>)\nPrefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)\nPrefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)\n\n"
 
-<declarations> ::= <ClassDeclarations> <IndividualsDeclarations> <ObjectPropertiesDeclarations> <DataPropertiesDeclarations> <AnnotationPropertiesDeclaration>"\n"
+<declarations> ::= <ClassDeclarations> <IndividualsDeclarations> <ObjectPropertiesDeclarations> <DataPropertiesDeclarations> <AnnotationPropertiesDeclaration> <DataTypeDeclarations> "\n"
 
 <ClassDeclarations>		::= "Declaration(Class(:A))\nDeclaration(Class(:B))\nDeclaration(Class(:C))\nDeclaration(Class(:D))\n"
 
@@ -165,6 +165,9 @@
 
 <DataPropertiesDeclarations>	::= "Declaration(DataProperty(:dp))\nDeclaration(DataProperty(:dq))\nDeclaration(DataProperty(:dr))\nDeclaration(DataProperty(:ds))\n"
 
+<DataTypeDeclarations>		::= "Declaration(Datatype(:dta))\nDeclaration(Datatype(:dtb))\nDeclaration(Datatype(:dtc))\n"
+
+
 <AnnotationPropertiesDeclaration> ::= "Declaration(AnnotationProperty(:anp))\nDeclaration(AnnotationProperty(:anq))\nDeclaration(AnnotationProperty(:anr))\nDeclaration(AnnotationProperty(:ans))\n"
 
 
@@ -172,7 +175,8 @@
 <Individual>    ::= ":a" | ":b" | ":c" | ":d"
 <ObjectProperty>      ::= ":p" | ":q" | ":r" | ":s"
 <DataProperty>	::= ":dp" | ":dq" | ":dr" | ":ds"
-<Datatype>	::= "owl:real" | "rdf:PlainLiteral" | "rdfs:Literal"
+<Datatype>	::= "xsd:string" | "rdf:PlainLiteral" | "rdfs:Literal"
+<NewDatatype>	::= ":dta" | ":dtb" | ":dtc"	# introduced, to make "DataTypeDefinition" possible according to rules
 
 <LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
 <QuotedString>	::=  "\"s1\"" | "\"s2\"" | "\"s3\"" | "\"s4\""

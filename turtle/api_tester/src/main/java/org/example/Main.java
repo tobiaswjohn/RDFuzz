@@ -23,6 +23,11 @@ import static java.lang.System.exit;
 
 public class Main {
     static OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    static OWLAxiom inconsistent = manager.getOWLDataFactory().getOWLSubClassOfAxiom(
+            manager.getOWLDataFactory().getOWLThing(),
+            manager.getOWLDataFactory().getOWLNothing()
+    );
+
 
     public static void main(String[] args) throws OWLOntologyCreationException {
         String fileName=args[0];
@@ -32,20 +37,22 @@ public class Main {
             // run to examine bugs in detail
 
             //runJenaApi(ontFile);
-            System.out.println("test Hermit reasoner");
 
             OWLOntology ont = loadOntologyFile(ontFile);
 
-            Set<OWLAxiom> inferredHermit = runHermitReasoner(ont, ontFile);
             System.out.println("test Openllet reasoner");
             Set<OWLAxiom> inferredOpenllet = runOpenlletReasoner(ont, ontFile);
 
+            System.out.println("test Hermit reasoner");
+            Set<OWLAxiom> inferredHermit = runHermitReasoner(ont, ontFile);
+
+            System.out.println("test ELK reasoner");
             Set<OWLAxiom> inferredElk = runElkReasoner(ont, ontFile);
 
             System.out.println("Openllet="+ inferredOpenllet + "\nHermit=" + inferredHermit + "\nElk=" + inferredElk);
             assert inferredOpenllet != null;
-            System.out.println(equivalent(inferredOpenllet, inferredHermit));
-            System.out.println(equivalent(inferredOpenllet, inferredElk));
+            System.out.println("openllet =?= HermiT : " + equivalent(inferredOpenllet, inferredHermit));
+            System.out.println("onenllet >?= Elk : " + subset(inferredElk,inferredOpenllet));
 
 
             Set<OWLAxiom> additionalHermit = new HashSet<>(inferredHermit);
@@ -150,9 +157,11 @@ public class Main {
                 exit(1);
             }
 
-
-            System.out.println("test Jena API");
-            runJenaApi(ontFile);
+            // disable check of jena API if desired
+            if (!Arrays.stream(args).toList().contains("--nojena")) {
+                System.out.println("test Jena API");
+                runJenaApi(ontFile);
+            }
         }
     }
 
@@ -190,7 +199,7 @@ public class Main {
             if (hermit.isConsistent())
                 return inferAxioms(hermit, ont);
             else
-                return new HashSet<>();
+                return Set.of(inconsistent);
 
         } catch (Exception e) {
             // if error occurred: save log file
@@ -201,7 +210,7 @@ public class Main {
     }
 
     // returns set of inferred axioms
-    private static Set<OWLAxiom> runOpenlletReasoner(OWLOntology ont, File ontFile) {
+    private static Set<OWLAxiom> runOpenlletReasoner(OWLOntology ont, File ontFile) throws OWLOntologyCreationException {
         try {
             OpenlletReasonerFactory rf = OpenlletReasonerFactory.getInstance();
             OWLReasoner openllet = rf.createReasoner(ont);
@@ -210,11 +219,12 @@ public class Main {
             if (openllet.isConsistent())
                 return inferAxioms(openllet, ont);
             else
-                return new HashSet<>();
+                return Set.of(inconsistent);
 
         } catch (Exception e) {
             // if error occurred: save log file
             logException(e, ontFile, "OpenlletReasoner");
+            //throw(e);
             exit(1);
         }
         return null;
@@ -231,7 +241,7 @@ public class Main {
             if (elk.isConsistent())
                 return inferAxioms(elk, ont);
             else
-                return new HashSet<>();
+                return Set.of(inconsistent);
 
         } catch (Exception e) {
             // if error occurred: save log file
@@ -273,7 +283,7 @@ public class Main {
     private static Set<OWLAxiom> inferAxioms(OWLReasoner reasoner, OWLOntology ont) throws OWLOntologyCreationException {
         // infer properties and class assertions
         List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
-        gens.add( new InferredPropertyAssertionGenerator());
+      /*  gens.add( new InferredPropertyAssertionGenerator());
         gens.add(new InferredClassAssertionAxiomGenerator());
         gens.add(new InferredSubClassAxiomGenerator());
         gens.add( new InferredDisjointClassesAxiomGenerator());
@@ -281,11 +291,12 @@ public class Main {
         gens.add( new InferredEquivalentDataPropertiesAxiomGenerator());
         gens.add( new InferredEquivalentObjectPropertyAxiomGenerator());
         gens.add( new InferredInverseObjectPropertiesAxiomGenerator());
+       */
         gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
-        gens.add( new InferredSubDataPropertyAxiomGenerator());
+       /* gens.add( new InferredSubDataPropertyAxiomGenerator());
         gens.add(new InferredDataPropertyCharacteristicAxiomGenerator());
         gens.add(new InferredObjectPropertyCharacteristicAxiomGenerator());
-        gens.add( new InferredSubObjectPropertyAxiomGenerator());
+        gens.add( new InferredSubObjectPropertyAxiomGenerator());*/
 
         InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
         OWLOntology infOnt = manager.createOntology();

@@ -1,0 +1,11 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+Declaration(NamedIndividual(:a))
+Declaration(ObjectProperty(:r))
+
+
+ObjectPropertyDomain( :r ObjectOneOf(:a))
+
+)

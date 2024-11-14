@@ -1,0 +1,90 @@
+Found error while parsing file tests/test4.owl
+Error occured while testing Reasoner comparison
+
+java.lang.Exception: Hermit and Openllet infer different number of axioms.
+additional Axioms from Hermit:
+DataPropertyAssertion(<http://www.example.org/reasonerTester#ds> <http://www.example.org/reasonerTester#c> "s1"^^<internal:anonymous-constants>)
+
+additional Axioms from Openllet:
+DataPropertyAssertion(<http://www.example.org/reasonerTester#ds> <http://www.example.org/reasonerTester#c> "s1"^^rdfs:Literal)
+
+––––––––––––––––––––––––––––––––––––––––––
+Elk infers axioms that are not inferred by Hermit.
+additional Axioms from Elk:
+SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing)
+
+––––––––––––––––––––––––––––––––––––––––––
+Elk infers axioms that are not inferred by Openllet.
+additional Axioms from Elk:
+SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing)
+
+––––––––––––––––––––––––––––––––––––––––––
+
+––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Turtle File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––
+
+1	Prefix(:=<http://www.example.org/reasonerTester#>)
+2	Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+3	Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+4	Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+5	Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+6	Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+7	
+8	Ontology (
+9	
+10	Declaration(Class(:A))
+11	Declaration(Class(:B))
+12	Declaration(Class(:C))
+13	Declaration(Class(:D))
+14	Declaration(NamedIndividual(:a))
+15	Declaration(NamedIndividual(:b))
+16	Declaration(NamedIndividual(:c))
+17	Declaration(NamedIndividual(:d))
+18	Declaration(ObjectProperty(:p))
+19	Declaration(ObjectProperty(:q))
+20	Declaration(ObjectProperty(:r))
+21	Declaration(ObjectProperty(:s))
+22	Declaration(DataProperty(:dp))
+23	Declaration(DataProperty(:dq))
+24	Declaration(DataProperty(:dr))
+25	Declaration(DataProperty(:ds))
+26	Declaration(AnnotationProperty(:anp))
+27	Declaration(AnnotationProperty(:anq))
+28	Declaration(AnnotationProperty(:anr))
+29	Declaration(AnnotationProperty(:ans))
+30	
+31	HasKey(Annotation(Annotation( :anq :annotation4)  :anr :annotation1) Annotation( :ans :annotation3)  ObjectIntersectionOf(ObjectHasSelf(:r) ObjectOneOf(:d) DataSomeValuesFrom(:ds rdfs:Literal) ) (  ) (  ) )
+32	
+33	SubClassOf(Annotation( :anp :annotation2) Annotation( :anq :annotation2) Annotation(Annotation( :anp :annotation2) Annotation( :anr :annotation3)  :anq :annotation1) Annotation( :ans :annotation1) Annotation( :anq :annotation3)  :D DataHasValue(:dp "s3"))
+34	
+35	NegativeObjectPropertyAssertion(Annotation(Annotation( :anr :annotation2) Annotation( :anq :annotation3) Annotation( :ans :annotation2)  :anr :annotation2) Annotation( :anq :annotation1) Annotation( :ans :annotation2)  :s :b :a)
+36	
+37	SubDataPropertyOf( :dr :dq)
+38	
+39	DatatypeDefinition( owl:real DataIntersectionOf(rdf:PlainLiteral DataOneOf("s2"^^rdfs:Literal) 
+40	 ) 
+41	)
+42	
+43	DataPropertyRange( :dp DataOneOf("s1"@no) 
+44	)
+45	
+46	FunctionalDataProperty(Annotation(Annotation(Annotation( :anq :annotation4) Annotation( :ans :annotation2) Annotation(Annotation(Annotation( :ans :annotation1) Annotation( :anp :annotation1)  :ans :annotation3)  :anr :annotation3) Annotation( :ans :annotation1) Annotation( :anp :annotation3)  :anq :annotation4) Annotation( :ans :annotation3)  :anp :annotation3)  :dp)
+47	
+48	ObjectPropertyAssertion( :p :d :c)
+49	
+50	HasKey( ObjectHasValue(:q :c) ( :p :s :p :p :q :s :p :r :r :s :s :p  ) ( :dr  ) )
+51	
+52	ObjectPropertyDomain( :r ObjectSomeValuesFrom(:q :C))
+53	
+54	DatatypeDefinition(Annotation( :ans :annotation1) Annotation( :ans :annotation3)  owl:real DataIntersectionOf(DataOneOf("s4"@en) 
+55	 DataOneOf("s1") 
+56	 owl:real ) 
+57	)
+58	
+59	DisjointClasses(Annotation(Annotation( :anr :annotation1)  :ans :annotation1)  :A :B DataHasValue(:dq "s1"@fr) DataHasValue(:dq "s4") DataHasValue(:ds "s1") :D )
+60	
+61	HasKey( DataHasValue(:dr "s4"@de) (  ) ( :ds :dr :dp  ) )
+62	
+63	DataPropertyAssertion( :ds :c "s1"^^rdfs:Literal) 
+64	)

@@ -32,8 +32,8 @@ with open(constraint_file, 'r') as file:
 cost_vector = CostWeightVector(
     tree_closing_cost=1,
     constraint_cost=1,
-    derivation_depth_penalty=1,
-    low_k_coverage_penalty=0,
+    derivation_depth_penalty=0,
+    low_k_coverage_penalty=2,
     low_global_k_path_coverage_penalty=0,
 )
 
