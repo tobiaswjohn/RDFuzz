@@ -1,0 +1,32 @@
+error in reasoners
+
+hermit handles rdfs:Literal strangely
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+ReasonerFactory rf = new ReasonerFactory();
+OWLReasoner hermit = rf.createReasoner(ont);
+
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredPropertyAssertionGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(hermit, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
+Hermit infers
+DataPropertyAssertion(:d :c "data"^^<internal:anonymous-constants>)
+
+Openllet infers the (correct) axiom:
+DataPropertyAssertion(:d :c "data"^^rdfs:Literal)
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script generator_OWL_EL.py
+
+found on 14.11.2024
+
+
+reported:
+

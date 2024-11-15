@@ -11,7 +11,7 @@
 <start>         ::= <ontologyDocument>
 
 <ontologyDocument>	::= <Prefixes> <ontology>
-<ontology>	::= "Ontology (\n\n" <ontologyAnnotations> <declarations> <axioms> " \n)\n"
+<ontology>	::= "Ontology (\n\n" <ontologyAnnotations> "\n" <declarations> "\n" <axioms> " \n)\n"
 
 <axioms>     ::= <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axiom> | <axiom> "\n\n" <axiom> "\n\n" <axiom> "\n\n" <axioms>
 
@@ -45,9 +45,9 @@
 <dataRange>	::= <Datatype> | <NewDatatype> | <dataIntersectionOf> | <dataOneOf>
 <dataRangeList>	::= "" | <dataRange> " " <dataRangeList>
 
-<dataIntersectionOf>	::= "DataIntersectionOf(" <dataRange>  " " <dataRange> " " <dataRangeList> ") \n"
+<dataIntersectionOf>	::= "DataIntersectionOf(" <dataRange>  " " <dataRange> " " <dataRangeList> ") "
 
-<dataOneOf>	::= "DataOneOf(" <literal> ") \n"
+<dataOneOf>	::= "DataOneOf(" <literal> ") "
 
 
 <classExpression>	::= <Class> | <objectIntersectionOf> | <objectOneOf> | <objectSomeValuesFrom> | <objectHasValue> | <objectHasSelf> | <dataSomeValuesFrom> | <dataHasValue>

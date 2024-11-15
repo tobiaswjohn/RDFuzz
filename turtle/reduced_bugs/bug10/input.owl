@@ -1,0 +1,17 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+
+Declaration(Class(:A))
+
+
+Declaration(NamedIndividual(:c))
+Declaration(DataProperty(:d))
+
+
+
+DataPropertyAssertion( :d :c "data"^^rdfs:Literal) 
+)

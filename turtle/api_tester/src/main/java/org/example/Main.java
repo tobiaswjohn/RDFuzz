@@ -283,17 +283,16 @@ public class Main {
     private static Set<OWLAxiom> inferAxioms(OWLReasoner reasoner, OWLOntology ont) throws OWLOntologyCreationException {
         // infer properties and class assertions
         List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
-      /*  gens.add( new InferredPropertyAssertionGenerator());
+        //gens.add( new InferredPropertyAssertionGenerator());
         gens.add(new InferredClassAssertionAxiomGenerator());
-        gens.add(new InferredSubClassAxiomGenerator());
+        /*gens.add(new InferredSubClassAxiomGenerator());
         gens.add( new InferredDisjointClassesAxiomGenerator());
         gens.add( new InferredEquivalentClassAxiomGenerator());
         gens.add( new InferredEquivalentDataPropertiesAxiomGenerator());
         gens.add( new InferredEquivalentObjectPropertyAxiomGenerator());
         gens.add( new InferredInverseObjectPropertiesAxiomGenerator());
-       */
         gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
-       /* gens.add( new InferredSubDataPropertyAxiomGenerator());
+        gens.add( new InferredSubDataPropertyAxiomGenerator());
         gens.add(new InferredDataPropertyCharacteristicAxiomGenerator());
         gens.add(new InferredObjectPropertyCharacteristicAxiomGenerator());
         gens.add( new InferredSubObjectPropertyAxiomGenerator());*/
@@ -318,7 +317,7 @@ public class Main {
 
         writer.print(e);
         writer.println("\n––––––––––––––––––––––––––––––––––––––––––");
-        writer.println("–––––––––––    Turtle File    ––––––––––––");
+        writer.println("–––––––––––    Ontology File    ––––––––––––");
         writer.println("––––––––––––––––––––––––––––––––––––––––––\n");
 
         // add content of turtle file
