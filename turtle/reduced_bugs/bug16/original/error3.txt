@@ -1,0 +1,83 @@
+Found error while parsing file tests/test7.owl
+Error occured while testing Reasoner comparison
+
+java.lang.Exception: Hermit and Openllet infer different number of axioms.
+additional Axioms from Hermit:
+SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing)
+
+additional Axioms from Openllet:
+DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Thing)
+DisjointClasses(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C>)
+SubClassOf(<http://www.example.org/reasonerTester#B> owl:Nothing)
+EquivalentClasses(<http://www.example.org/reasonerTester#B> owl:Nothing)
+DisjointClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#B>)
+DisjointClasses(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#D>)
+
+––––––––––––––––––––––––––––––––––––––––––
+Elk infers axioms that are not inferred by Openllet.
+additional Axioms from Elk:
+SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing)
+
+––––––––––––––––––––––––––––––––––––––––––
+
+––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––
+
+1	Prefix(:=<http://www.example.org/reasonerTester#>)
+2	Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+3	Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+4	Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+5	Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+6	Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+7	
+8	Ontology (
+9	
+10	
+11	Declaration(Class(:A))
+12	Declaration(Class(:B))
+13	Declaration(Class(:C))
+14	Declaration(Class(:D))
+15	Declaration(NamedIndividual(:a))
+16	Declaration(NamedIndividual(:b))
+17	Declaration(NamedIndividual(:c))
+18	Declaration(NamedIndividual(:d))
+19	Declaration(ObjectProperty(:p))
+20	Declaration(ObjectProperty(:q))
+21	Declaration(ObjectProperty(:r))
+22	Declaration(ObjectProperty(:s))
+23	Declaration(DataProperty(:dp))
+24	Declaration(DataProperty(:dq))
+25	Declaration(DataProperty(:dr))
+26	Declaration(DataProperty(:ds))
+27	Declaration(AnnotationProperty(:anp))
+28	Declaration(AnnotationProperty(:anq))
+29	Declaration(AnnotationProperty(:anr))
+30	Declaration(AnnotationProperty(:ans))
+31	Declaration(Datatype(:dta))
+32	Declaration(Datatype(:dtb))
+33	Declaration(Datatype(:dtc))
+34	
+35	
+36	EquivalentClasses(Annotation( :ans :annotation3) Annotation( :anp :annotation4)  ObjectIntersectionOf(:C ObjectHasSelf(:s) :B ) ObjectSomeValuesFrom(:r ObjectHasValue(:p :c)) )
+37	
+38	NegativeDataPropertyAssertion(Annotation(Annotation(Annotation( :anr :annotation3)  :anq :annotation1) Annotation( :anp :annotation3)  :anr :annotation1) Annotation(Annotation( :ans :annotation2)  :ans :annotation1)  :dp :a "s3"^^xsd:string)
+39	
+40	ObjectPropertyAssertion( :q :d :b)
+41	
+42	DisjointClasses( :D :A )
+43	
+44	ReflexiveObjectProperty( :p)
+45	
+46	DatatypeDefinition( :dtc rdfs:Literal)
+47	
+48	FunctionalDataProperty( :ds)
+49	
+50	ReflexiveObjectProperty( :s)
+51	
+52	TransitiveObjectProperty( :r)
+53	
+54	ClassAssertion( :C :c)
+55	
+56	FunctionalDataProperty( :dr) 
+57	)

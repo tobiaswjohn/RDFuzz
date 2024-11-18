@@ -285,7 +285,7 @@ public class Main {
         List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
         //gens.add( new InferredPropertyAssertionGenerator());
         gens.add(new InferredClassAssertionAxiomGenerator());
-        /*gens.add(new InferredSubClassAxiomGenerator());
+        gens.add(new InferredSubClassAxiomGenerator());
         gens.add( new InferredDisjointClassesAxiomGenerator());
         gens.add( new InferredEquivalentClassAxiomGenerator());
         gens.add( new InferredEquivalentDataPropertiesAxiomGenerator());
@@ -295,7 +295,7 @@ public class Main {
         gens.add( new InferredSubDataPropertyAxiomGenerator());
         gens.add(new InferredDataPropertyCharacteristicAxiomGenerator());
         gens.add(new InferredObjectPropertyCharacteristicAxiomGenerator());
-        gens.add( new InferredSubObjectPropertyAxiomGenerator());*/
+        gens.add( new InferredSubObjectPropertyAxiomGenerator());
 
         InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
         OWLOntology infOnt = manager.createOntology();
