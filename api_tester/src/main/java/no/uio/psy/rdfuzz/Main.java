@@ -1,5 +1,7 @@
-package org.example;
+package no.uio.psy.rdfuzz;
 
+import no.uio.psy.rdfuzz.anomalies.Anomaly;
+import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
@@ -21,6 +23,7 @@ import org.semanticweb.owlapi.util.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.*;
 
 import static java.lang.System.exit;
 
@@ -43,6 +46,13 @@ public class Main {
 
             OWLOntology ont = loadOntologyFile(ontFile);
 
+            Set<Anomaly> foundAnomalies = testReasoners(ont);
+
+            for (Anomaly a : foundAnomalies)
+                System.out.println(a);
+
+
+            /*
             System.out.println("test Openllet reasoner");
             Set<OWLAxiom> inferredOpenllet = runOpenlletReasoner(ont, ontFile);
 
@@ -76,6 +86,8 @@ public class Main {
                     manager.getOWLDataFactory().getOWLClass("http://www.w3.org/2002/07/owl#Thing"))
             );
 
+             */
+
         }
         else {
             // regular test run
@@ -85,6 +97,8 @@ public class Main {
 
             // load ontology to reasoner
             OWLOntology ont = loadOntologyFile(ontFile);
+
+
 
             System.out.println("test Hermit reasoner");
             Set<OWLAxiom> axiomsHermit = runHermitReasoner(ont, ontFile);
@@ -171,6 +185,18 @@ public class Main {
                 System.out.println("test Jena API");
                 runJenaApi(ontFile);
             }
+
+
+        }
+    }
+
+    public static Set<Anomaly> testReasoners(OWLOntology ont) {
+        if (!isEL(ont))
+            return Set.of(new NotElAnomaly());
+        else {
+            ElReasonerTester tester = new ElReasonerTester(ont);
+            tester.runTests();
+            return tester.getFoundAnomalies();
         }
     }
 
@@ -322,7 +348,6 @@ public class Main {
 
         return infOnt.getAxioms();
     }
-
 
     private static void logException(Exception e, File ontFile, String type) {
         PrintWriter writer = getPrintWriter();
