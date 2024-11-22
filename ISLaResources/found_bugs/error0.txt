@@ -1,0 +1,65 @@
+Found error while parsing file tests/test1.owl
+Error occured while testing Hermit reasoner
+
+java.lang.IllegalArgumentException: Non-simple property '<http://www.example.org/reasonerTester#s>' or its inverse appears in the Self restriction 'ObjectHasSelf(<http://www.example.org/reasonerTester#s>)'.
+––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––
+
+1	Prefix(:=<http://www.example.org/reasonerTester#>)
+2	Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+3	Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+4	Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+5	Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+6	Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+7	
+8	Ontology (
+9	
+10	
+11	Declaration(Class(:A))
+12	Declaration(Class(:B))
+13	Declaration(Class(:C))
+14	Declaration(Class(:D))
+15	Declaration(NamedIndividual(:a))
+16	Declaration(NamedIndividual(:b))
+17	Declaration(NamedIndividual(:c))
+18	Declaration(NamedIndividual(:d))
+19	Declaration(ObjectProperty(:p))
+20	Declaration(ObjectProperty(:q))
+21	Declaration(ObjectProperty(:r))
+22	Declaration(ObjectProperty(:s))
+23	Declaration(DataProperty(:dp))
+24	Declaration(DataProperty(:dq))
+25	Declaration(DataProperty(:dr))
+26	Declaration(DataProperty(:ds))
+27	Declaration(AnnotationProperty(:anp))
+28	Declaration(AnnotationProperty(:anq))
+29	Declaration(AnnotationProperty(:anr))
+30	Declaration(AnnotationProperty(:ans))
+31	Declaration(Datatype(:dta))
+32	Declaration(Datatype(:dtb))
+33	Declaration(Datatype(:dtc))
+34	
+35	
+36	SubClassOf(Annotation( :anp :annotation4) Annotation( :ans :annotation2) Annotation( :anr :annotation3)  ObjectOneOf(:a) DataHasValue(:dq "s4"^^rdfs:Literal))
+37	
+38	DatatypeDefinition(Annotation( :anq :annotation1) Annotation(Annotation( :anr :annotation4)  :anr :annotation1) Annotation(Annotation(Annotation( :anq :annotation3) Annotation( :ans :annotation1) Annotation( :anr :annotation3)  :anr :annotation3) Annotation(Annotation(Annotation( :anr :annotation3)  :anq :annotation2)  :anq :annotation3)  :ans :annotation1)  :dtc DataIntersectionOf(xsd:string DataOneOf("s3"@de)  ) )
+39	
+40	SubObjectPropertyOf(Annotation( :anq :annotation2)  ObjectPropertyChain(:p :r ) :s)
+41	
+42	DisjointClasses( ObjectHasValue(:q :b) DataSomeValuesFrom(:dr :dtb) )
+43	
+44	ClassAssertion( ObjectHasSelf(:s) :c)
+45	
+46	ClassAssertion( ObjectIntersectionOf(:D ObjectSomeValuesFrom(:s :B) :C :A DataHasValue(:dp "s1") DataHasValue(:ds "s2"^^:dta) DataSomeValuesFrom(:dr rdf:PlainLiteral) DataSomeValuesFrom(:ds DataIntersectionOf(rdf:PlainLiteral DataIntersectionOf(:dtc :dtc )  :dtb ) ) DataHasValue(:dr "s2"@no) DataSomeValuesFrom(:dp DataIntersectionOf(rdf:PlainLiteral :dtb ) ) :D ) :d)
+47	
+48	EquivalentDataProperties( :dp :dq )
+49	
+50	DatatypeDefinition( :dtc DataOneOf("s4"@fr) )
+51	
+52	ObjectPropertyAssertion( :q :b :b)
+53	
+54	TransitiveObjectProperty(Annotation( :anq :annotation1) Annotation( :ans :annotation1) Annotation( :anp :annotation1) Annotation( :ans :annotation1)  :q)
+55	
+56	SubDataPropertyOf(Annotation( :anr :annotation2) Annotation( :anq :annotation2) Annotation( :anr :annotation3)  :dp :ds) 
+57	)

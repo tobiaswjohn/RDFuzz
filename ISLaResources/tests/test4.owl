@@ -1,0 +1,57 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :ans :annotation1)  :anr :annotation4) Annotation( :anp :annotation2) Annotation( :anq :annotation2) Annotation( :anr :annotation1)  :anq :annotation3) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:p))
+Declaration(ObjectProperty(:q))
+Declaration(ObjectProperty(:r))
+Declaration(ObjectProperty(:s))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+EquivalentClasses(Annotation( :ans :annotation2) Annotation( :anq :annotation1)  ObjectIntersectionOf(DataSomeValuesFrom(:dq DataIntersectionOf(:dta rdf:PlainLiteral ) ) ObjectOneOf(:b) ) :B ObjectHasSelf(:s) :C ObjectSomeValuesFrom(:q :A) )
+
+EquivalentObjectProperties( :p :r )
+
+DataPropertyRange(Annotation( :anp :annotation2) Annotation(Annotation(Annotation( :anp :annotation4)  :ans :annotation1)  :ans :annotation4)  :dp DataOneOf("s3"@de) )
+
+SubClassOf( DataHasValue(:ds "s2") ObjectHasValue(:p :d))
+
+DisjointClasses(Annotation(Annotation( :anq :annotation1) Annotation( :ans :annotation4)  :anq :annotation4)  ObjectOneOf(:a) :D ObjectOneOf(:c) ObjectOneOf(:a) DataHasValue(:dr "s1") )
+
+SameIndividual(Annotation(Annotation( :anp :annotation3) Annotation(Annotation( :ans :annotation4) Annotation( :anq :annotation2)  :anp :annotation3) Annotation(Annotation( :anr :annotation3)  :ans :annotation4) Annotation( :ans :annotation4)  :anq :annotation3) Annotation( :anp :annotation2)  :a :c )
+
+NegativeObjectPropertyAssertion( :q :a :b)
+
+DataPropertyDomain(Annotation( :anq :annotation3)  :dq DataHasValue(:dr "s4"^^:dtc))
+
+HasKey( DataSomeValuesFrom(:dq rdfs:Literal) ( :s :q  ) ( :ds  ) )
+
+ObjectPropertyAssertion(Annotation( :anr :annotation1)  :p :d :c)
+
+ObjectPropertyRange(Annotation( :ans :annotation1)  :r DataSomeValuesFrom(:dq xsd:string)) 
+)

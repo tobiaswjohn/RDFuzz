@@ -1,0 +1,58 @@
+Found error while parsing file tests/test5.owl
+Error occured while testing Reasoner comparison
+
+java.lang.Exception: Hermit and Openllet infer different number of axioms.
+additional Axioms from Openllet:
+IrreflexiveObjectProperty(<http://www.example.org/reasonerTester#r>)
+
+––––––––––––––––––––––––––––––––––––––––––
+
+––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––
+
+1	Prefix(:=<http://www.example.org/reasonerTester#>)
+2	Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+3	Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+4	Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+5	Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+6	Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+7	
+8	Ontology (
+9	
+10	
+11	Declaration(Class(:A))
+12	Declaration(Class(:B))
+13	Declaration(Class(:C))
+14	Declaration(Class(:D))
+15	Declaration(NamedIndividual(:a))
+16	Declaration(NamedIndividual(:b))
+17	Declaration(NamedIndividual(:c))
+18	Declaration(NamedIndividual(:d))
+19	Declaration(ObjectProperty(:p))
+20	Declaration(ObjectProperty(:q))
+21	Declaration(ObjectProperty(:r))
+22	Declaration(ObjectProperty(:s))
+23	Declaration(DataProperty(:dp))
+24	Declaration(DataProperty(:dq))
+25	Declaration(DataProperty(:dr))
+26	Declaration(DataProperty(:ds))
+27	Declaration(AnnotationProperty(:anp))
+28	Declaration(AnnotationProperty(:anq))
+29	Declaration(AnnotationProperty(:anr))
+30	Declaration(AnnotationProperty(:ans))
+31	Declaration(Datatype(:dta))
+32	Declaration(Datatype(:dtb))
+33	Declaration(Datatype(:dtc))
+34	
+35	
+36	DisjointClasses(Annotation( :anp :annotation3)  ObjectIntersectionOf(ObjectHasValue(:s :a) :C :B ) :A DataHasValue(:dp "s2") )
+37	
+38	ObjectPropertyAssertion(Annotation(Annotation( :ans :annotation3) Annotation( :anr :annotation1)  :anq :annotation4) Annotation( :anq :annotation2) Annotation( :anr :annotation1)  :p :d :b)
+39	
+40	TransitiveObjectProperty(Annotation( :anq :annotation1)  :q)
+41	
+42	DatatypeDefinition( :dta DataOneOf("s3"@fr) )
+43	
+44	SubClassOf( ObjectSomeValuesFrom(:r ObjectHasSelf(:r)) DataSomeValuesFrom(:ds DataIntersectionOf(rdf:PlainLiteral :dtb ) )) 
+45	)

@@ -1,0 +1,66 @@
+Found error while parsing file tests/test3.owl
+Error occured while testing Reasoner comparison
+
+java.lang.Exception: Hermit and Openllet infer different number of axioms.
+additional Axioms from Hermit:
+SubObjectPropertyOf(<http://www.example.org/reasonerTester#q> <http://www.example.org/reasonerTester#p>)
+
+additional Axioms from Openllet:
+SubObjectPropertyOf(<http://www.example.org/reasonerTester#q> owl:topObjectProperty)
+
+––––––––––––––––––––––––––––––––––––––––––
+Elk infers axioms that are not inferred by Hermit.
+additional Axioms from Elk:
+SubObjectPropertyOf(<http://www.example.org/reasonerTester#q> owl:topObjectProperty)
+
+––––––––––––––––––––––––––––––––––––––––––
+
+––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––
+
+1	Prefix(:=<http://www.example.org/reasonerTester#>)
+2	Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+3	Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+4	Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+5	Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+6	Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+7	
+8	Ontology (
+9	
+10	Annotation(Annotation(Annotation( :anp :annotation3) Annotation( :ans :annotation4)  :ans :annotation2) Annotation( :anp :annotation1) Annotation( :anr :annotation1)  :anq :annotation4) 
+11	Declaration(Class(:A))
+12	Declaration(Class(:B))
+13	Declaration(Class(:C))
+14	Declaration(Class(:D))
+15	Declaration(NamedIndividual(:a))
+16	Declaration(NamedIndividual(:b))
+17	Declaration(NamedIndividual(:c))
+18	Declaration(NamedIndividual(:d))
+19	Declaration(ObjectProperty(:p))
+20	Declaration(ObjectProperty(:q))
+21	Declaration(ObjectProperty(:r))
+22	Declaration(ObjectProperty(:s))
+23	Declaration(DataProperty(:dp))
+24	Declaration(DataProperty(:dq))
+25	Declaration(DataProperty(:dr))
+26	Declaration(DataProperty(:ds))
+27	Declaration(AnnotationProperty(:anp))
+28	Declaration(AnnotationProperty(:anq))
+29	Declaration(AnnotationProperty(:anr))
+30	Declaration(AnnotationProperty(:ans))
+31	Declaration(Datatype(:dta))
+32	Declaration(Datatype(:dtb))
+33	Declaration(Datatype(:dtc))
+34	
+35	
+36	SubClassOf( DataSomeValuesFrom(:dr DataIntersectionOf(DataOneOf("s2"@no)  xsd:string :dta ) ) ObjectHasValue(:s :b))
+37	
+38	ObjectPropertyDomain(Annotation(Annotation( :ans :annotation3) Annotation( :anr :annotation4) Annotation( :anp :annotation3)  :anr :annotation1) Annotation(Annotation(Annotation(Annotation( :anp :annotation1) Annotation( :anq :annotation4) Annotation( :anq :annotation2)  :anp :annotation4)  :anp :annotation4) Annotation( :anp :annotation4)  :anp :annotation4)  :q ObjectHasSelf(:p))
+39	
+40	HasKey(Annotation(Annotation(Annotation( :anq :annotation2) Annotation(Annotation(Annotation(Annotation(Annotation( :ans :annotation2) Annotation(Annotation(Annotation(Annotation(Annotation(Annotation( :anq :annotation1) Annotation( :anr :annotation1)  :ans :annotation1)  :anp :annotation3) Annotation( :anp :annotation1) Annotation( :ans :annotation3) Annotation( :ans :annotation1)  :anp :annotation2) Annotation( :ans :annotation2)  :ans :annotation2) Annotation( :anp :annotation1)  :anq :annotation1)  :anr :annotation1)  :anp :annotation3) Annotation(Annotation( :ans :annotation4)  :ans :annotation4)  :anp :annotation2) Annotation( :anr :annotation2)  :anr :annotation1)  :ans :annotation2) Annotation(Annotation( :anp :annotation4)  :anq :annotation1)  :anq :annotation3)  ObjectIntersectionOf(ObjectOneOf(:c) DataHasValue(:ds "s1"^^:dtc) ) ( :r  ) ( :dp  ) )
+41	
+42	ObjectPropertyAssertion( :r :a :d)
+43	
+44	HasKey(Annotation( :anq :annotation3)  ObjectSomeValuesFrom(:p :D) (  ) ( :dq :dp  ) ) 
+45	)

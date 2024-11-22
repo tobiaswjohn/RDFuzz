@@ -1,0 +1,30 @@
+@base <k> .
+@prefix p2: <n> .
+@prefix p1: <m> .
+@prefix : <apiTester#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:A rdf:type owl:Class .
+:B rdf:type owl:Class .
+:C rdf:type owl:Class .
+:D rdf:type owl:Class .
+:p rdf:type owl:ObjectProperty .
+:q rdf:type owl:ObjectProperty .
+:r rdf:type owl:ObjectProperty .
+:s rdf:type owl:ObjectProperty .
+
+:B rdfs:subClassOf :B .  
+[ rdf:type owl:AllDifferent ; owl:distinctMembers ( :c :b ) ] .    
+:s rdfs:range :D .  
+:D owl:disjointWith :C . 
+:q rdf:type owl:TransitiveProperty .    
+:d rdf:type :B . 
+:b owl:sameAs :d .   
+:p rdfs:subPropertyOf :p . 
+:a :r :c .
+:s rdfs:domain :A .   
+

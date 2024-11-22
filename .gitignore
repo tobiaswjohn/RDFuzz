@@ -10,5 +10,6 @@ turtle/tests
 # temporary ontologies
 *temp*.ttl
 *temp*.owl
+temp/*
 
 

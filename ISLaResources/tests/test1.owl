@@ -1,0 +1,57 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:p))
+Declaration(ObjectProperty(:q))
+Declaration(ObjectProperty(:r))
+Declaration(ObjectProperty(:s))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+SubClassOf(Annotation( :anp :annotation4) Annotation( :ans :annotation2) Annotation( :anr :annotation3)  ObjectOneOf(:a) DataHasValue(:dq "s4"^^rdfs:Literal))
+
+DatatypeDefinition(Annotation( :anq :annotation1) Annotation(Annotation( :anr :annotation4)  :anr :annotation1) Annotation(Annotation(Annotation( :anq :annotation3) Annotation( :ans :annotation1) Annotation( :anr :annotation3)  :anr :annotation3) Annotation(Annotation(Annotation( :anr :annotation3)  :anq :annotation2)  :anq :annotation3)  :ans :annotation1)  :dtc DataIntersectionOf(xsd:string DataOneOf("s3"@de)  ) )
+
+SubObjectPropertyOf(Annotation( :anq :annotation2)  ObjectPropertyChain(:p :r ) :s)
+
+DisjointClasses( ObjectHasValue(:q :b) DataSomeValuesFrom(:dr :dtb) )
+
+ClassAssertion( ObjectHasSelf(:s) :c)
+
+ClassAssertion( ObjectIntersectionOf(:D ObjectSomeValuesFrom(:s :B) :C :A DataHasValue(:dp "s1") DataHasValue(:ds "s2"^^:dta) DataSomeValuesFrom(:dr rdf:PlainLiteral) DataSomeValuesFrom(:ds DataIntersectionOf(rdf:PlainLiteral DataIntersectionOf(:dtc :dtc )  :dtb ) ) DataHasValue(:dr "s2"@no) DataSomeValuesFrom(:dp DataIntersectionOf(rdf:PlainLiteral :dtb ) ) :D ) :d)
+
+EquivalentDataProperties( :dp :dq )
+
+DatatypeDefinition( :dtc DataOneOf("s4"@fr) )
+
+ObjectPropertyAssertion( :q :b :b)
+
+TransitiveObjectProperty(Annotation( :anq :annotation1) Annotation( :ans :annotation1) Annotation( :anp :annotation1) Annotation( :ans :annotation1)  :q)
+
+SubDataPropertyOf(Annotation( :anr :annotation2) Annotation( :anq :annotation2) Annotation( :anr :annotation3)  :dp :ds) 
+)

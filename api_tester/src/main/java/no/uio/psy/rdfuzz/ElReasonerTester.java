@@ -9,7 +9,10 @@ import no.uio.psy.rdfuzz.reasoners.ReasonerCallerFactory;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 // tests the EL reasoners
@@ -20,14 +23,13 @@ public class ElReasonerTester {
     private final ReasonerCaller elk;
 
 
-    private Set<Anomaly> foundAnomalies = new HashSet<>();
+    private final Set<Anomaly> foundAnomalies = new HashSet<>();
 
     ElReasonerTester(OWLOntology ont) {
         ReasonerCallerFactory callerFactory = new ReasonerCallerFactory();
         hermit = callerFactory.getCaller(ont, SUT.HERMIT);
         openllet = callerFactory.getCaller(ont, SUT.OPENLLET);
         elk = callerFactory.getCaller(ont, SUT.ELK);
-
     }
 
     public Set<Anomaly> getFoundAnomalies() {
@@ -74,7 +76,6 @@ public class ElReasonerTester {
         foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers));
 
     }
-
 
     // checks, if the two systems found a result (i.e. no anomaly in computation) and if the results are the same
     private Set<Anomaly> compareConsistencyChecks(ResultWithAnomalie<Boolean> consistency1,
@@ -127,13 +128,6 @@ public class ElReasonerTester {
         return Set.of();
     }
 
-    // compare different sets of axioms
-    private static boolean identical(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
-        return set1.containsAll(set2) && set2.containsAll(set1);
-    }
 
-    // decides, if set1 is a subset of set2
-    private static boolean subset(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
-        return set2.containsAll(set1);
-    }
+
 }
