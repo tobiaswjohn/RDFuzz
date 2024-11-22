@@ -2,9 +2,11 @@ package no.uio.psy.rdfuzz;
 
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ConsistencyAnomaly;
+import no.uio.psy.rdfuzz.anomalies.InferenceAnomaly;
 import no.uio.psy.rdfuzz.anomalies.ResultWithAnomalie;
 import no.uio.psy.rdfuzz.reasoners.ReasonerCaller;
 import no.uio.psy.rdfuzz.reasoners.ReasonerCallerFactory;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.util.HashSet;
@@ -35,7 +37,7 @@ public class ElReasonerTester {
     // runs all kinds of test with the ontology
     public void runTests() {
         testConsistency();
-
+        testInferredAxioms();
     }
 
     private void testConsistency() {
@@ -57,6 +59,19 @@ public class ElReasonerTester {
     }
 
     private void testInferredAxioms() {
+        ResultWithAnomalie<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
+        ResultWithAnomalie<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
+        ResultWithAnomalie<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
+
+        // add any found anomalies
+        foundAnomalies.addAll(hermitInfers.foundAnomalies);
+        foundAnomalies.addAll(openlletInfers.foundAnomalies);
+        foundAnomalies.addAll(elkInfers.foundAnomalies);
+
+        // check for conflicting results and add anomalies if necessary
+        foundAnomalies.addAll(compareInferredAxioms(hermitInfers, openlletInfers));
+        foundAnomalies.addAll(compareInferredAxioms(hermitInfers,elkInfers));
+        foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers));
 
     }
 
@@ -74,5 +89,51 @@ public class ElReasonerTester {
                 ));
 
         return Set.of();
+    }
+
+    private Set<Anomaly> compareInferredAxioms(ResultWithAnomalie<Set<OWLAxiom>> infers1,
+                                               ResultWithAnomalie<Set<OWLAxiom>> infers2) {
+
+        // check, if both systems found a result (i.e. no anomaly in computation)
+        if (!infers1.anyAnomaly && !infers2.anyAnomaly) {
+            boolean isAnomaly = false; // tracks, if this comparison is an anomaly
+
+            // compute the differences between the two results
+            Set<OWLAxiom> additional1 = new HashSet<OWLAxiom>(infers1.result);
+            additional1.removeAll(infers2.result);
+
+            Set<OWLAxiom> additional2 = new HashSet<OWLAxiom>(infers2.result);
+            additional2.removeAll(infers1.result);
+
+            // if one of the reasoners is ELK, only check for subset relation of result
+            if (infers1.sut != SUT.ELK && infers2.sut != SUT.ELK) {
+                if (!additional2.isEmpty() || !additional1.isEmpty())
+                    isAnomaly = true;
+            }
+
+            else if (infers1.sut == SUT.ELK && !additional1.isEmpty() ||
+                    infers2.sut == SUT.ELK && !additional2.isEmpty())
+                isAnomaly = true;
+
+            if (isAnomaly)
+                return Set.of(new InferenceAnomaly(
+                        infers1.sut,
+                        infers2.sut,
+                        additional1,
+                        additional2
+                ));
+        }
+
+        return Set.of();
+    }
+
+    // compare different sets of axioms
+    private static boolean identical(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
+        return set1.containsAll(set2) && set2.containsAll(set1);
+    }
+
+    // decides, if set1 is a subset of set2
+    private static boolean subset(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
+        return set2.containsAll(set1);
     }
 }

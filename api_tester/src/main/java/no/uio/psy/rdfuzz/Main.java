@@ -46,7 +46,7 @@ public class Main {
 
             OWLOntology ont = loadOntologyFile(ontFile);
 
-            Set<Anomaly> foundAnomalies = testReasoners(ont);
+            List<Anomaly> foundAnomalies = testReasoners(ont);
 
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
@@ -190,13 +190,13 @@ public class Main {
         }
     }
 
-    public static Set<Anomaly> testReasoners(OWLOntology ont) {
+    public static List<Anomaly> testReasoners(OWLOntology ont) {
         if (!isEL(ont))
-            return Set.of(new NotElAnomaly());
+            return List.of(new NotElAnomaly());
         else {
             ElReasonerTester tester = new ElReasonerTester(ont);
             tester.runTests();
-            return tester.getFoundAnomalies();
+            return tester.getFoundAnomalies().stream().sorted().toList();
         }
     }
 

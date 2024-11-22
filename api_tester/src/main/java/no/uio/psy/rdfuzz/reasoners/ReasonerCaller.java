@@ -59,7 +59,7 @@ public class ReasonerCaller {
     public ResultWithAnomalie<Boolean> isConsistent() {
         try {
             boolean consistent = reasoner.isConsistent();
-            return new ResultWithAnomalie<>(consistent, Set.of(), sut);
+            return new ResultWithAnomalie<>(consistent, sut);
         } catch (Exception e) {
             return  new ResultWithAnomalie<>(
                     false,
@@ -69,10 +69,18 @@ public class ReasonerCaller {
         }
     }
 
-    public Set<OWLAxiom> inferredAxioms() throws OWLOntologyCreationException {
-        InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
-        OWLOntology infOnt = manager.createOntology();
-        iog.fillOntology(manager.getOWLDataFactory(), infOnt);
-        return infOnt.getAxioms();
+    public ResultWithAnomalie<Set<OWLAxiom>> inferredAxioms() {
+        try {
+            InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
+            OWLOntology infOnt = manager.createOntology();
+            iog.fillOntology(manager.getOWLDataFactory(), infOnt);
+            return new ResultWithAnomalie<>(infOnt.getAxioms(), sut);
+        } catch (Exception e) {
+            return  new ResultWithAnomalie<>(
+                    Set.of(),
+                    Set.of(new ExceptionAnomaly(e)),
+                    sut
+            );
+        }
     }
 }

@@ -17,5 +17,13 @@ public class ResultWithAnomalie<R> {
         this.anyAnomaly = !foundAnomalies.isEmpty();
         this.sut = sut;
     }
+
+    // no anomaly found
+    public ResultWithAnomalie(R result, SUT sut) {
+        this.result = result;
+        this.foundAnomalies = Set.of();
+        this.anyAnomaly = false;
+        this.sut = sut;
+    }
 }
 
