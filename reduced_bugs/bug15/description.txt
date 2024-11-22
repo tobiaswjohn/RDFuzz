@@ -1,0 +1,31 @@
+error in reasoners
+
+hermit misses class assertion (owl:Thing)
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+ReasonerFactory rf = new ReasonerFactory();
+OWLReasoner hermit = rf.createReasoner(ont);
+
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add(new InferredClassAssertionAxiomGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(hermit, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
+
+Hermit does not infer axiom (which Openllet and ELK do)
+ClassAssertion(owl:Thing :c)
+
+The assertion is contained as soon as an (unrelated) class declaration is added
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script generator_OWL_EL.py
+
+found on 14.11.2024
+
+reported:
+

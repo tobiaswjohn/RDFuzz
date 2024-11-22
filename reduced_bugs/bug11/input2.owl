@@ -7,9 +7,7 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 Ontology (
 
-
 Declaration(DataProperty(:d))
-Declaration( Datatype( :dt ) ) 
 
 DatatypeDefinition(rdfs:Literal DataIntersectionOf(owl:real DataOneOf("s1") )) 
 )

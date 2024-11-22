@@ -7,28 +7,7 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 Ontology (
 
-Declaration(Class(:C))
-Declaration(NamedIndividual(:a))
+Declaration(DataProperty(:d))
 
-Declaration(ObjectProperty(:r))
-Declaration(ObjectProperty(:s))
-
-
-
-
-EquivalentClasses(
-    ObjectIntersectionOf(
-        ObjectHasSelf(:s) 
-        :C
-    ) 
-    
-    ObjectSomeValuesFrom(
-        :r 
-        owl:Thing
-    ) 
-)
-
-ReflexiveObjectProperty( :s)
-
- 
+DatatypeDefinition(rdfs:Literal DataIntersectionOf(owl:real DataOneOf("s1") )) 
 )

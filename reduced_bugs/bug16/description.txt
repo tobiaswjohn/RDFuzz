@@ -1,6 +1,9 @@
 error in reasoners
 
-calling hermit and openllet leads to different results
+--> openllet infers EquivalentClasses(<http://www.example.org/reasonerTester#C> owl:Nothing) 
+
+hermit does not (which is correct)
+
 
 call:
 OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
@@ -9,22 +12,18 @@ ont = manager.loadOntologyFromOntologyDocument(source);
 OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
 List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
-gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
+gens.add( new InferredEquivalentClassAxiomGenerator());
 
 InferredOntologyGenerator iog = new InferredOntologyGenerator(openllet, gens);
 OWLOntology infOnt = manager.createOntology();
 iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
 
 
-Hermit infers nothing
-
-Openllet infers this axiom:
-AsymmetricObjectProperty(:r)
 
 
 grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script generator_OWL_EL.py
 
-found on 14.11.2024
+found on 18.11.2024
 
 
 reported:

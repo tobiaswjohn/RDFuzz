@@ -12,6 +12,5 @@ Declaration(NamedIndividual(:c))
 Declaration(DataProperty(:d))
 
 
-
 DataPropertyAssertion( :d :c "data"^^rdfs:Literal) 
 )
