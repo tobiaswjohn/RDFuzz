@@ -5,7 +5,7 @@
  - Isla
 	 + see [github](https://github.com/rindPHI/isla#build-run-install)
 	 + `sudo apt install python3.10 python3.10-dev python3.10-venv gcc g++ make cmake git clang`
-	 + `cd RDFuzz/turtle`
+	 + `cd RDFuzz/ISLaResources`
 	 
  ```
 	 python3.10 -m venv venv

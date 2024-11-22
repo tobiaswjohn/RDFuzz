@@ -1,1 +1,15 @@
-org/example/Main.class
+no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory.class
+no/uio/psy/rdfuzz/reasoners/ReasonerCaller.class
+no/uio/psy/rdfuzz/anomalies/ConsistencyAnomaly.class
+no/uio/psy/rdfuzz/AnomaliePrinter.class
+no/uio/psy/rdfuzz/anomalies/InferenceAnomaly.class
+no/uio/psy/rdfuzz/anomalies/NotElAnomaly.class
+no/uio/psy/rdfuzz/SUT.class
+no/uio/psy/rdfuzz/ElReasonerTester.class
+no/uio/psy/rdfuzz/Main.class
+no/uio/psy/rdfuzz/anomalies/DifferentialAnomaly.class
+no/uio/psy/rdfuzz/anomalies/Anomaly.class
+no/uio/psy/rdfuzz/anomalies/ResultWithAnomalie.class
+no/uio/psy/rdfuzz/anomalies/ExceptionAnomaly.class
+no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory$1.class
+no/uio/psy/rdfuzz/OntologyLoader.class
