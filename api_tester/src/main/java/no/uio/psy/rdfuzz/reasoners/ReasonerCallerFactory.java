@@ -4,8 +4,11 @@ import no.uio.psy.rdfuzz.SUT;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.elk.owlapi.ElkReasonerFactory;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.util.*;
 
+import java.util.List;
 
 
 // factory class to produce callers for different reasoners
@@ -23,7 +26,23 @@ public class ReasonerCallerFactory {
 
     private ReasonerCaller getElkCaller(OWLOntology ont) {
         ElkReasonerFactory rf = new ElkReasonerFactory();
-        return new ReasonerCaller(rf.createReasoner(ont), SUT.ELK);
+        // disable the kinds of inference that ELK can not fully handle
+        List<InferredAxiomGenerator<? extends OWLAxiom>> gens = List.of(
+                //new InferredPropertyAssertionGenerator(),
+                new InferredClassAssertionAxiomGenerator(),
+                new InferredSubClassAxiomGenerator(),
+                new InferredDisjointClassesAxiomGenerator(),
+                new InferredEquivalentClassAxiomGenerator(),
+                //new InferredEquivalentDataPropertiesAxiomGenerator(),
+                new InferredEquivalentObjectPropertyAxiomGenerator(),
+                new InferredInverseObjectPropertiesAxiomGenerator(),
+                new InferredObjectPropertyCharacteristicAxiomGenerator(),
+                //new InferredSubDataPropertyAxiomGenerator(),
+                //new InferredDataPropertyCharacteristicAxiomGenerator(),
+                new InferredObjectPropertyCharacteristicAxiomGenerator(),
+                new InferredSubObjectPropertyAxiomGenerator()
+        );
+        return new ReasonerCaller(rf.createReasoner(ont), SUT.ELK, gens);
     }
 
     // get caller according to SUT one wants to test

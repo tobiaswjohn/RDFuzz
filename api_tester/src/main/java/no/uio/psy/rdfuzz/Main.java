@@ -38,13 +38,15 @@ public class Main {
     public static void main(String[] args) throws OWLOntologyCreationException {
         String fileName=args[0];
         File ontFile = new File(fileName);
+        OntologyLoader ontL = new OntologyLoader(manager);
+
 
         if (args.length == 2 && Objects.equals(args[1], "--no-export")) {
             // run to examine bugs in detail
 
             //runJenaApi(ontFile);
 
-            OWLOntology ont = loadOntologyFile(ontFile);
+            OWLOntology ont = ontL.loadOntologyFile(ontFile);
 
             List<Anomaly> foundAnomalies = testReasoners(ont);
 
@@ -96,10 +98,10 @@ public class Main {
             runOwlApi(ontFile);
 
             // load ontology to reasoner
-            OWLOntology ont = loadOntologyFile(ontFile);
+            OWLOntology ont = ontL.loadOntologyFile(ontFile);
 
 
-
+            /*
             System.out.println("test Hermit reasoner");
             Set<OWLAxiom> axiomsHermit = runHermitReasoner(ont, ontFile);
             System.out.println("test Openllet reasoner");
@@ -179,6 +181,8 @@ public class Main {
                 logException(e, ontFile, "Reasoner comparison");
                 exit(1);
             }
+            */
+
 
             // disable check of jena API if desired
             if (!Arrays.stream(args).toList().contains("--nojena")) {
@@ -203,7 +207,8 @@ public class Main {
     // tries to load ontology using owl api
     public static void runOwlApi(File ontFile) {        
         try {
-            loadOntologyFile(ontFile);
+            OntologyLoader ontL = new OntologyLoader(manager);
+            ontL.loadOntologyFile(ontFile);
         } catch (OWLOntologyCreationException e) {
             // if error occurred: save log file
             logException(e, ontFile, "Owl API");
@@ -223,77 +228,8 @@ public class Main {
         }
     }
 
-    // returns set of inferred axioms
 
-    private static Set<OWLAxiom> runHermitReasoner(OWLOntology ont, File ontFile) {
-        try {
-            ReasonerFactory rf = new ReasonerFactory();
-            OWLReasoner hermit = rf.createReasoner(ont);
 
-            // do some simple computation with the model
-            if (hermit.isConsistent())
-                return inferAxioms(hermit, ont);
-            else
-                return Set.of(inconsistent);
-
-        } catch (Exception e) {
-            // if error occurred: save log file
-            logException(e, ontFile, "Hermit reasoner");
-            exit(1);
-        }
-        return null;
-    }
-
-    // returns set of inferred axioms
-    private static Set<OWLAxiom> runOpenlletReasoner(OWLOntology ont, File ontFile) throws OWLOntologyCreationException {
-        try {
-            OpenlletReasonerFactory rf = OpenlletReasonerFactory.getInstance();
-            OWLReasoner openllet = rf.createReasoner(ont);
-
-            // do some simple computation with the model
-            if (openllet.isConsistent())
-                return inferAxioms(openllet, ont);
-            else
-                return Set.of(inconsistent);
-
-        } catch (Exception e) {
-            // if error occurred: save log file
-            logException(e, ontFile, "OpenlletReasoner");
-            //throw(e);
-            exit(1);
-        }
-        return null;
-    }
-
-    // returns set of inferred axioms
-    private static Set<OWLAxiom> runElkReasoner(OWLOntology ont, File ontFile) {
-        try {
-
-            ElkReasonerFactory rf = new ElkReasonerFactory();
-            OWLReasoner elk = rf.createReasoner(ont);
-
-            // do some simple computation with the model
-            if (elk.isConsistent())
-                return inferAxioms(elk, ont);
-            else
-                return Set.of(inconsistent);
-
-        } catch (Exception e) {
-            // if error occurred: save log file
-            logException(e, ontFile, "ElkReasoner");
-            exit(1);
-        }
-        return null;
-    }
-
-    private static boolean equivalent(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
-        return set1.containsAll(set2) && set2.containsAll(set1);
-    }
-
-    // decides, if set1 is a subset of set2
-    private static boolean subset(Set<OWLAxiom> set1, Set<OWLAxiom> set2) {
-        return set2.containsAll(set1);
-    }
     private static PrintWriter getPrintWriter() {
         int i = 0;
         String folder = "/home/tobias/Documents/programming/ontologies/RDFuzz/turtle";
@@ -374,34 +310,6 @@ public class Main {
             throw new RuntimeException(ex);
         }
         writer.close();
-    }
-
-    public static OWLOntology loadOntologyFile(File ontFile)  throws OWLOntologyCreationException {
-        // check, if ontology is in turtle format
-        if (ontFile.getName().endsWith(".ttl"))
-            return loadTurtleFile(ontFile);
-        else {
-            return loadFunctionalSyntaxFile(ontFile);
-        }
-    }
-
-    public static OWLOntology loadTurtleFile(File ontFile)  throws OWLOntologyCreationException {
-        OWLOntologyDocumentSource source =
-                new FileDocumentSource(ontFile, new TurtleDocumentFormat());
-
-        return manager.loadOntologyFromOntologyDocument(source);
-    }
-
-    public static OWLOntology loadFunctionalSyntaxFile(File ontFile)  throws OWLOntologyCreationException {
-        OWLOntologyDocumentSource source =
-                new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
-
-        return manager.loadOntologyFromOntologyDocument(source);
-    }
-
-    public static Set<OWLNamedIndividual> getInstances(OWLReasoner reasoner, OWLClassExpression classExpression) {
-        NodeSet<OWLNamedIndividual> individuals = reasoner.getInstances(classExpression);
-        return individuals.getFlattened();
     }
 
     // checks if ontology is in profile
