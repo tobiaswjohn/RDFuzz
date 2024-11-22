@@ -13,7 +13,7 @@ mvn clean package
 cd ..
 
 # source to have access to ISLA
-source venv/bin/activate
+source ISLaResources/venv/bin/activate
 
 runs=${1:-10}
 count=0
@@ -23,9 +23,9 @@ do
 
     # generate new turtle file
 
-    ontFile="tests/test$i.ttl"
+    ontFile="testOntologies/test$i.owl"
 
-    python turtle_generator_reasoner.py $ontFile
+    python generator_OWL_EL.py $ontFile
 
 
     # test parsing with OWL API
@@ -33,7 +33,7 @@ do
     echo "run test number $i"
     echo "run test number $i" >> $log
 
-    java -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile >> $log 2>&1
+    java -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile --test-reasoner >> $log 2>&1
     
     
 
