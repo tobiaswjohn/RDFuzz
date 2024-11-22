@@ -10,6 +10,9 @@ import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
 import org.semanticweb.owlapi.io.FileDocumentSource;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.profiles.OWL2ELProfile;
+import org.semanticweb.owlapi.profiles.OWLProfileReport;
+import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.util.*;
@@ -66,6 +69,12 @@ public class Main {
             System.out.println(additionalHermit);
             System.out.println(additionalOpenllet);
             System.out.println(additionalElk);
+
+            ReasonerFactory rf = new ReasonerFactory();
+            System.out.println(getInstances(
+                    rf.createReasoner(ont),
+                    manager.getOWLDataFactory().getOWLClass("http://www.w3.org/2002/07/owl#Thing"))
+            );
 
         }
         else {
@@ -283,19 +292,26 @@ public class Main {
     private static Set<OWLAxiom> inferAxioms(OWLReasoner reasoner, OWLOntology ont) throws OWLOntologyCreationException {
         // infer properties and class assertions
         List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
-        //gens.add( new InferredPropertyAssertionGenerator());
+        /*gens.add( new InferredPropertyAssertionGenerator());
         gens.add(new InferredClassAssertionAxiomGenerator());
         gens.add(new InferredSubClassAxiomGenerator());
         gens.add( new InferredDisjointClassesAxiomGenerator());
         gens.add( new InferredEquivalentClassAxiomGenerator());
+
+         */
         gens.add( new InferredEquivalentDataPropertiesAxiomGenerator());
-        gens.add( new InferredEquivalentObjectPropertyAxiomGenerator());
+        /*gens.add( new InferredEquivalentObjectPropertyAxiomGenerator());
         gens.add( new InferredInverseObjectPropertiesAxiomGenerator());
         gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
         gens.add( new InferredSubDataPropertyAxiomGenerator());
         gens.add(new InferredDataPropertyCharacteristicAxiomGenerator());
         gens.add(new InferredObjectPropertyCharacteristicAxiomGenerator());
         gens.add( new InferredSubObjectPropertyAxiomGenerator());
+
+         */
+
+
+
 
         InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
         OWLOntology infOnt = manager.createOntology();
@@ -356,6 +372,17 @@ public class Main {
                 new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
 
         return manager.loadOntologyFromOntologyDocument(source);
+    }
+
+    public static Set<OWLNamedIndividual> getInstances(OWLReasoner reasoner, OWLClassExpression classExpression) {
+        NodeSet<OWLNamedIndividual> individuals = reasoner.getInstances(classExpression);
+        return individuals.getFlattened();
+    }
+
+    // checks if ontology is in profile
+    public static boolean isEL(OWLOntology ont) {
+        OWLProfileReport profileReport = new OWL2ELProfile().checkOntology(ont);
+        return profileReport.isInProfile();
     }
 }
 

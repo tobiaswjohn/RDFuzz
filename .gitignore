@@ -6,6 +6,7 @@ turtle/tests
 # java stuff
 *.jar
 *.class
+api_tester/target/*
 
 # temporary ontologies
 *temp*.ttl
