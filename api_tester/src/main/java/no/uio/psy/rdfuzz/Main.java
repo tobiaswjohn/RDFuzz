@@ -38,12 +38,10 @@ public class Main {
 
     public static void main(String[] args) throws OWLOntologyCreationException {
         String fileName=args[0];
+        String pathToReportAnomalies = args[1];
         File ontFile = new File(fileName);
         OntologyLoader ontL = new OntologyLoader(manager);
-
-        // todo: get this from args
-        String pathToReportAnomalies = "/home/tobias/Documents/programming/ontologies/RDFuzz/temp";
-
+        
         if (List.of(args).contains("--test-reasoners")) {
             System.out.println("test reasoners");
             List<Anomaly> foundAnomalies = testReasoners(ontFile);
