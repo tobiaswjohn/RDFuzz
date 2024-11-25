@@ -3,12 +3,14 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
+import org.apache.jena.base.Sys;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
+import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 
 
 import java.io.*;
@@ -54,13 +56,17 @@ public class Main {
 
         if (List.of(args).contains("--no-export")) {
             // run to examine bugs in detail
+            System.out.println("detailed inspection");
+
 
             List<Anomaly> foundAnomalies = testReasoners(ontFile);
 
             AnomalieDocumenter anomPrint = new AnomalieDocumenter();
-            anomPrint.logAnomalies(foundAnomalies,
+            /*anomPrint.logAnomalies(foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
+
+             */
 
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
@@ -81,14 +87,16 @@ public class Main {
         }
 
         // check if ontology is in EL --> only use for those for testing
-        //if (!isEL(ont))
-         //   return List.of(new NotElAnomaly());
-        //else {
+        if (!isEL(ont)) {
+            List<OWLProfileViolation> violations = getElViolations(ont);
+            return List.of(new NotElAnomaly(violations));
+        }
+        else {
             ElReasonerTester tester = new ElReasonerTester(ont);
 
             tester.runTests();
             return tester.getFoundAnomalies().stream().sorted().toList();
-        //}
+        }
 
     }
 
@@ -122,6 +130,12 @@ public class Main {
     public static boolean isEL(OWLOntology ont) {
         OWLProfileReport profileReport = new OWL2ELProfile().checkOntology(ont);
         return profileReport.isInProfile();
+    }
+
+    // get EL violations
+    public static List<OWLProfileViolation> getElViolations(OWLOntology ont) {
+        OWLProfileReport profileReport = new OWL2ELProfile().checkOntology(ont);
+        return profileReport.getViolations();
     }
 }
 

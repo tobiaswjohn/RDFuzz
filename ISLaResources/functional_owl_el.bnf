@@ -29,20 +29,24 @@
 
 <individualList>	::= "" | <Individual> " " <individualList>
 
-<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> | <stringLiteralWithLanguage>
-<typedLiteral>	::= <lexicalForm> "^^" <Datatype> | <lexicalForm> "^^" <NewDatatype> 
+<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> #| <stringLiteralWithLanguage>
+<typedLiteral>	::= <lexicalForm> "^^" <Datatype> #| <lexicalForm> "^^" <NewDatatype> 
 <lexicalForm>	::= <QuotedString>
 <stringLiteralNoLanguage> 	::= <QuotedString>
-<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
+#<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
 
 
-<objectPropertyExpression>	::= <ObjectProperty>
+<objectPropertyExpression>	::= <NonSimpleObjectProperty> | <SimpleObjectProperty>
 <objectPropertyExpressionList>	::= "" | <objectPropertyExpression> " " <objectPropertyExpressionList>
+
+# introduced to comform to https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Property_Hierarchy_and_Simple_Object_Property_Expressions
+<simpleObjectPropertyExpression>    ::= <SimpleObjectProperty>
+<nonSimpleObjectPropertyExpression>    ::= <NonSimpleObjectProperty>
 
 <dataPropertyExpression>	::= <DataProperty>
 <dataPropertyExpressionList>	::= "" | <dataPropertyExpression> " " <dataPropertyExpressionList>
 
-<dataRange>	::= <Datatype> | <NewDatatype> | <dataIntersectionOf> | <dataOneOf>
+<dataRange>	::= <Datatype> | <dataIntersectionOf> | <dataOneOf>
 <dataRangeList>	::= "" | <dataRange> " " <dataRangeList>
 
 <dataIntersectionOf>	::= "DataIntersectionOf(" <dataRange>  " " <dataRange> " " <dataRangeList> ") "
@@ -62,7 +66,7 @@
 
 <objectHasValue>	::= "ObjectHasValue(" <objectPropertyExpression> " " <Individual> ")"
 
-<objectHasSelf>		::= "ObjectHasSelf(" <objectPropertyExpression> ")"
+<objectHasSelf>		::= "ObjectHasSelf(" <simpleObjectPropertyExpression> ")"
 
 #<dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataPropertyExpressionList> " " <dataRange>")"
 <dataSomeValuesFrom>	::= "DataSomeValuesFrom(" <dataPropertyExpression> " " <dataRange>")"	# we only have data ranges with arity 1
@@ -72,7 +76,7 @@
 
 
 # main production rule
-<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <dataTypeDefinition> | <hasKey> | <assertion> #| <annotationAxiom>
+<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <hasKey> | <assertion> # | <dataTypeDefinition>  | <annotationAxiom>
 
 
 <classAxiom>	::= <subClassOf> | <equivalentClasses> | <disjointClasses>
@@ -88,10 +92,10 @@
 
 <objectPropertyAxiom>	::= <equivalentObjectProperties> | <subObjectPropertyOf> | <objectPropertyDomain> | <objectPropertyRange> | <reflexiveObjectProperty> | <transitiveObjectProperty>
 
-<subObjectPropertyOf>	::= "SubObjectPropertyOf(" <axiomAnnotations> " " <subObjectPropertyExpression> " " <superObjectPropertyExpression> ")" 
+<subObjectPropertyOf>	::= "SubObjectPropertyOf(" <axiomAnnotations> " " <subObjectPropertyExpression> " " <superObjectPropertyExpression> ")" | "SubObjectPropertyOf(" <axiomAnnotations> " " <objectPropertyExpression> " " <simpleObjectPropertyExpression> ")" 
 <subObjectPropertyExpression>	::= <objectPropertyExpression> | <propertyExpressionChain>
 <propertyExpressionChain>	::= "ObjectPropertyChain(" <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList> ")"
-<superObjectPropertyExpression>	::= <objectPropertyExpression>
+<superObjectPropertyExpression>	::= <nonSimpleObjectPropertyExpression>
 
 <equivalentObjectProperties>	::= "EquivalentObjectProperties(" <axiomAnnotations> " " <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList>")"
 
@@ -101,7 +105,7 @@
 
 <reflexiveObjectProperty>	::= "ReflexiveObjectProperty(" <axiomAnnotations> " " <objectPropertyExpression> ")"
 
-<transitiveObjectProperty>	::= "TransitiveObjectProperty(" <axiomAnnotations> " " <objectPropertyExpression> ")"
+<transitiveObjectProperty>	::= "TransitiveObjectProperty(" <axiomAnnotations> " " <nonSimpleObjectPropertyExpression> ")"
 
 
 <dataPropertyAxiom>	::= <subDataPropertyOf> | <equivalentDataProperties> | <dataPropertyDomain> | <dataPropertyRange> | <functionalDataProperty>
@@ -120,10 +124,12 @@
 <functionalDataProperty>	::= "FunctionalDataProperty(" <axiomAnnotations> " " <dataPropertyExpression> ")"
 
 
-<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <NewDatatype> " " <dataRange> ")"
+#<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <NewDatatype> " " <dataRange> ")"
 
 
-<hasKey>	::=  "HasKey(" <axiomAnnotations> " " <classExpression> " ( " <objectPropertyExpressionList> " ) ( " <dataPropertyExpressionList> " ) )"
+# also encodes "In each such axiom in an OWL ontology, m or n (or both) MUST be larger than zero" from https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Keys
+
+<hasKey>	::=  "HasKey(" <axiomAnnotations> " " <classExpression> " ( " <objectPropertyExpression> " " <objectPropertyExpressionList> " ) ( " <dataPropertyExpression> " " <dataPropertyExpressionList> " ) )" | "HasKey(" <axiomAnnotations> " " <classExpression> " ( " <objectPropertyExpression> " " <objectPropertyExpressionList> " ) ( ) )" | "HasKey(" <axiomAnnotations> " " <classExpression> " ( ) ( " <dataPropertyExpression> " " <dataPropertyExpressionList> " ) )"
 
 
 <assertion>	::= <sameIndividual> | <differentIndividuals> | <classAssertion> | <objectPropertyAssertion> | <negativeObjectPropertyAssertion> | <dataPropertyAssertion> | <negativeDataPropertyAssertion>
@@ -161,7 +167,8 @@
 
 <IndividualsDeclarations>	::= "Declaration(NamedIndividual(:a))\nDeclaration(NamedIndividual(:b))\nDeclaration(NamedIndividual(:c))\nDeclaration(NamedIndividual(:d))\n"
 
-<ObjectPropertiesDeclarations>	::= "Declaration(ObjectProperty(:p))\nDeclaration(ObjectProperty(:q))\nDeclaration(ObjectProperty(:r))\nDeclaration(ObjectProperty(:s))\n"
+#<ObjectPropertiesDeclarations>	::= "Declaration(ObjectProperty(:p))\nDeclaration(ObjectProperty(:q))\nDeclaration(ObjectProperty(:r))\nDeclaration(ObjectProperty(:s))\n"
+<ObjectPropertiesDeclarations>	::= "Declaration(ObjectProperty(:psim))\nDeclaration(ObjectProperty(:qsim))\nDeclaration(ObjectProperty(:rsim))\nDeclaration(ObjectProperty(:ssim))\nDeclaration(ObjectProperty(:pnonsim))\nDeclaration(ObjectProperty(:qnonsim))\nDeclaration(ObjectProperty(:rnonsim))\nDeclaration(ObjectProperty(:snonsim))\n"
 
 <DataPropertiesDeclarations>	::= "Declaration(DataProperty(:dp))\nDeclaration(DataProperty(:dq))\nDeclaration(DataProperty(:dr))\nDeclaration(DataProperty(:ds))\n"
 
@@ -173,12 +180,16 @@
 
 <Class>         ::= ":A" | ":B" | ":C" | ":D"
 <Individual>    ::= ":a" | ":b" | ":c" | ":d"
-<ObjectProperty>      ::= ":p" | ":q" | ":r" | ":s"
+#<ObjectProperty>      ::= ":p" | ":q" | ":r" | ":s"
+<SimpleObjectProperty>      ::= ":psim" | ":qsim" | ":rsim" | ":ssim"
+<NonSimpleObjectProperty>      ::= ":pnonsim" | ":qnonsim" | ":rnonsim" | ":snonsim"
+
+
 <DataProperty>	::= ":dp" | ":dq" | ":dr" | ":ds"
 <Datatype>	::= "xsd:string" | "rdf:PlainLiteral" | "rdfs:Literal"
-<NewDatatype>	::= ":dta" | ":dtb" | ":dtc"	# introduced, to make "DataTypeDefinition" possible according to rules
+#<NewDatatype>	::= ":dta" | ":dtb" | ":dtc"	# introduced, to make "DataTypeDefinition" possible according to rules
 
-<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
+#<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
 <QuotedString>	::=  "\"s1\"" | "\"s2\"" | "\"s3\"" | "\"s4\""
 
 <AnnotationProperty>	::= ":anp" | ":anq" | ":anr" | ":ans"

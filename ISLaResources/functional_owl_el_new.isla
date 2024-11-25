@@ -1,0 +1,31 @@
+(   
+    # dataintersections have at least two different elements
+    forall <dataIntersectionOf> dataInter in start:
+        exists <dataRange> dr1 in dataInter: 
+            exists <dataRange> dr2 in dataInter:
+                not (dr1 = dr2)
+)
+add
+(   
+    # equivalentDataProperties have at least two different elements
+    forall <equivalentDataProperties> equivData in start:
+        exists <dataPropertyExpression> dpe1 in equivData: 
+            exists <dataPropertyExpression> dpe2 in equivData:
+                not (dpe1 = dpe2)
+)
+add
+(   
+    # objectIntersections have at least two different elements
+    forall <objectIntersectionOf> objectInter in start:
+        exists <classExpression> ce1 in objectInter: 
+            exists <classExpression> ce2 in objectInter:
+                not (ce1 = ce2)
+)
+add
+(   
+    # equivalentObjectProperties have at least two different elements
+    forall <equivalentObjectProperties> equivProp in start:
+        exists <objectPropertyExpression> prop1 in equivProp: 
+            exists <objectPropertyExpression> prop2 in equivProp:
+                not (prop1 = prop2)
+)

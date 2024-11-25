@@ -34,7 +34,7 @@ echo "end time: ${endTime}" >> $log
 # .csv file to summarize testing results
 summaryFile="${directory}/summary.csv"
 touch $summaryFile
-echo "id,folder,ontology,inEL,exceptions,consistencyAnomalies,inferenceAnomalies,anomalieReport" > $summaryFile
+echo "id,folder,ontology,inEL,exceptions,consistencyAnomalies,inferenceAnomalies,anomalyReport" > $summaryFile
 
 #rm $log
 
@@ -96,4 +96,8 @@ do
 
 done
 
+cd ..
+
 echo "Found $count bugs in $i test runs within $timeLimit seconds."
+echo "Found $count bugs in $i test runs within $timeLimit seconds." >> $log
+
