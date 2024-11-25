@@ -3,6 +3,14 @@
 # generates test cases until specified number is reached
 
 runs=${1:-10}
+timeLimit=${1:-1}   # timeLimit in minutes
+timeLimit=$(( timeLimit * 60 ))
+
+endTime=$(date -d "$(date) + ${timeLimit} seconds")
+
+
+
+# check
 
 hostname=$(hostname)    # name of computer that runs benchmark
 suts="el_reasoners"
@@ -16,12 +24,19 @@ mkdir -p "$directory"
 mkdir -p "$directoryOntologies"
 mkdir -p "$directoryAnomalies"
 
+# log file 
+log="${directory}/fuzzing.log"
+
+echo "time limit: ${timeLimit} seconds" >> $log
+echo "end time: ${endTime}" >> $log
 
 
+# .csv file to summarize testing results
+summaryFile="${directory}/summary.csv"
+touch $summaryFile
+echo "id,folder,ontology,inEL,exceptions,consistencyAnomalies,inferenceAnomalies,anomalieReport" > $summaryFile
 
-log="${directory}/temp.log"
-
-rm $log
+#rm $log
 
 # build 
 cd api_tester
@@ -38,17 +53,25 @@ source venv/bin/activate
 
 count=0
 
-for i in $(seq 1 $runs);
+i=1
+
+#for i in $(seq 1 $runs);
+while [ $SECONDS -lt $timeLimit ]; 
 do
 
     # generate new ontology files
+    ontName="test$i.owl"
 
-    ontFile="../${directoryOntologies}/test$i.owl"
+    ontFile="../${directoryOntologies}/${ontName}" 
+
+    # documentation
+
+    echo -n "${i},${directory},${ontName}," >> ../$summaryFile
 
     echo "generate test number $i"
     echo "generate test number $i" >> ../$log
 
-    python generator_OWL_EL.py $ontFile
+    python generator_OWL_EL.py $ontFile >> ../$log
 
 
     # test parsing with OWL API
@@ -56,15 +79,21 @@ do
     echo "run test number $i"
     echo "run test number $i" >> ../$log
 
-    java -jar ../api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile ../$directoryAnomalies --test-reasoners >> ../$log 2>&1
-    
-    
+    java -jar ../api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile ../$directoryAnomalies ../$summaryFile --test-reasoners >> ../$log 2>&1
 
     if [[ $? == 1 ]] ; then
         # create output, if error is found
         echo "Error found and safed to $ontFile"
         count=$((count+1))
     fi
+
+    # finish documentation
+
+    echo "" >> ../$summaryFile
+
+    i=$(( i + 1 ))
+
+
 done
 
-echo "Found $count bugs in $runs test runs."
+echo "Found $count bugs in $i test runs within $timeLimit seconds."

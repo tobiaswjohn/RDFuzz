@@ -13,6 +13,6 @@ public class DifferentialAnomaly extends Anomaly {
     }
     @Override
     public String toString() {
-        return "DifferentialAnomalie between " + sut1 + " and " + sut2;
+        return "Differential anomaly between " + sut1 + " and " + sut2;
     }
 }

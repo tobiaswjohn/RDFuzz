@@ -27,6 +27,8 @@ public class Main {
     public static void main(String[] args) throws OWLOntologyCreationException {
         String fileName=args[0];
         String pathToReportAnomalies = args[1];
+        String pathToReportCSV = args[2];
+
         File ontFile = new File(fileName);
         OntologyLoader ontL = new OntologyLoader(manager);
 
@@ -34,10 +36,13 @@ public class Main {
             System.out.println("test reasoners");
             List<Anomaly> foundAnomalies = testReasoners(ontFile);
 
-            AnomalieDocumenter anomPrint = new AnomalieDocumenter();
-            anomPrint.logAnomalies(foundAnomalies,
+            AnomalieDocumenter anomDocumenter = new AnomalieDocumenter();
+            anomDocumenter.logAnomalies(
+                    foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
+
+            anomDocumenter.logSummary(foundAnomalies, pathToReportCSV, ",");
         }
 
         if (List.of(args).contains("--test-parsers")) {
@@ -76,14 +81,14 @@ public class Main {
         }
 
         // check if ontology is in EL --> only use for those for testing
-        if (!isEL(ont))
-            return List.of(new NotElAnomaly());
-        else {
+        //if (!isEL(ont))
+         //   return List.of(new NotElAnomaly());
+        //else {
             ElReasonerTester tester = new ElReasonerTester(ont);
 
             tester.runTests();
             return tester.getFoundAnomalies().stream().sorted().toList();
-        }
+        //}
 
     }
 

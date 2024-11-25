@@ -46,6 +46,10 @@ solver = ISLaSolver(
     )
 )
 
+print("used script: generator_OWL_EL.py")
+print("used grammar: " + grammar_file)
+print("used constraints: " + constraint_file)
+
 
 
 ontology = ""

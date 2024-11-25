@@ -1,8 +1,9 @@
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/ElReasonerTester.java
-/home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/AnomaliePrinter.java
+/home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/AnomalieDocumenter.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/anomalies/NotElAnomaly.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/reasoners/ReasonerCaller.java
+/home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/anomalies/AnomalySummary.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/anomalies/Anomaly.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/SUT.java
 /home/tobias/Documents/programming/ontologies/RDFuzz/api_tester/src/main/java/no/uio/psy/rdfuzz/anomalies/InferenceAnomaly.java

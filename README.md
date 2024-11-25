@@ -5,6 +5,7 @@ this repository contains the code for generating random OWL ontologies and turtl
 ## Run Fuzzing
  - `testReasonersEL.sh`
 	 + script to test EL reasoners (HermiT, Openllet, ELK) using fuzzing
+	 + argument: number of minutes the fuzzing should run (default: 1min)
 
 ## Structure of Repostitory
  - ISLaResources: contains environment to run ISLa and grammars and scripts to call generate test files

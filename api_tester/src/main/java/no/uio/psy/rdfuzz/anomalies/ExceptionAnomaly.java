@@ -8,7 +8,14 @@ public class ExceptionAnomaly extends Anomaly {
     }
 
     @Override
+    public AnomalySummary getSummary() {
+        AnomalySummary as = new AnomalySummary();
+        as.exceptions = 1;
+        return as;
+    }
+
+    @Override
     public String toString() {
-        return "Anomalie with following exception:\n" + e ;
+        return "Anomaly with following exception:\n" + e ;
     }
 }

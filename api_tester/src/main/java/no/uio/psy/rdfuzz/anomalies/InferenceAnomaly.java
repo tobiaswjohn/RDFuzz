@@ -24,4 +24,11 @@ public class InferenceAnomaly extends DifferentialAnomaly{
                 "additional axioms " + sut1 + ": " + additional1 + "\n\t" +
                 "additional axioms " + sut2 + ": " + additional2;
     }
+
+    @Override
+    public AnomalySummary getSummary() {
+        AnomalySummary as = new AnomalySummary();
+        as.inferenceAnomalies = 1;
+        return as;
+    }
 }

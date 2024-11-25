@@ -27,4 +27,11 @@ public class ConsistencyAnomaly extends DifferentialAnomaly {
         else
             return "not consistent";
     }
+
+    @Override
+    public AnomalySummary getSummary() {
+        AnomalySummary as = new AnomalySummary();
+        as.consistencyAnomalies = 1;
+        return as;
+    }
 }
