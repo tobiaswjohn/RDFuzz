@@ -5,10 +5,9 @@ import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Set;
 
 
-public class AnomaliePrinter {
+public class AnomalieDocumenter {
     // print writer for results
     private PrintWriter getPrintWriter(String folderToPrint) {
         int i = 0;

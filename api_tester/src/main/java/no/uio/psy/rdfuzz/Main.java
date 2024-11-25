@@ -3,28 +3,16 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
-import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
-import org.semanticweb.elk.owlapi.ElkReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
-import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
-import org.semanticweb.owlapi.io.FileDocumentSource;
-import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.HermiT.ReasonerFactory;
-import org.semanticweb.owlapi.util.*;
 
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.logging.*;
 
 import static java.lang.System.exit;
 
@@ -41,12 +29,12 @@ public class Main {
         String pathToReportAnomalies = args[1];
         File ontFile = new File(fileName);
         OntologyLoader ontL = new OntologyLoader(manager);
-        
+
         if (List.of(args).contains("--test-reasoners")) {
             System.out.println("test reasoners");
             List<Anomaly> foundAnomalies = testReasoners(ontFile);
 
-            AnomaliePrinter anomPrint = new AnomaliePrinter();
+            AnomalieDocumenter anomPrint = new AnomalieDocumenter();
             anomPrint.logAnomalies(foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
@@ -64,7 +52,7 @@ public class Main {
 
             List<Anomaly> foundAnomalies = testReasoners(ontFile);
 
-            AnomaliePrinter anomPrint = new AnomaliePrinter();
+            AnomalieDocumenter anomPrint = new AnomalieDocumenter();
             anomPrint.logAnomalies(foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
