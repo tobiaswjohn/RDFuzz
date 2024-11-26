@@ -1,0 +1,49 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+HasKey(Annotation( :anr :annotation2) Annotation( :ans :annotation4) Annotation( :anq :annotation1) Annotation( :anp :annotation3)  :A ( :qnonsim :qsim  ) ( :ds :dq  ) )
+
+DisjointClasses( DataSomeValuesFrom(:dp DataOneOf("s2") ) ObjectSomeValuesFrom(:psim ObjectIntersectionOf(ObjectHasSelf(:rsim) ObjectHasValue(:pnonsim :b) DataHasValue(:dr "s1"^^rdfs:Literal) ObjectOneOf(:a) :D :B :D :C ObjectOneOf(:d) DataSomeValuesFrom(:dr DataIntersectionOf(xsd:string rdf:PlainLiteral ) ) ObjectOneOf(:c) ObjectSomeValuesFrom(:rnonsim ObjectSomeValuesFrom(:snonsim ObjectSomeValuesFrom(:rnonsim ObjectHasValue(:rnonsim :b)))) ObjectHasValue(:ssim :b) ObjectHasValue(:qnonsim :a) DataHasValue(:dq "s3") DataHasValue(:ds "s4") DataSomeValuesFrom(:dp DataIntersectionOf(DataIntersectionOf(xsd:string rdfs:Literal )  DataIntersectionOf(rdfs:Literal rdfs:Literal )  ) ) DataSomeValuesFrom(:dr DataIntersectionOf(xsd:string rdf:PlainLiteral ) ) DataSomeValuesFrom(:ds DataIntersectionOf(xsd:string rdfs:Literal ) ) :B )) )
+
+ObjectPropertyAssertion( :qnonsim :a :d)
+
+SubDataPropertyOf( :dp :ds)
+
+ObjectPropertyRange( :ssim DataSomeValuesFrom(:dq DataIntersectionOf(DataIntersectionOf(rdfs:Literal DataIntersectionOf(xsd:string xsd:string )  DataIntersectionOf(rdf:PlainLiteral xsd:string )  )  DataIntersectionOf(rdf:PlainLiteral xsd:string )  xsd:string ) )) 
+)

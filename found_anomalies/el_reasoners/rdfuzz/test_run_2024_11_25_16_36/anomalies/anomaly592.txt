@@ -1,0 +1,64 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1337.owl
+
+Anomaly 1: Inference differentiation between HERMIT and ELK:
+	additional axioms HERMIT: [DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Thing), DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C>), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), DisjointClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#C>), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dq> <http://www.example.org/reasonerTester#ds>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#C> <http://www.example.org/reasonerTester#D>), SubClassOf(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> owl:topDataProperty), EquivalentClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> owl:topDataProperty)]
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#C> owl:Thing)]
+
+Anomaly 2: Inference differentiation between ELK and OPENLLET:
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#C> owl:Thing)]
+	additional axioms OPENLLET: [DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Thing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), DisjointClasses(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C>), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), DisjointClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#C>), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dq> <http://www.example.org/reasonerTester#ds>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#C> <http://www.example.org/reasonerTester#D>), SubClassOf(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> owl:topDataProperty), EquivalentClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> owl:topDataProperty)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+TransitiveObjectProperty(Annotation(Annotation( :anp :annotation3)  :ans :annotation1) Annotation( :anr :annotation4) Annotation( :anq :annotation2)  :rnonsim)
+
+ObjectPropertyAssertion( :pnonsim :c :a)
+
+EquivalentClasses( DataHasValue(:dr "s4") :C ObjectIntersectionOf(DataSomeValuesFrom(:dp DataOneOf("s3"^^rdf:PlainLiteral) ) ObjectSomeValuesFrom(:ssim ObjectHasValue(:psim :b)) ObjectHasSelf(:qsim) ObjectOneOf(:d) :D :B :A DataSomeValuesFrom(:ds DataIntersectionOf(xsd:string rdfs:Literal ) ) ObjectSomeValuesFrom(:qnonsim ObjectHasValue(:snonsim :b)) DataSomeValuesFrom(:dq DataIntersectionOf(rdf:PlainLiteral rdfs:Literal ) ) ObjectHasValue(:rsim :b) :C :B ) )
+
+DisjointClasses( DataHasValue(:dr "s1") DataHasValue(:ds "s4") DataHasValue(:dq "s2") DataHasValue(:dq "s2") DataSomeValuesFrom(:dr DataIntersectionOf(xsd:string xsd:string rdf:PlainLiteral ) ) DataSomeValuesFrom(:dp DataIntersectionOf(rdf:PlainLiteral rdfs:Literal ) ) DataSomeValuesFrom(:dq rdfs:Literal) :C )
+
+EquivalentDataProperties(Annotation( :anq :annotation4)  :ds :dp :dq ) 
+)

@@ -1,0 +1,72 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1540.owl
+
+Anomaly 1: Anomaly: not in EL
+ Not enough operands; at least two needed: DataIntersectionOf(rdfs:Literal) [DisjointClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#D> ObjectIntersectionOf(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C> <http://www.example.org/reasonerTester#D> ObjectHasValue(<http://www.example.org/reasonerTester#rnonsim> <http://www.example.org/reasonerTester#b>) DataSomeValuesFrom(<http://www.example.org/reasonerTester#dp> DataIntersectionOf(rdfs:Literal)) DataSomeValuesFrom(<http://www.example.org/reasonerTester#ds> xsd:string)) ObjectHasValue(<http://www.example.org/reasonerTester#ssim> <http://www.example.org/reasonerTester#a>) DataSomeValuesFrom(<http://www.example.org/reasonerTester#dq> rdf:PlainLiteral) DataSomeValuesFrom(<http://www.example.org/reasonerTester#dq> xsd:string)) in OntologyID(Anonymous-3)]
+
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anr :annotation2)  :ans :annotation1) Annotation(Annotation( :anr :annotation4)  :anq :annotation2) Annotation( :anp :annotation3) Annotation( :anp :annotation3) Annotation( :anq :annotation1)  :anp :annotation4) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+HasKey( DataHasValue(:ds "s3"^^rdfs:Literal) ( :snonsim :rsim  ) ( ) )
+
+EquivalentClasses(Annotation( :anp :annotation1) Annotation( :anp :annotation1)  DataSomeValuesFrom(:dq rdf:PlainLiteral) ObjectSomeValuesFrom(:rnonsim :B) )
+
+ObjectPropertyAssertion( :psim :b :c)
+
+EquivalentObjectProperties(Annotation( :anq :annotation4)  :qsim :pnonsim :pnonsim :qnonsim :snonsim :ssim :qsim )
+
+ObjectPropertyRange(Annotation( :anr :annotation2)  :snonsim ObjectOneOf(:d))
+
+SameIndividual( :a :a :d )
+
+HasKey( ObjectHasSelf(:ssim) ( ) ( :dr :dp  ) )
+
+SubObjectPropertyOf(Annotation( :anp :annotation3) Annotation( :anp :annotation2) Annotation( :anp :annotation4)  :qsim :rnonsim)
+
+DataPropertyRange( :ds DataOneOf("s2") )
+
+DisjointClasses( :A ObjectIntersectionOf(:C :D ObjectHasValue(:rnonsim :b) DataSomeValuesFrom(:dp DataIntersectionOf(rdfs:Literal rdfs:Literal ) ) DataSomeValuesFrom(:ds xsd:string) :B ) :A ObjectHasValue(:ssim :a) DataSomeValuesFrom(:dq rdf:PlainLiteral) DataSomeValuesFrom(:dq xsd:string) :D )
+
+SubClassOf(Annotation( :ans :annotation4) Annotation( :anr :annotation3) Annotation( :ans :annotation2)  DataHasValue(:dr "s4") DataHasValue(:ds "s1")) 
+)

@@ -1,0 +1,60 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1169.owl
+
+Anomaly 1: Anomaly: not in EL
+ Not enough operands; at least two needed: DataIntersectionOf(DataIntersectionOf(rdf:PlainLiteral xsd:string)) [ObjectPropertyRange(<http://www.example.org/reasonerTester#rnonsim> ObjectIntersectionOf(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#C> <http://www.example.org/reasonerTester#D> ObjectOneOf(<http://www.example.org/reasonerTester#b>) ObjectSomeValuesFrom(<http://www.example.org/reasonerTester#pnonsim> ObjectHasValue(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b>)) ObjectSomeValuesFrom(<http://www.example.org/reasonerTester#psim> ObjectSomeValuesFrom(<http://www.example.org/reasonerTester#qnonsim> DataSomeValuesFrom(<http://www.example.org/reasonerTester#dq> xsd:string))) ObjectSomeValuesFrom(<http://www.example.org/reasonerTester#rsim> <http://www.example.org/reasonerTester#B>) ObjectHasValue(<http://www.example.org/reasonerTester#qsim> <http://www.example.org/reasonerTester#d>) ObjectHasValue(<http://www.example.org/reasonerTester#snonsim> <http://www.example.org/reasonerTester#b>) DataSomeValuesFrom(<http://www.example.org/reasonerTester#dq> DataIntersectionOf(DataIntersectionOf(rdf:PlainLiteral xsd:string))) DataSomeValuesFrom(<http://www.example.org/reasonerTester#ds> rdfs:Literal) DataHasValue(<http://www.example.org/reasonerTester#dp> "s3"^^xsd:string) DataHasValue(<http://www.example.org/reasonerTester#ds> "s1"^^xsd:string))) in OntologyID(Anonymous-3)]
+
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+ObjectPropertyAssertion(Annotation( :anp :annotation1) Annotation( :anq :annotation2) Annotation( :ans :annotation3) Annotation( :anr :annotation4)  :snonsim :c :b)
+
+FunctionalDataProperty( :dp)
+
+NegativeDataPropertyAssertion(Annotation(Annotation(Annotation( :anp :annotation3)  :anq :annotation2) Annotation( :anq :annotation2)  :anp :annotation3)  :dq :d "s2"^^rdfs:Literal)
+
+DisjointClasses( DataSomeValuesFrom(:dr DataIntersectionOf(DataOneOf("s4")  rdf:PlainLiteral ) ) ObjectHasValue(:psim :a) ObjectHasSelf(:ssim) )
+
+ObjectPropertyRange( :rnonsim ObjectIntersectionOf(ObjectSomeValuesFrom(:rsim :B) ObjectOneOf(:b) :D DataHasValue(:ds "s1") :A :C ObjectSomeValuesFrom(:pnonsim ObjectHasValue(:psim :b)) ObjectHasValue(:qsim :d) ObjectSomeValuesFrom(:psim ObjectSomeValuesFrom(:qnonsim DataSomeValuesFrom(:dq xsd:string))) ObjectHasValue(:snonsim :b) DataSomeValuesFrom(:dq DataIntersectionOf(DataIntersectionOf(rdf:PlainLiteral xsd:string )  DataIntersectionOf(xsd:string rdf:PlainLiteral )  ) ) DataHasValue(:dp "s3") DataSomeValuesFrom(:ds rdfs:Literal) :D :A )) 
+)

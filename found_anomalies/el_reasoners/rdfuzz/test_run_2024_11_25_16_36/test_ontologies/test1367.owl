@@ -1,0 +1,49 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anq :annotation2) Annotation( :anp :annotation4)  :anp :annotation1) Annotation(Annotation( :anq :annotation1)  :anr :annotation2) Annotation( :anq :annotation4)  :ans :annotation3) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+EquivalentDataProperties( :dp :dq :dr )
+
+DisjointClasses(Annotation( :anq :annotation3)  ObjectIntersectionOf(ObjectOneOf(:a) :D ) ObjectSomeValuesFrom(:rnonsim DataSomeValuesFrom(:ds rdfs:Literal)) :B )
+
+HasKey( ObjectHasSelf(:ssim) ( :qsim :pnonsim  ) ( ) )
+
+EquivalentClasses( ObjectHasValue(:rsim :b) DataHasValue(:dr "s2"^^xsd:string) :A :C ObjectHasValue(:snonsim :d) DataSomeValuesFrom(:dr DataOneOf("s3") ) DataSomeValuesFrom(:dp DataIntersectionOf(rdf:PlainLiteral rdf:PlainLiteral DataIntersectionOf(rdf:PlainLiteral xsd:string )  ) ) ObjectHasValue(:psim :a) ObjectHasValue(:qnonsim :c) ObjectSomeValuesFrom(:qnonsim :C) :C :B :D :D )
+
+ObjectPropertyAssertion(Annotation(Annotation(Annotation( :anr :annotation3) Annotation( :anp :annotation4)  :anr :annotation4) Annotation( :anq :annotation2) Annotation( :ans :annotation4)  :anp :annotation1)  :psim :a :d) 
+)

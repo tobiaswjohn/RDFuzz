@@ -1,0 +1,55 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+NegativeDataPropertyAssertion(Annotation(Annotation( :anr :annotation1) Annotation( :anq :annotation3)  :ans :annotation1) Annotation( :anp :annotation4) Annotation( :anp :annotation1) Annotation( :anq :annotation2)  :ds :c "s1"^^rdf:PlainLiteral)
+
+EquivalentDataProperties( :dq :dr )
+
+SubClassOf(Annotation( :ans :annotation2) Annotation( :ans :annotation3)  ObjectSomeValuesFrom(:qsim :A) ObjectHasValue(:qnonsim :d))
+
+ObjectPropertyAssertion(Annotation( :ans :annotation3)  :psim :b :a)
+
+HasKey( ObjectIntersectionOf(DataSomeValuesFrom(:ds DataIntersectionOf(xsd:string DataOneOf("s2")  ) ) DataHasValue(:dp "s4") ObjectOneOf(:b) ) ( :rnonsim  ) ( :dp :dp  ) )
+
+HasKey(Annotation(Annotation( :anr :annotation2) Annotation( :anp :annotation4) Annotation(Annotation( :anp :annotation4) Annotation( :anr :annotation2) Annotation( :anp :annotation1) Annotation( :anp :annotation4) Annotation( :anq :annotation4)  :anr :annotation3) Annotation(Annotation( :anp :annotation4)  :anp :annotation3)  :anp :annotation3)  ObjectHasSelf(:ssim) ( ) ( :dq :ds  ) )
+
+EquivalentObjectProperties(Annotation(Annotation( :anq :annotation3) Annotation(Annotation(Annotation(Annotation( :ans :annotation4) Annotation( :anq :annotation4)  :anp :annotation4) Annotation(Annotation( :ans :annotation2)  :ans :annotation4) Annotation( :ans :annotation1)  :ans :annotation2)  :anq :annotation3) Annotation( :ans :annotation2) Annotation( :ans :annotation4)  :anq :annotation2)  :rsim :pnonsim :snonsim :ssim :rnonsim )
+
+SubObjectPropertyOf(Annotation( :anr :annotation1) Annotation( :ans :annotation3) Annotation( :anq :annotation1)  :pnonsim :qnonsim) 
+)

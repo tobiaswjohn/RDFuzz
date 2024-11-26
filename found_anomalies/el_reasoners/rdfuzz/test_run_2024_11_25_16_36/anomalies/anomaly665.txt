@@ -1,0 +1,91 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1494.owl
+
+Anomaly 1: Anomaly: not in EL
+ Not enough individuals; at least two needed [DifferentIndividuals(<http://www.example.org/reasonerTester#b>) in OntologyID(Anonymous-3)]
+ Not enough individuals; at least two needed [SameIndividual(Annotation(<http://www.example.org/reasonerTester#ans> <http://www.example.org/reasonerTester#annotation4>) <http://www.example.org/reasonerTester#c>) in OntologyID(Anonymous-3)]
+
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anr :annotation3)  :anq :annotation4) Annotation( :ans :annotation3) Annotation( :anp :annotation3) Annotation( :ans :annotation2)  :anp :annotation1) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+DisjointClasses( DataHasValue(:dp "s1"^^rdf:PlainLiteral) ObjectOneOf(:d) )
+
+FunctionalDataProperty( :dr)
+
+ObjectPropertyDomain(Annotation(Annotation(Annotation( :anr :annotation2)  :ans :annotation1)  :ans :annotation3)  :psim ObjectSomeValuesFrom(:rnonsim ObjectIntersectionOf(ObjectHasValue(:ssim :b) DataSomeValuesFrom(:dq xsd:string) :C )))
+
+SubClassOf(Annotation( :anp :annotation1)  :D ObjectHasSelf(:rsim))
+
+ObjectPropertyAssertion(Annotation(Annotation( :ans :annotation3) Annotation( :anp :annotation4) Annotation( :anq :annotation1)  :ans :annotation1) Annotation(Annotation( :anr :annotation2)  :anq :annotation4)  :pnonsim :c :a)
+
+EquivalentClasses( :D :A :B DataSomeValuesFrom(:ds DataIntersectionOf(rdfs:Literal DataOneOf("s2")  ) ) DataSomeValuesFrom(:ds rdfs:Literal) :A DataHasValue(:dp "s4") :A )
+
+EquivalentClasses(Annotation(Annotation( :ans :annotation2) Annotation( :anp :annotation4) Annotation( :ans :annotation2)  :anp :annotation4)  ObjectHasValue(:qsim :a) ObjectHasValue(:qnonsim :c) ObjectHasValue(:snonsim :a) DataHasValue(:dr "s3") DataSomeValuesFrom(:dr rdf:PlainLiteral) :B )
+
+SameIndividual(Annotation( :ans :annotation4) Annotation( :ans :annotation4) Annotation( :ans :annotation4)  :c :c )
+
+DataPropertyRange(Annotation(Annotation( :anq :annotation3)  :ans :annotation2) Annotation(Annotation(Annotation( :anr :annotation1)  :anq :annotation4)  :anq :annotation2)  :ds DataIntersectionOf(rdfs:Literal DataIntersectionOf(DataOneOf("s1"^^xsd:string)  rdf:PlainLiteral rdf:PlainLiteral rdfs:Literal rdf:PlainLiteral DataOneOf("s3")  xsd:string DataOneOf("s1"^^rdf:PlainLiteral)  )  DataOneOf("s3")  ) )
+
+ObjectPropertyRange( :qnonsim ObjectHasSelf(:psim))
+
+DataPropertyAssertion( :dr :b "s1")
+
+SubDataPropertyOf( :dp :dq)
+
+SubClassOf( :D :B)
+
+ClassAssertion( :C :b)
+
+HasKey( :C ( :rnonsim  ) ( ) )
+
+TransitiveObjectProperty( :rnonsim)
+
+DifferentIndividuals( :c :b )
+
+TransitiveObjectProperty( :pnonsim)
+
+ReflexiveObjectProperty( :snonsim)
+
+DifferentIndividuals( :b :b ) 
+)

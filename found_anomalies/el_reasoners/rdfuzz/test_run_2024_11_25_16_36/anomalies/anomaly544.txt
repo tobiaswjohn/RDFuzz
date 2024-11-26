@@ -1,0 +1,82 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1223.owl
+
+Anomaly 1: Inference differentiation between HERMIT and ELK:
+	additional axioms HERMIT: [DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), FunctionalDataProperty(<http://www.example.org/reasonerTester#dr>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#qsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#c>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), SubClassOf(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C>), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dr>), ReflexiveObjectProperty(<http://www.example.org/reasonerTester#psim>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#a>), SubClassOf(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#C>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#d>), ReflexiveObjectProperty(<http://www.example.org/reasonerTester#pnonsim>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#d>), SubClassOf(<http://www.example.org/reasonerTester#D> <http://www.example.org/reasonerTester#C>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#d>), FunctionalDataProperty(<http://www.example.org/reasonerTester#dp>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#c>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#d>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#a>), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> <http://www.example.org/reasonerTester#ds>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#b>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#c>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#b>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#d>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#d>), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> owl:topDataProperty), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#a>), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> owl:topDataProperty)]
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing), SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing), SubClassOf(<http://www.example.org/reasonerTester#A> owl:Thing)]
+
+Anomaly 2: Inference differentiation between ELK and OPENLLET:
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing), SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing), SubClassOf(<http://www.example.org/reasonerTester#A> owl:Thing)]
+	additional axioms OPENLLET: [DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), FunctionalDataProperty(<http://www.example.org/reasonerTester#dr>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#qsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#c>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), SubClassOf(<http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#C>), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dr>), ReflexiveObjectProperty(<http://www.example.org/reasonerTester#psim>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#a>), SubClassOf(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#C>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#d>), ReflexiveObjectProperty(<http://www.example.org/reasonerTester#pnonsim>), SubClassOf(<http://www.example.org/reasonerTester#D> <http://www.example.org/reasonerTester#C>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#d>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#d>), FunctionalDataProperty(<http://www.example.org/reasonerTester#dp>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#c>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#d>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#a>), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> <http://www.example.org/reasonerTester#ds>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#b>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#c>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#b> <http://www.example.org/reasonerTester#b>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#d>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#a> <http://www.example.org/reasonerTester#d>), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> owl:topDataProperty), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#a>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#pnonsim> <http://www.example.org/reasonerTester#d> <http://www.example.org/reasonerTester#a>), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> owl:topDataProperty)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+SameIndividual(Annotation( :anq :annotation4) Annotation( :anr :annotation1) Annotation( :ans :annotation3) Annotation( :anp :annotation2)  :a :d )
+
+DataPropertyDomain( :dq ObjectSomeValuesFrom(:rnonsim ObjectHasValue(:qsim :c)))
+
+DisjointClasses(Annotation(Annotation( :anq :annotation1) Annotation( :anq :annotation4) Annotation( :anp :annotation3)  :anr :annotation2) Annotation( :ans :annotation4)  DataHasValue(:ds "s1") ObjectOneOf(:b) )
+
+ObjectPropertyAssertion(Annotation( :anp :annotation4) Annotation( :anq :annotation1)  :psim :b :d)
+
+EquivalentDataProperties(Annotation(Annotation( :ans :annotation3)  :anp :annotation3) Annotation( :ans :annotation2) Annotation( :anr :annotation3)  :dr :dp :dp )
+
+ReflexiveObjectProperty(Annotation( :anp :annotation4) Annotation(Annotation( :anq :annotation1) Annotation( :anr :annotation1) Annotation( :ans :annotation3) Annotation( :anr :annotation3) Annotation( :anq :annotation3)  :ans :annotation2) Annotation( :anq :annotation2)  :pnonsim)
+
+SubDataPropertyOf( :dq :ds)
+
+SubObjectPropertyOf( :rsim :ssim)
+
+EquivalentClasses( DataSomeValuesFrom(:dp rdfs:Literal) ObjectIntersectionOf(:B :C :B DataSomeValuesFrom(:dr DataOneOf("s3"^^rdf:PlainLiteral) ) :B :A ) ObjectHasSelf(:rsim) :D :B :A :D DataSomeValuesFrom(:dq DataIntersectionOf(rdf:PlainLiteral xsd:string ) ) DataSomeValuesFrom(:dp xsd:string) :B )
+
+HasKey(Annotation( :anq :annotation3) Annotation( :anr :annotation2)  ObjectSomeValuesFrom(:snonsim DataHasValue(:dq "s2")) ( :qnonsim :snonsim  ) ( :dr :dp :dp  ) )
+
+FunctionalDataProperty(Annotation( :anq :annotation2)  :dr)
+
+SubClassOf(Annotation(Annotation(Annotation( :ans :annotation2)  :anq :annotation1) Annotation( :anp :annotation2) Annotation( :anr :annotation1)  :anp :annotation4)  DataHasValue(:dq "s4") DataHasValue(:dr "s1"))
+
+EquivalentObjectProperties( :psim :pnonsim :pnonsim :psim )
+
+ObjectPropertyAssertion(Annotation( :anp :annotation4) Annotation( :anq :annotation3)  :qsim :b :c) 
+)

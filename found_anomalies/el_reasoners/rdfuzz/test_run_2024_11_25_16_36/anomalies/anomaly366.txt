@@ -1,0 +1,69 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test852.owl
+
+Anomaly 1: Inference differentiation between HERMIT and ELK:
+	additional axioms HERMIT: [SubClassOf(owl:Thing owl:Nothing)]
+	additional axioms ELK: [SubObjectPropertyOf(<http://www.example.org/reasonerTester#psim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#a>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#pnonsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#C> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#b>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qsim> owl:topObjectProperty), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#c>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#snonsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#A> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#ssim> owl:topObjectProperty), EquivalentClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#B> <http://www.example.org/reasonerTester#D>), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#d>)]
+
+Anomaly 2: Consistency differentiation:
+	HERMIT: not consistent, ELK: consistent
+
+Anomaly 3: Anomaly with following exception:
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "openllet.core.boxes.abox.Node.getTerm()" is null
+
+Anomaly 4: Anomaly with following exception:
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "openllet.core.boxes.abox.Node.getTerm()" is null
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation( :anq :annotation1) Annotation( :ans :annotation3) Annotation( :anp :annotation4) Annotation( :anr :annotation4) Annotation( :anr :annotation2)  :anr :annotation2) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+FunctionalDataProperty(Annotation(Annotation( :anp :annotation2) Annotation( :ans :annotation3)  :anr :annotation2)  :ds)
+
+EquivalentClasses( ObjectIntersectionOf(ObjectHasSelf(:qsim) ObjectHasValue(:rsim :b) ) DataHasValue(:dr "s3"^^rdfs:Literal) DataSomeValuesFrom(:dp DataOneOf("s1") ) ObjectSomeValuesFrom(:rnonsim :C) ObjectOneOf(:a) :D :A :B ObjectHasValue(:qnonsim :d) DataSomeValuesFrom(:dq DataIntersectionOf(rdfs:Literal xsd:string ) ) ObjectHasValue(:ssim :c) DataSomeValuesFrom(:dp rdf:PlainLiteral) ObjectSomeValuesFrom(:snonsim ObjectHasValue(:psim :c)) ObjectHasValue(:snonsim :d) ObjectHasValue(:pnonsim :a) DataHasValue(:dp "s2") DataHasValue(:ds "s4") DataHasValue(:ds "s2") DataSomeValuesFrom(:ds DataIntersectionOf(DataOneOf("s4"^^rdf:PlainLiteral)  rdfs:Literal DataIntersectionOf(rdfs:Literal xsd:string )  ) ) DataSomeValuesFrom(:ds rdfs:Literal) ObjectHasSelf(:rsim) ObjectOneOf(:d) ObjectHasValue(:qsim :c) :B )
+
+HasKey(Annotation( :anq :annotation4) Annotation( :anp :annotation3) Annotation( :ans :annotation4) Annotation( :anr :annotation4)  :B ( :rsim :snonsim  ) ( :dp :ds  ) )
+
+ObjectPropertyAssertion( :qnonsim :d :d)
+
+DataPropertyDomain(Annotation( :anp :annotation1) Annotation( :anr :annotation3)  :dr ObjectIntersectionOf(DataSomeValuesFrom(:dq DataOneOf("s2") ) ObjectIntersectionOf(:D :C ) )) 
+)

@@ -1,0 +1,78 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test764.owl
+
+Anomaly 1: Anomaly: not in EL
+ Not enough property expressions; at least two needed [EquivalentDataProperties(<http://www.example.org/reasonerTester#dr>) in OntologyID(Anonymous-3)]
+
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anr :annotation1) Annotation( :anr :annotation4)  :anp :annotation3) Annotation( :anq :annotation3) Annotation( :anp :annotation4)  :ans :annotation2) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+HasKey( DataHasValue(:dq "s1") ( ) ( :dp  ) )
+
+SameIndividual(Annotation(Annotation( :anq :annotation1)  :anq :annotation2) Annotation(Annotation(Annotation( :anq :annotation1)  :anp :annotation1) Annotation( :anr :annotation3)  :anq :annotation1)  :b :c :d )
+
+DisjointClasses(Annotation( :anp :annotation2)  :A ObjectHasSelf(:psim) )
+
+HasKey(Annotation(Annotation( :anp :annotation4) Annotation( :anp :annotation1)  :anr :annotation4) Annotation( :anr :annotation4)  DataSomeValuesFrom(:dr DataIntersectionOf(DataOneOf("s2")  rdfs:Literal xsd:string ) ) ( :qnonsim  ) ( ) )
+
+DataPropertyDomain(Annotation( :ans :annotation1)  :ds ObjectOneOf(:a))
+
+ClassAssertion(Annotation(Annotation( :anq :annotation3) Annotation( :anr :annotation1) Annotation( :anr :annotation1)  :anr :annotation2)  ObjectSomeValuesFrom(:ssim ObjectIntersectionOf(ObjectHasValue(:rnonsim :a) :C :B )) :a)
+
+FunctionalDataProperty(Annotation(Annotation(Annotation( :anr :annotation3) Annotation( :anr :annotation4)  :anr :annotation2)  :anr :annotation3)  :dr)
+
+ReflexiveObjectProperty( :pnonsim)
+
+ObjectPropertyAssertion(Annotation( :anp :annotation2) Annotation(Annotation( :anq :annotation2) Annotation(Annotation( :anp :annotation3)  :anq :annotation3)  :ans :annotation2)  :qsim :d :b)
+
+TransitiveObjectProperty(Annotation( :anr :annotation3) Annotation(Annotation(Annotation( :anp :annotation1)  :anq :annotation2)  :anq :annotation4)  :snonsim)
+
+HasKey(Annotation( :anr :annotation1) Annotation(Annotation( :ans :annotation1)  :anq :annotation1) Annotation( :ans :annotation2) Annotation( :anp :annotation2) Annotation( :anq :annotation3) Annotation(Annotation( :ans :annotation4) Annotation(Annotation(Annotation( :anp :annotation2) Annotation( :anr :annotation3)  :anr :annotation4)  :ans :annotation1)  :anp :annotation2) Annotation(Annotation(Annotation( :anr :annotation2)  :anq :annotation3)  :anq :annotation2)  :D ( :psim :ssim :rsim :rnonsim  ) ( :dq :dp :dq :dq  ) )
+
+HasKey(Annotation( :anq :annotation4)  DataHasValue(:dr "s3"^^rdf:PlainLiteral) ( :ssim  ) ( :dq  ) )
+
+EquivalentDataProperties( :dr :dr )
+
+EquivalentClasses( DataHasValue(:dq "s1") DataHasValue(:ds "s4") DataHasValue(:ds "s1") DataHasValue(:dq "s4"^^rdfs:Literal) ObjectHasSelf(:qsim) ) 
+)

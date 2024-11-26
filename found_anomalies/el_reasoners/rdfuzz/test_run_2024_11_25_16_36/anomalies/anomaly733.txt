@@ -1,0 +1,82 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test1654.owl
+
+Anomaly 1: Inference differentiation between HERMIT and ELK:
+	additional axioms HERMIT: [SubClassOf(owl:Thing owl:Nothing)]
+	additional axioms ELK: [SubObjectPropertyOf(<http://www.example.org/reasonerTester#psim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#a>), EquivalentClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#B>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#pnonsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#C> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#b>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qsim> owl:topObjectProperty), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#c>), SubClassOf(<http://www.example.org/reasonerTester#A> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#ssim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#d>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#snonsim> <http://www.example.org/reasonerTester#psim>)]
+
+Anomaly 2: Inference differentiation between ELK and OPENLLET:
+	additional axioms ELK: [SubObjectPropertyOf(<http://www.example.org/reasonerTester#psim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#a>), EquivalentClasses(<http://www.example.org/reasonerTester#A> <http://www.example.org/reasonerTester#B>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#pnonsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#C> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rnonsim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#b>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#qsim> owl:topObjectProperty), SubObjectPropertyOf(<http://www.example.org/reasonerTester#rsim> owl:topObjectProperty), SubClassOf(<http://www.example.org/reasonerTester#B> owl:Thing), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#c>), SubClassOf(<http://www.example.org/reasonerTester#A> owl:Thing), SubObjectPropertyOf(<http://www.example.org/reasonerTester#ssim> owl:topObjectProperty), ClassAssertion(owl:Thing <http://www.example.org/reasonerTester#d>), SubObjectPropertyOf(<http://www.example.org/reasonerTester#snonsim> <http://www.example.org/reasonerTester#psim>)]
+	additional axioms OPENLLET: [SubClassOf(owl:Thing owl:Nothing)]
+
+Anomaly 3: Consistency differentiation:
+	OPENLLET: not consistent, ELK: consistent
+
+Anomaly 4: Consistency differentiation:
+	HERMIT: not consistent, ELK: consistent
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+SubClassOf(Annotation(Annotation( :anp :annotation1)  :anq :annotation3) Annotation(Annotation( :ans :annotation4)  :ans :annotation4) Annotation( :anr :annotation2)  ObjectOneOf(:c) DataHasValue(:dq "s1"^^rdfs:Literal))
+
+ClassAssertion( ObjectHasSelf(:ssim) :a)
+
+DisjointClasses( ObjectIntersectionOf(:B :A :C :D ) DataSomeValuesFrom(:dr xsd:string) ObjectSomeValuesFrom(:snonsim ObjectHasValue(:qsim :b)) )
+
+EquivalentClasses( DataSomeValuesFrom(:ds DataOneOf("s4") ) DataSomeValuesFrom(:dp DataIntersectionOf(rdf:PlainLiteral DataOneOf("s2")  DataOneOf("s1"^^xsd:string)  ) ) DataSomeValuesFrom(:dp DataOneOf("s3") ) ObjectOneOf(:d) ObjectHasValue(:pnonsim :d) ObjectSomeValuesFrom(:ssim ObjectSomeValuesFrom(:qnonsim :D)) ObjectSomeValuesFrom(:rnonsim ObjectHasValue(:psim :c)) ObjectSomeValuesFrom(:rsim :D) :A :A :B )
+
+DisjointClasses( DataSomeValuesFrom(:dq DataIntersectionOf(DataIntersectionOf(rdf:PlainLiteral rdfs:Literal )  rdfs:Literal ) ) ObjectIntersectionOf(ObjectOneOf(:b) ObjectHasValue(:qnonsim :b) :B ) )
+
+TransitiveObjectProperty( :pnonsim)
+
+SubObjectPropertyOf( :snonsim :psim)
+
+ObjectPropertyAssertion( :qnonsim :a :a)
+
+ObjectPropertyAssertion(Annotation(Annotation( :anq :annotation3) Annotation( :anq :annotation4) Annotation(Annotation(Annotation( :ans :annotation2)  :anr :annotation4) Annotation(Annotation( :anq :annotation3) Annotation( :anr :annotation3)  :anq :annotation2) Annotation( :anq :annotation3) Annotation( :anp :annotation3)  :ans :annotation3)  :anp :annotation3)  :qnonsim :b :a)
+
+FunctionalDataProperty(Annotation( :ans :annotation1) Annotation(Annotation(Annotation( :ans :annotation2) Annotation(Annotation( :ans :annotation2) Annotation( :anq :annotation1)  :anq :annotation4)  :anp :annotation4)  :ans :annotation3)  :dq)
+
+HasKey( DataHasValue(:dr "s2"^^rdf:PlainLiteral) ( :snonsim :pnonsim  ) ( ) ) 
+)

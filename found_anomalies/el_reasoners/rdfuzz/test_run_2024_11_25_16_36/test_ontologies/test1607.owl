@@ -1,0 +1,85 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation( :anr :annotation4) Annotation(Annotation( :anp :annotation3) Annotation( :anp :annotation3)  :anq :annotation2) Annotation(Annotation( :ans :annotation1)  :ans :annotation1) Annotation( :anr :annotation3) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+ReflexiveObjectProperty( :snonsim)
+
+EquivalentClasses( DataSomeValuesFrom(:dr rdfs:Literal) ObjectIntersectionOf(ObjectHasValue(:rsim :a) ObjectOneOf(:d) DataHasValue(:ds "s2"^^rdf:PlainLiteral) ObjectHasSelf(:ssim) :A ObjectSomeValuesFrom(:pnonsim :D) :B :C ObjectHasValue(:qsim :b) DataSomeValuesFrom(:dp DataOneOf("s4") ) DataSomeValuesFrom(:dq DataIntersectionOf(rdf:PlainLiteral rdfs:Literal DataOneOf("s1")  ) ) DataSomeValuesFrom(:dp xsd:string) ObjectOneOf(:c) ObjectHasValue(:qnonsim :c) ObjectHasValue(:psim :b) ObjectSomeValuesFrom(:rnonsim ObjectHasValue(:pnonsim :b)) ObjectSomeValuesFrom(:qnonsim DataHasValue(:ds "s3")) :B ObjectIntersectionOf(:B :A ) ObjectSomeValuesFrom(:psim DataSomeValuesFrom(:dr rdf:PlainLiteral)) ObjectIntersectionOf(ObjectHasValue(:pnonsim :b) ObjectOneOf(:b) ) ) )
+
+HasKey(Annotation( :anq :annotation1) Annotation(Annotation(Annotation( :anp :annotation3)  :anq :annotation2)  :anp :annotation3)  :C ( ) ( :dq  ) )
+
+DisjointClasses(Annotation(Annotation(Annotation(Annotation( :ans :annotation2)  :ans :annotation1) Annotation( :anr :annotation4) Annotation( :anr :annotation4)  :anp :annotation3) Annotation( :ans :annotation3)  :anr :annotation3)  ObjectSomeValuesFrom(:ssim ObjectHasValue(:rnonsim :b)) ObjectHasSelf(:qsim) )
+
+SubClassOf( ObjectIntersectionOf(ObjectOneOf(:a) DataSomeValuesFrom(:dq rdf:PlainLiteral) ) ObjectOneOf(:b))
+
+NegativeObjectPropertyAssertion( :rnonsim :a :c)
+
+HasKey( DataHasValue(:dr "s4") ( :rnonsim :rsim  ) ( :dq :dr  ) )
+
+EquivalentClasses(Annotation( :ans :annotation2)  DataHasValue(:dp "s4") ObjectSomeValuesFrom(:ssim DataHasValue(:ds "s2"^^xsd:string)) )
+
+EquivalentDataProperties( :dq :ds :dq :dr )
+
+ObjectPropertyAssertion(Annotation(Annotation( :ans :annotation4) Annotation(Annotation( :anp :annotation3)  :anq :annotation3) Annotation( :anp :annotation2) Annotation( :ans :annotation2) Annotation( :anr :annotation4) Annotation( :anr :annotation2)  :anp :annotation2)  :snonsim :d :a)
+
+EquivalentClasses( ObjectHasValue(:psim :b) ObjectHasValue(:snonsim :b) ObjectIntersectionOf(DataSomeValuesFrom(:dp DataOneOf("s2") ) ObjectOneOf(:c) ObjectIntersectionOf(ObjectOneOf(:d) DataSomeValuesFrom(:dr DataIntersectionOf(rdfs:Literal xsd:string ) ) DataSomeValuesFrom(:ds rdfs:Literal) ObjectHasValue(:rnonsim :c) ObjectIntersectionOf(:A :A ) ) ) ObjectOneOf(:a) )
+
+SubDataPropertyOf(Annotation( :ans :annotation2)  :dp :dq)
+
+SubClassOf(Annotation(Annotation(Annotation( :anr :annotation3)  :anr :annotation2)  :ans :annotation1)  :A ObjectHasValue(:qnonsim :c))
+
+SameIndividual( :b :d :d )
+
+HasKey(Annotation( :anr :annotation2)  ObjectHasValue(:qnonsim :b) ( :qsim :snonsim  ) ( ) )
+
+SubClassOf( ObjectOneOf(:d) DataHasValue(:dq "s1"))
+
+FunctionalDataProperty( :dq)
+
+NegativeDataPropertyAssertion( :dr :a "s3")
+
+ClassAssertion( :D :a)
+
+ObjectPropertyRange( :qsim ObjectOneOf(:a))
+
+DifferentIndividuals( :a :d )
+
+ObjectPropertyAssertion( :ssim :b :c)
+
+HasKey( :C ( :rnonsim  ) ( ) ) 
+)

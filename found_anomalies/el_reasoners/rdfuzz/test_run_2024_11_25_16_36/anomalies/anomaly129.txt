@@ -1,0 +1,78 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_36/test_ontologies/test314.owl
+
+Anomaly 1: Anomaly: not in EL
+ Not enough individuals; at least two needed [DifferentIndividuals(<http://www.example.org/reasonerTester#b>) in OntologyID(Anonymous-3)]
+
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anq :annotation2) Annotation( :anq :annotation4) Annotation( :anq :annotation3)  :anr :annotation4) Annotation(Annotation( :anp :annotation2) Annotation( :anq :annotation4)  :anp :annotation3) Annotation( :anp :annotation2)  :ans :annotation1) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+ObjectPropertyAssertion( :qsim :d :b)
+
+EquivalentClasses( ObjectHasValue(:rnonsim :a) ObjectHasSelf(:psim) )
+
+HasKey( DataSomeValuesFrom(:dp DataOneOf("s2") ) ( :snonsim  ) ( ) )
+
+EquivalentObjectProperties( :pnonsim :qnonsim :ssim :rsim )
+
+HasKey(Annotation( :ans :annotation2)  :A ( :snonsim :ssim :rsim  ) ( :dr :dq  ) )
+
+HasKey(Annotation( :anq :annotation2)  ObjectIntersectionOf(ObjectOneOf(:c) DataHasValue(:dp "s3") :C :D :B ) ( ) ( :ds :dp  ) )
+
+ObjectPropertyDomain( :rnonsim ObjectSomeValuesFrom(:qsim DataSomeValuesFrom(:ds DataIntersectionOf(rdf:PlainLiteral rdfs:Literal xsd:string ) )))
+
+ClassAssertion( DataHasValue(:ds "s1"^^xsd:string) :b)
+
+DisjointClasses( DataHasValue(:dr "s2") DataHasValue(:dq "s4") DataSomeValuesFrom(:dp xsd:string) DataHasValue(:ds "s4") ObjectIntersectionOf(DataHasValue(:dq "s4") :A :D ObjectOneOf(:d) ) )
+
+HasKey( DataSomeValuesFrom(:dr rdfs:Literal) ( ) ( :ds  ) )
+
+SameIndividual( :c :b )
+
+DifferentIndividuals( :b :b )
+
+ReflexiveObjectProperty( :qnonsim)
+
+DataPropertyRange( :dp rdf:PlainLiteral) 
+)
