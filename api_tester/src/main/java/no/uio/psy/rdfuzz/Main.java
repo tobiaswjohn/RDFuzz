@@ -83,7 +83,7 @@ public class Main {
             ont = ontL.loadOntologyFile(ontFile);
         }
         catch (OWLOntologyCreationException e) {
-            return List.of(new ExceptionAnomaly(e));
+            return List.of(new ExceptionAnomaly(e, SUT.OWLAPI));
         }
 
         // check if ontology is in EL --> only use for those for testing

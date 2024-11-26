@@ -70,7 +70,7 @@ public class ReasonerCaller {
         } catch (Exception e) {
             return  new ResultWithAnomalie<>(
                     false,
-                    Set.of(new ExceptionAnomaly(e)),
+                    Set.of(new ExceptionAnomaly(e, sut)),
                     sut
             );
         }
@@ -89,7 +89,7 @@ public class ReasonerCaller {
         } catch (Exception e) {
             return  new ResultWithAnomalie<>(
                     Set.of(),
-                    Set.of(new ExceptionAnomaly(e)),
+                    Set.of(new ExceptionAnomaly(e, sut)),
                     sut
             );
         }
@@ -106,7 +106,7 @@ public class ReasonerCaller {
         } catch (Exception e) {
             return new ResultWithAnomalie<>(
                     Set.of(),
-                    Set.of(new ExceptionAnomaly(e)),
+                    Set.of(new ExceptionAnomaly(e, sut)),
                     sut
             );
         }
