@@ -13,7 +13,7 @@ endTime=$(date -d "$(date) + ${timeLimit} seconds")
 # check
 
 hostname=$(hostname)    # name of computer that runs benchmark
-suts="el_reasoners"
+suts="turtle_parsers"
 # directory, where found anomalies are stored
 directory="found_anomalies/${suts}/${hostname}/test_run_$(date +'%Y_%m_%d_%H_%M')"
 directoryOntologies="${directory}/test_ontologies"
@@ -28,7 +28,7 @@ mkdir -p "$directoryAnomalies"
 log="${directory}/fuzzing.log"
 
 echo "time limit: ${timeLimit} seconds" >> $log
-echo "end time: ${endTime}" >> $log
+echo "expected end time: ${endTime}" >> $log
 
 
 # .csv file to summarize testing results
@@ -60,7 +60,7 @@ while [ $SECONDS -lt $timeLimit ];
 do
 
     # generate new ontology files
-    ontName="test$i.owl"
+    ontName="test$i.ttl"
 
     ontFile="../${directoryOntologies}/${ontName}" 
 
@@ -71,7 +71,7 @@ do
     echo "generate test number $i"
     echo "generate test number $i" >> ../$log
 
-    python generator_OWL_EL.py $ontFile >> ../$log
+    python turtle_generator.py $ontFile >> ../$log
 
 
     # test parsing with OWL API
@@ -79,7 +79,7 @@ do
     echo "run test number $i"
     echo "run test number $i" >> ../$log
 
-    java -jar ../api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile ../$directoryAnomalies ../$summaryFile --test-reasoners >> ../$log 2>&1
+    java -jar ../api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile ../$directoryAnomalies ../$summaryFile --test-parsers >> ../$log 2>&1
 
     if [[ $? == 1 ]] ; then
         # create output, if error is found

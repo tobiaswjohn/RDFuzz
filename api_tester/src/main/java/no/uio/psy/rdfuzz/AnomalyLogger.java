@@ -11,7 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 
-public class AnomalieDocumenter {
+public class AnomalyLogger {
 
     String reportFile = "-";
 

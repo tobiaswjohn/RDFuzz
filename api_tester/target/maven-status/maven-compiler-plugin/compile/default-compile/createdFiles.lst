@@ -1,8 +1,8 @@
 no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory.class
 no/uio/psy/rdfuzz/reasoners/ReasonerCaller.class
 no/uio/psy/rdfuzz/anomalies/ConsistencyAnomaly.class
-no/uio/psy/rdfuzz/AnomalieDocumenter.class
 no/uio/psy/rdfuzz/anomalies/InferenceAnomaly.class
+no/uio/psy/rdfuzz/ParserTester.class
 no/uio/psy/rdfuzz/anomalies/AnomalySummary.class
 no/uio/psy/rdfuzz/anomalies/NotElAnomaly.class
 no/uio/psy/rdfuzz/SUT.class
@@ -14,3 +14,4 @@ no/uio/psy/rdfuzz/anomalies/ResultWithAnomalie.class
 no/uio/psy/rdfuzz/anomalies/ExceptionAnomaly.class
 no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory$1.class
 no/uio/psy/rdfuzz/OntologyLoader.class
+no/uio/psy/rdfuzz/AnomalyLogger.class

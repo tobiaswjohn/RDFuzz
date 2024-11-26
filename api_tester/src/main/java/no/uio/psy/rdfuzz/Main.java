@@ -3,9 +3,6 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
-import org.apache.jena.base.Sys;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFDataMgr;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
@@ -32,26 +29,17 @@ public class Main {
         String pathToReportCSV = args[2];
 
         File ontFile = new File(fileName);
-        OntologyLoader ontL = new OntologyLoader(manager);
+
+        // list to save all found anomalies
+        List<Anomaly> foundAnomalies = new ArrayList<>();
+
+        if (List.of(args).contains("--test-parsers")) {
+            foundAnomalies.addAll(testParsers(ontFile));
+        }
 
         if (List.of(args).contains("--test-reasoners")) {
             System.out.println("test reasoners");
-            List<Anomaly> foundAnomalies = testReasoners(ontFile);
-
-            AnomalieDocumenter anomDocumenter = new AnomalieDocumenter();
-            anomDocumenter.logAnomalies(
-                    foundAnomalies,
-                    ontFile,
-                    pathToReportAnomalies);
-
-            anomDocumenter.logSummary(foundAnomalies, pathToReportCSV, ",");
-        }
-
-        if (List.of(args).contains("--test-parsers")) {
-            System.out.println("test OWL API");
-            runOwlApi(ontFile);
-            System.out.println("test Jena API");
-            runJenaApi(ontFile);
+             foundAnomalies.addAll(testReasoners(ontFile));
         }
 
         if (List.of(args).contains("--no-export")) {
@@ -59,20 +47,26 @@ public class Main {
             System.out.println("detailed inspection");
 
 
-            List<Anomaly> foundAnomalies = testReasoners(ontFile);
+            List<Anomaly> anomalies = testReasoners(ontFile);
 
-            AnomalieDocumenter anomPrint = new AnomalieDocumenter();
-            /*anomPrint.logAnomalies(foundAnomalies,
-                    ontFile,
-                    pathToReportAnomalies);
-
-             */
-
-            for (Anomaly a : foundAnomalies)
+            for (Anomaly a : anomalies)
                 System.out.println(a);
 
         }
+        else {
+            // export found anomalies
+            AnomalyLogger anomalyLogger = new AnomalyLogger();
+            anomalyLogger.logAnomalies(
+                    foundAnomalies,
+                    ontFile,
+                    pathToReportAnomalies);
 
+            anomalyLogger.logSummary(foundAnomalies, pathToReportCSV, ",");
+        }
+
+        // indicate, that some anomaly was found
+        if (!foundAnomalies.isEmpty())
+            exit(1);
     }
 
     public static List<Anomaly> testReasoners(File ontFile) {
@@ -97,34 +91,14 @@ public class Main {
             tester.runTests();
             return tester.getFoundAnomalies().stream().sorted().toList();
         }
-
     }
 
-    // tries to load ontology using owl api
-    public static void runOwlApi(File ontFile) {        
-        try {
-            OntologyLoader ontL = new OntologyLoader(manager);
-            ontL.loadOntologyFile(ontFile);
-        } catch (OWLOntologyCreationException e) {
-            // if error occurred: save log file
-            //logException(e, ontFile, "Owl API");
-            //TODO: log exception
-            exit(1);
-        }
+    public static List<Anomaly> testParsers(File ontFile) {
+        ParserTester parserTester = new ParserTester();
+        parserTester.testParsers(ontFile);
+        return parserTester.getFoundAnomalies().stream().sorted().toList();
     }
 
-    private static void runJenaApi(File ontFile) {
-        try {
-            Model jenaModel = RDFDataMgr.loadDataset(ontFile.getAbsolutePath()).getDefaultModel();
-        } catch  (Exception e) {
-            //throw  e;
-            //System.out.println(e);
-            // if error occurred: save log file
-            //logException(e, ontFile, "Jena API");
-            // TODO: log exception
-            exit(1);
-        }
-    }
 
     // checks if ontology is in profile
     public static boolean isEL(OWLOntology ont) {

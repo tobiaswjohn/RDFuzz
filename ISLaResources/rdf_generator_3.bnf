@@ -4,6 +4,7 @@
 
 # version 2: no anon nodes behind "a" predicate
 # version 2: no empty line in predicate object list
+# version 3: avoid empty blankNode + avoid bug of Jena Parser
 
 <start>                 ::= <turtleDoc> "\n"
 <turtleDoc>             ::= <statement> | <statement> "\n\n" <turtleDoc>

@@ -1,4 +1,4 @@
-# generates turtle documents according to the specification
+# generates turtle documents according to the specification; initial version, that uncovered many issues
 import sys
 from grammar_graph import gg
 
@@ -16,7 +16,7 @@ if (len(sys.argv) != 2):
 
 output_file = sys.argv[1]
 
-grammar_file = "rdf_generator_3.bnf"
+grammar_file = "rdf_generator.bnf"
 #print("using grammar:", grammar_file)
 with open(grammar_file, 'r') as file:
 	grammar = file.read()
@@ -54,7 +54,7 @@ turtle += "@base <k> .\n"
 turtle += "@prefix p2: <n> .\n@prefix p1: <m> .\n"
 
 
-for i in range(1):
+for i in range(10):
     turtle += str(solver.solve())
 
 #print("Write output to file ", output_file)

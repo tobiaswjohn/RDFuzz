@@ -51,6 +51,8 @@ public class ReasonerCallerFactory {
             case HERMIT -> getHermiTCaller(ont);
             case OPENLLET -> getOpenlletCaller(ont);
             case ELK -> getElkCaller(ont);
+            case OWLAPI -> null;
+            case JENAAPI -> null;
         };
     }
 
