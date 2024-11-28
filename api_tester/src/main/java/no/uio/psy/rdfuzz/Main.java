@@ -3,8 +3,11 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
+import org.apache.jena.base.Sys;
+import org.apache.jena.ontology.impl.OWLDLProfile;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.profiles.OWL2DLProfile;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
@@ -12,6 +15,7 @@ import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static java.lang.System.exit;
 
@@ -43,15 +47,27 @@ public class Main {
         }
 
         if (List.of(args).contains("--no-export")) {
-            // run to examine bugs in detail
+            // print anomalies instead of exporting them
             System.out.println("detailed inspection");
+            OntologyLoader ontL = new OntologyLoader(manager);
+            OWLOntology ont = null;
+            try {
+                ont = ontL.loadOntologyFile(ontFile);
+            }
+            catch (Exception e) {
+                System.out.println("could not create ontology");
+            }
+            if (!isEL(ont)) {
+                System.out.println("not in EL!");
+                if (!isDL(ont))
+                    System.out.println("not in DL!");
+                else
+                    System.out.println("in DL!");
+                foundAnomalies.add(new NotElAnomaly(getDlViolations(ont)));
+            }
 
-
-            List<Anomaly> anomalies = testReasoners(ontFile);
-
-            for (Anomaly a : anomalies)
+            for (Anomaly a : foundAnomalies)
                 System.out.println(a);
-
         }
         else {
             // export found anomalies
@@ -82,15 +98,18 @@ public class Main {
 
         // check if ontology is in EL --> only use for those for testing
         if (!isEL(ont)) {
+            System.out.println("profiler indicates not EL. Check for known bugs");
             List<OWLProfileViolation> violations = getElViolations(ont);
-            return List.of(new NotElAnomaly(violations));
+            if (!allAreBugs(violations))
+                return List.of(new NotElAnomaly(violations));
         }
-        else {
-            ElReasonerTester tester = new ElReasonerTester(ont);
 
-            tester.runTests();
-            return tester.getFoundAnomalies().stream().sorted().toList();
-        }
+        System.out.println("is in EL");
+        ElReasonerTester tester = new ElReasonerTester(ont);
+
+        tester.runTests();
+        return tester.getFoundAnomalies().stream().sorted().toList();
+
     }
 
     public static List<Anomaly> testParsers(File ontFile) {
@@ -99,6 +118,34 @@ public class Main {
         return parserTester.getFoundAnomalies().stream().sorted().toList();
     }
 
+    // checks, if the violations result from bugs
+    // CAVE: assumes that ontologies are created using the EL profile grammar!
+    public static boolean allAreBugs(List<OWLProfileViolation> violations) {
+        for (OWLProfileViolation v : violations) {
+            if (!isProfilerBug(v))
+                return false;
+        }
+        return true;
+    }
+
+    public static boolean isProfilerBug(OWLProfileViolation violation) {
+        String violationString = violation.toString();
+        System.out.println("violation: " + violationString);
+        List<String> knownProfilerBugPatterns = List.of(
+                "Use of data range not in profile: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString .*",
+                "Use of data range not in profile: <.*> \\[DatatypeDefinition.*",
+                "Not enough .*; at least two needed.*"
+        );
+
+        // check, if any of the known bugs matches
+        for (String bugPattern : knownProfilerBugPatterns ) {
+            if (violationString.matches(bugPattern))
+                return true;
+        }
+        return false;
+    }
+
+
 
     // checks if ontology is in profile
     public static boolean isEL(OWLOntology ont) {
@@ -106,9 +153,21 @@ public class Main {
         return profileReport.isInProfile();
     }
 
+    // checks if ontology is in profile
+    public static boolean isDL(OWLOntology ont) {
+        OWLProfileReport profileReport = new OWL2DLProfile().checkOntology(ont);
+        return profileReport.isInProfile();
+    }
+
     // get EL violations
     public static List<OWLProfileViolation> getElViolations(OWLOntology ont) {
         OWLProfileReport profileReport = new OWL2ELProfile().checkOntology(ont);
+        return profileReport.getViolations();
+    }
+
+    // get DL violations
+    public static List<OWLProfileViolation> getDlViolations(OWLOntology ont) {
+        OWLProfileReport profileReport = new OWL2DLProfile().checkOntology(ont);
         return profileReport.getViolations();
     }
 }

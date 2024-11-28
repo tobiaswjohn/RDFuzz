@@ -29,11 +29,11 @@
 
 <individualList>	::= "" | <Individual> " " <individualList>
 
-<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> #| <stringLiteralWithLanguage>
+<literal>	::= <typedLiteral> | <stringLiteralNoLanguage> | <stringLiteralWithLanguage>
 <typedLiteral>	::= <lexicalForm> "^^" <Datatype> #| <lexicalForm> "^^" <NewDatatype> 
 <lexicalForm>	::= <QuotedString>
 <stringLiteralNoLanguage> 	::= <QuotedString>
-#<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
+<stringLiteralWithLanguage>	::= <QuotedString> <LanguageTag>
 
 
 <objectPropertyExpression>	::= <NonSimpleObjectProperty> | <SimpleObjectProperty>
@@ -76,7 +76,7 @@
 
 
 # main production rule
-<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <hasKey> | <assertion> # | <dataTypeDefinition>  | <annotationAxiom>
+<axiom>		::= <classAxiom> | <objectPropertyAxiom> | <dataPropertyAxiom> | <hasKey> | <assertion> | <dataTypeDefinition>  # | <annotationAxiom>
 
 
 <classAxiom>	::= <subClassOf> | <equivalentClasses> | <disjointClasses>
@@ -124,7 +124,7 @@
 <functionalDataProperty>	::= "FunctionalDataProperty(" <axiomAnnotations> " " <dataPropertyExpression> ")"
 
 
-#<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <NewDatatype> " " <dataRange> ")"
+<dataTypeDefinition>	::= "DatatypeDefinition(" <axiomAnnotations> " " <NewDatatype> " " <dataRange> ")"
 
 
 # also encodes "In each such axiom in an OWL ontology, m or n (or both) MUST be larger than zero" from https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Keys
@@ -187,9 +187,9 @@
 
 <DataProperty>	::= ":dp" | ":dq" | ":dr" | ":ds"
 <Datatype>	::= "xsd:string" | "rdf:PlainLiteral" | "rdfs:Literal"
-#<NewDatatype>	::= ":dta" | ":dtb" | ":dtc"	# introduced, to make "DataTypeDefinition" possible according to rules
+<NewDatatype>	::= ":dta" | ":dtb" | ":dtc"	# introduced, to make "DataTypeDefinition" possible according to rules
 
-#<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
+<LanguageTag>	::= "@en" | "@de" | "@fr" | "@no"
 <QuotedString>	::=  "\"s1\"" | "\"s2\"" | "\"s3\"" | "\"s4\""
 
 <AnnotationProperty>	::= ":anp" | ":anq" | ":anr" | ":ans"

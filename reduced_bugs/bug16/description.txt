@@ -27,4 +27,4 @@ found on 18.11.2024
 
 
 reported:
-
+https://github.com/Galigator/openllet/issues/88

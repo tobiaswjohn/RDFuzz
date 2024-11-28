@@ -1,0 +1,9 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology(
+
+    Declaration(Datatype ( :mydatatype ))
+
+    DatatypeDefinition( :mydatatype rdfs:Literal)
+
+)

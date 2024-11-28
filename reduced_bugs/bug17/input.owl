@@ -1,0 +1,11 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology(
+
+Declaration(DataProperty(:dataprop))
+Declaration(NamedIndividual(:a))
+
+
+DataPropertyAssertion(:dataprop :a "some string"@en)
+
+)

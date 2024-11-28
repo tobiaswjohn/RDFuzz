@@ -1,0 +1,35 @@
+error in checking profile (in parser?)
+
+--> OWL2DLProfile().checkOntology(ont) returns a violation, although this should be allowed
+
+ - problem is triggered by parser: parsing string as langString in https://github.com/owlcs/owlapi/blob/0e7166f4df44d40dbe66d74c3e8710ef4fd5ee4b/impl/src/main/java/uk/ac/manchester/cs/owl/owlapi/OWLLiteralImplPlain.java#L44
+
+ - definitions a bit unclear:
+  	- according to RDF1.2 standard, it seems like this should be parsed as langString is correct https://www.w3.org/TR/rdf12-concepts/#section-Graph-Literal
+  	- OWL DL standard explains with examples how this is allowed https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#BNF_Notation
+  	- OWL DL standard does not list langStrings as allowed datatypes https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Strings
+
+
+
+
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+
+
+OWLProfileReport profileReport = new OWL2DLProfile().checkOntology(ont);
+List<OWLProfileViolation> violations = profileReport.getViolations();
+
+
+
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script generator_OWL_EL.py
+
+found on 25.11.2024
+
+
+reported:
+https://github.com/owlcs/owlapi/issues/1158
+
