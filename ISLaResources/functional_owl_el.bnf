@@ -41,7 +41,11 @@
 
 # introduced to comform to https://www.w3.org/TR/2012/REC-owl2-syntax-20121211/#Property_Hierarchy_and_Simple_Object_Property_Expressions
 <simpleObjectPropertyExpression>    ::= <SimpleObjectProperty>
+<simpleObjectPropertyExpressionList>    ::= "" | <SimpleObjectProperty> " " <simpleObjectPropertyExpressionList>
+
 <nonSimpleObjectPropertyExpression>    ::= <NonSimpleObjectProperty>
+<nonSimpleObjectPropertyExpressionList>    ::= "" | <nonSimpleObjectPropertyExpression> " " <nonSimpleObjectPropertyExpressionList>
+
 
 <dataPropertyExpression>	::= <DataProperty>
 <dataPropertyExpressionList>	::= "" | <dataPropertyExpression> " " <dataPropertyExpressionList>
@@ -97,7 +101,8 @@
 <propertyExpressionChain>	::= "ObjectPropertyChain(" <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList> ")"
 <superObjectPropertyExpression>	::= <nonSimpleObjectPropertyExpression>
 
-<equivalentObjectProperties>	::= "EquivalentObjectProperties(" <axiomAnnotations> " " <objectPropertyExpression> " " <objectPropertyExpression> " " <objectPropertyExpressionList>")"
+# either simple or non-simple roles are equivalent
+<equivalentObjectProperties>	::= "EquivalentObjectProperties(" <axiomAnnotations> " " <simpleObjectPropertyExpression> " " <simpleObjectPropertyExpression> " " <simpleObjectPropertyExpressionList>")" | "EquivalentObjectProperties(" <axiomAnnotations> " " <nonSimpleObjectPropertyExpression> " " <nonSimpleObjectPropertyExpression> " " <nonSimpleObjectPropertyExpressionList>")"
 
 <objectPropertyDomain>	::= "ObjectPropertyDomain(" <axiomAnnotations> " " <objectPropertyExpression> " " <classExpression> ")"
 
