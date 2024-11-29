@@ -1,0 +1,49 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+SubDataPropertyOf(Annotation(Annotation( :anp :annotation2)  :anr :annotation3) Annotation( :anq :annotation1) Annotation( :ans :annotation4)  :ds :dp)
+
+SubClassOf( :C DataHasValue(:dr "s1"^^rdf:PlainLiteral))
+
+ObjectPropertyAssertion(Annotation(Annotation( :ans :annotation3) Annotation(Annotation( :anr :annotation3)  :anr :annotation3) Annotation( :anr :annotation4)  :anp :annotation3) Annotation( :anr :annotation2)  :rnonsim :c :a)
+
+DisjointClasses(Annotation( :anq :annotation2)  DataSomeValuesFrom(:dq DataOneOf("s2"@en) ) ObjectIntersectionOf(ObjectHasValue(:rsim :d) ObjectHasSelf(:ssim) ) :D :B :A )
+
+HasKey( ObjectOneOf(:b) ( :qnonsim  ) ( :dp  ) ) 
+)

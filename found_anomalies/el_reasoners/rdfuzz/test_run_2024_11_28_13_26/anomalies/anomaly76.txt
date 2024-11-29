@@ -1,0 +1,82 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_28_13_26/test_ontologies/test209.owl
+
+Anomaly 1: Inference differentiation between HERMIT and ELK:
+	additional axioms HERMIT: [DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dr>), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> owl:topDataProperty), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> <http://www.example.org/reasonerTester#dr>), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#ds>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#qnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), SubClassOf(<http://www.example.org/reasonerTester#D> <http://www.example.org/reasonerTester#A>)]
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing)]
+
+Anomaly 2: Inference differentiation between ELK and OPENLLET:
+	additional axioms ELK: [SubClassOf(<http://www.example.org/reasonerTester#D> owl:Thing)]
+	additional axioms OPENLLET: [SubDataPropertyOf(<http://www.example.org/reasonerTester#dr> owl:topDataProperty), DisjointClasses(<http://www.example.org/reasonerTester#C> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#dr>), DisjointClasses(<http://www.example.org/reasonerTester#A> owl:Nothing), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#psim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), DisjointClasses(<http://www.example.org/reasonerTester#B> owl:Nothing), DisjointClasses(<http://www.example.org/reasonerTester#D> owl:Nothing), SubDataPropertyOf(<http://www.example.org/reasonerTester#dq> owl:topDataProperty), SubDataPropertyOf(<http://www.example.org/reasonerTester#ds> <http://www.example.org/reasonerTester#dr>), EquivalentDataProperties(<http://www.example.org/reasonerTester#dp> <http://www.example.org/reasonerTester#ds>), ObjectPropertyAssertion(<http://www.example.org/reasonerTester#qnonsim> <http://www.example.org/reasonerTester#c> <http://www.example.org/reasonerTester#a>), SubClassOf(<http://www.example.org/reasonerTester#D> <http://www.example.org/reasonerTester#A>)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :ans :annotation3)  :anp :annotation4) Annotation( :anq :annotation1) Annotation( :anr :annotation4) Annotation( :anr :annotation1)  :ans :annotation2) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+HasKey( ObjectOneOf(:b) ( ) ( :dp  ) )
+
+DisjointClasses( ObjectHasSelf(:qsim) ObjectSomeValuesFrom(:rsim :C) DataHasValue(:ds "s4"@en) )
+
+DataPropertyDomain(Annotation( :anr :annotation3) Annotation( :anq :annotation3)  :dr ObjectIntersectionOf(:A :D ))
+
+ClassAssertion(Annotation( :anr :annotation2)  DataSomeValuesFrom(:dq DataIntersectionOf(rdf:PlainLiteral DataOneOf("s3")  rdfs:Literal ) ) :c)
+
+SubClassOf( ObjectHasValue(:pnonsim :d) :B)
+
+HasKey( DataHasValue(:ds "s2"^^xsd:string) ( :snonsim  ) ( ) )
+
+EquivalentDataProperties(Annotation( :anr :annotation1) Annotation( :anr :annotation1)  :dp :ds :ds )
+
+ObjectPropertyAssertion(Annotation( :ans :annotation2)  :psim :c :a)
+
+HasKey( ObjectSomeValuesFrom(:pnonsim ObjectHasValue(:qsim :c)) ( :rnonsim :ssim :qnonsim :pnonsim :pnonsim :qnonsim  ) ( :dq :dr :dq  ) )
+
+EquivalentObjectProperties( :psim :qnonsim )
+
+EquivalentClasses( DataHasValue(:dr "s2") DataHasValue(:dq "s1"@no) DataHasValue(:dq "s1") :D )
+
+NegativeDataPropertyAssertion(Annotation( :anp :annotation2) Annotation(Annotation(Annotation( :ans :annotation1) Annotation( :ans :annotation2)  :ans :annotation4)  :anq :annotation1) Annotation( :anp :annotation2)  :ds :c "s2"@fr)
+
+SubDataPropertyOf(Annotation( :anr :annotation3) Annotation( :anp :annotation2) Annotation(Annotation(Annotation( :ans :annotation4) Annotation( :anp :annotation2) Annotation( :ans :annotation4)  :anq :annotation2) Annotation(Annotation( :ans :annotation4) Annotation( :ans :annotation1)  :ans :annotation1)  :anq :annotation1)  :dp :dr)
+
+HasKey(Annotation( :anr :annotation3)  DataHasValue(:dq "s2"@de) ( :pnonsim :ssim :psim :snonsim :qsim  ) ( ) ) 
+)

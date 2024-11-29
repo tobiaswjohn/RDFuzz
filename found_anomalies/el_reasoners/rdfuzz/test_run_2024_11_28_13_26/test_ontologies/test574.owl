@@ -1,0 +1,67 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anq :annotation4) Annotation( :ans :annotation2) Annotation( :anq :annotation2)  :anq :annotation1) Annotation( :ans :annotation2) Annotation( :anp :annotation3)  :anr :annotation4) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+EquivalentClasses( ObjectHasSelf(:qsim) ObjectSomeValuesFrom(:psim ObjectHasValue(:rnonsim :d)) )
+
+DataPropertyDomain( :dr :D)
+
+HasKey(Annotation( :anq :annotation1)  DataHasValue(:dp "s1"^^rdfs:Literal) ( :qnonsim  ) ( :dq :ds  ) )
+
+SubClassOf(Annotation( :anp :annotation1)  DataSomeValuesFrom(:ds rdf:PlainLiteral) ObjectIntersectionOf(:A :C :B ))
+
+FunctionalDataProperty(Annotation(Annotation( :ans :annotation1) Annotation( :anr :annotation4) Annotation(Annotation(Annotation(Annotation( :anq :annotation2)  :anp :annotation3) Annotation(Annotation(Annotation( :ans :annotation4)  :anr :annotation1)  :anq :annotation2)  :anq :annotation4)  :anr :annotation4)  :anr :annotation2) Annotation( :anq :annotation1)  :ds)
+
+ObjectPropertyAssertion(Annotation( :anq :annotation1)  :pnonsim :b :c)
+
+ObjectPropertyAssertion( :rsim :a :b)
+
+NegativeDataPropertyAssertion( :dp :b "s4")
+
+HasKey(Annotation(Annotation( :ans :annotation4)  :anr :annotation4) Annotation(Annotation( :anq :annotation2)  :anr :annotation1) Annotation( :anr :annotation3)  ObjectOneOf(:b) ( :ssim :snonsim :snonsim  ) ( ) )
+
+DatatypeDefinition(Annotation(Annotation(Annotation(Annotation( :anq :annotation3)  :anr :annotation1)  :anp :annotation2)  :anr :annotation3)  :dtc DataOneOf("s3"@fr) )
+
+DisjointClasses(Annotation( :ans :annotation2)  :D DataSomeValuesFrom(:dp DataIntersectionOf(xsd:string rdf:PlainLiteral ) ) DataSomeValuesFrom(:ds rdfs:Literal) :B )
+
+EquivalentObjectProperties(Annotation(Annotation( :anr :annotation1)  :anp :annotation2) Annotation(Annotation(Annotation(Annotation(Annotation( :anr :annotation3)  :ans :annotation4)  :ans :annotation4) Annotation(Annotation( :anq :annotation3)  :anr :annotation2)  :anp :annotation1)  :anr :annotation3) Annotation( :anr :annotation1)  :qnonsim :rsim :psim :qnonsim :ssim )
+
+DifferentIndividuals( :a :d :d )
+
+HasKey( DataHasValue(:dr "s2"@de) ( ) ( :dq  ) ) 
+)

@@ -1,0 +1,66 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_28_13_26/test_ontologies/test146.owl
+
+Anomaly 1: Inference differentiation between HERMIT and OPENLLET:
+	additional axioms HERMIT: [DataPropertyAssertion(<http://www.example.org/reasonerTester#dr> <http://www.example.org/reasonerTester#b> "s2"^^<internal:anonymous-constants>)]
+	additional axioms OPENLLET: [FunctionalDataProperty(<http://www.example.org/reasonerTester#dp>), DataPropertyAssertion(<http://www.example.org/reasonerTester#dr> <http://www.example.org/reasonerTester#b> "s2"^^rdfs:Literal), AsymmetricObjectProperty(<http://www.example.org/reasonerTester#qnonsim>)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anp :annotation1) Annotation( :anp :annotation2)  :ans :annotation4) Annotation( :anq :annotation3) Annotation( :anr :annotation2)  :anp :annotation1) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+DataPropertyAssertion( :dr :b "s2"^^rdfs:Literal)
+
+DisjointClasses(Annotation( :anr :annotation1) Annotation( :ans :annotation2)  ObjectSomeValuesFrom(:pnonsim :A) DataHasValue(:ds "s4") )
+
+DataPropertyRange(Annotation(Annotation( :ans :annotation1)  :anr :annotation2)  :dp DataOneOf("s3"@no) )
+
+HasKey( ObjectHasSelf(:ssim) ( :rsim :psim  ) ( ) )
+
+ObjectPropertyRange( :qnonsim ObjectOneOf(:d))
+
+HasKey( ObjectHasValue(:qsim :c) ( :snonsim :pnonsim :rnonsim :rnonsim :rsim  ) ( :dq :dp  ) )
+
+SubClassOf(Annotation( :anq :annotation3)  DataSomeValuesFrom(:dq DataIntersectionOf(rdf:PlainLiteral xsd:string xsd:string ) ) ObjectIntersectionOf(:D :B :C ObjectHasValue(:rsim :c) ObjectHasValue(:snonsim :d) ObjectOneOf(:a) DataHasValue(:dr "s1"@fr) DataHasValue(:dp "s4"@de) DataHasValue(:dq "s3"@en) DataHasValue(:dq "s4"@no) ObjectIntersectionOf(ObjectOneOf(:d) DataHasValue(:dr "s1"@en) ) DataHasValue(:dr "s1"^^rdf:PlainLiteral) ))
+
+ObjectPropertyAssertion( :rsim :b :d) 
+)

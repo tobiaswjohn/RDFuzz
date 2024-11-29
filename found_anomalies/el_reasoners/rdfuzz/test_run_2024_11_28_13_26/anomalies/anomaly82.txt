@@ -1,0 +1,74 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_28_13_26/test_ontologies/test251.owl
+
+Anomaly 1: Anomaly with following exception thrown by OPENLLET:
+java.lang.IllegalArgumentException: Value is not in the value space of any recognized datatypes: literal(s3,(),http://www.w3.org/2000/01/rdf-schema#Literal)
+
+Anomaly 2: Anomaly with following exception thrown by OPENLLET:
+java.lang.IllegalArgumentException: Value is not in the value space of any recognized datatypes: literal(s3,(),http://www.w3.org/2000/01/rdf-schema#Literal)
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+SubObjectPropertyOf(Annotation(Annotation( :anr :annotation1) Annotation( :ans :annotation1)  :anp :annotation2) Annotation( :ans :annotation4) Annotation( :anq :annotation3)  :rnonsim :qsim)
+
+EquivalentClasses(Annotation( :ans :annotation3) Annotation( :anr :annotation4)  DataHasValue(:dp "s4"^^xsd:string) ObjectHasValue(:ssim :b) :D )
+
+HasKey( ObjectIntersectionOf(ObjectHasSelf(:rsim) DataSomeValuesFrom(:dq DataIntersectionOf(DataOneOf("s1")  rdf:PlainLiteral rdfs:Literal ) ) ObjectSomeValuesFrom(:snonsim :B) ObjectOneOf(:a) :A :C ) ( ) ( :dr  ) )
+
+DisjointClasses( ObjectHasValue(:qnonsim :c) ObjectHasValue(:pnonsim :d) ObjectOneOf(:d) DataHasValue(:ds "s2"@de) DataHasValue(:dr "s3"@fr) ObjectHasValue(:psim :b) DataHasValue(:dq "s2"@no) DataHasValue(:dp "s1"@en) DataHasValue(:dq "s1"^^rdfs:Literal) ObjectHasValue(:rsim :d) )
+
+HasKey(Annotation( :anq :annotation3)  ObjectOneOf(:a) ( :ssim  ) ( :ds :dr  ) )
+
+ObjectPropertyDomain( :snonsim DataSomeValuesFrom(:dr DataIntersectionOf(rdfs:Literal DataOneOf("s3"^^rdfs:Literal)  ) ))
+
+ObjectPropertyAssertion(Annotation( :ans :annotation1)  :rnonsim :d :a)
+
+HasKey( DataHasValue(:ds "s3"@en) ( :ssim :qsim  ) ( ) )
+
+ObjectPropertyRange(Annotation(Annotation(Annotation( :anq :annotation1) Annotation( :ans :annotation4)  :anq :annotation1) Annotation(Annotation( :anr :annotation3) Annotation( :anr :annotation4) Annotation( :ans :annotation2)  :anq :annotation2)  :ans :annotation4)  :qnonsim ObjectIntersectionOf(ObjectHasValue(:rnonsim :b) ObjectOneOf(:d) ))
+
+EquivalentObjectProperties(Annotation( :anq :annotation3)  :snonsim :rnonsim )
+
+SubClassOf(Annotation( :anq :annotation4) Annotation(Annotation(Annotation(Annotation(Annotation( :anq :annotation1) Annotation( :anq :annotation1)  :anp :annotation1)  :anq :annotation4)  :anr :annotation3)  :ans :annotation3) Annotation(Annotation( :anr :annotation4)  :anq :annotation1)  ObjectHasSelf(:psim) ObjectHasValue(:rsim :b)) 
+)

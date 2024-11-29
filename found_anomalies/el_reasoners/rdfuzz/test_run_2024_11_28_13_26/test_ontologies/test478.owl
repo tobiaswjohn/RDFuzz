@@ -1,0 +1,67 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+HasKey(Annotation(Annotation( :anr :annotation4)  :ans :annotation1) Annotation(Annotation( :anr :annotation3) Annotation( :ans :annotation3)  :anp :annotation2) Annotation( :anq :annotation3) Annotation( :anq :annotation3)  ObjectOneOf(:a) ( ) ( :dq  ) )
+
+ObjectPropertyAssertion(Annotation( :anq :annotation3) Annotation( :ans :annotation3)  :psim :d :c)
+
+EquivalentClasses(Annotation( :anp :annotation1)  ObjectHasSelf(:qsim) DataSomeValuesFrom(:ds rdf:PlainLiteral) )
+
+ObjectPropertyAssertion(Annotation( :ans :annotation4)  :pnonsim :a :b)
+
+DisjointClasses( ObjectIntersectionOf(:B :A :D ) ObjectSomeValuesFrom(:qnonsim ObjectHasValue(:ssim :d)) DataHasValue(:dp "s1") :C )
+
+DataPropertyAssertion(Annotation(Annotation( :anq :annotation4)  :ans :annotation1)  :dr :a "s2"@de)
+
+DatatypeDefinition( :dtb DataIntersectionOf(xsd:string DataOneOf("s3"^^rdf:PlainLiteral)  rdfs:Literal ) )
+
+TransitiveObjectProperty( :rnonsim)
+
+DifferentIndividuals(Annotation( :anr :annotation4) Annotation( :ans :annotation3) Annotation( :anp :annotation2) Annotation(Annotation( :ans :annotation2) Annotation( :anp :annotation1)  :anq :annotation4) Annotation( :anq :annotation3) Annotation( :anq :annotation1)  :a :d :b )
+
+FunctionalDataProperty( :dr)
+
+EquivalentClasses( :B :D )
+
+ReflexiveObjectProperty( :snonsim)
+
+HasKey( :C ( :rsim  ) ( :dp  ) )
+
+FunctionalDataProperty( :dq) 
+)
