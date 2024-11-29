@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 // class to call the reasoners
-public class ReasonerCaller {
+public class ReasonerCaller implements ReasonerInteractor {
 
     private final OWLReasoner reasoner;
     private final OWLOntologyManager manager;
@@ -26,7 +26,7 @@ public class ReasonerCaller {
     // generators used for inferred axioms
     private final List<InferredAxiomGenerator<? extends OWLAxiom>> gens;
 
-    ReasonerCaller(OWLReasoner reasoner, SUT sut) {
+    ReasonerCaller(OWLReasoner reasoner, SUT sut)  {
         this.reasoner = reasoner;
         this.manager = reasoner.getRootOntology().getOWLOntologyManager();
         this.sut = sut;

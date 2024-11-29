@@ -1,11 +1,10 @@
 package no.uio.psy.rdfuzz;
 
-import no.uio.psy.rdfuzz.anomalies.Anomaly;
-import no.uio.psy.rdfuzz.anomalies.ConsistencyAnomaly;
-import no.uio.psy.rdfuzz.anomalies.InferenceAnomaly;
-import no.uio.psy.rdfuzz.anomalies.ResultWithAnomalie;
+import no.uio.psy.rdfuzz.anomalies.*;
+import no.uio.psy.rdfuzz.reasoners.EmptyReasonerCaller;
 import no.uio.psy.rdfuzz.reasoners.ReasonerCaller;
 import no.uio.psy.rdfuzz.reasoners.ReasonerCallerFactory;
+import no.uio.psy.rdfuzz.reasoners.ReasonerInteractor;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
@@ -18,18 +17,45 @@ import java.util.Set;
 // tests the EL reasoners
 // creates a list of anomalies found for the provided ontology
 public class ElReasonerTester {
-    private final ReasonerCaller hermit;
-    private final ReasonerCaller openllet;
-    private final ReasonerCaller elk;
+    private final ReasonerInteractor hermit;
+    private final ReasonerInteractor openllet;
+    private final ReasonerInteractor elk;
 
 
     private final Set<Anomaly> foundAnomalies = new HashSet<>();
 
     ElReasonerTester(OWLOntology ont) {
+
         ReasonerCallerFactory callerFactory = new ReasonerCallerFactory();
-        hermit = callerFactory.getCaller(ont, SUT.HERMIT);
-        openllet = callerFactory.getCaller(ont, SUT.OPENLLET);
-        elk = callerFactory.getCaller(ont, SUT.ELK);
+
+        ReasonerInteractor hermit1;
+        try {
+            hermit1 = callerFactory.getCaller(ont, SUT.HERMIT);
+        }
+        catch (Exception e) {
+            hermit1 = new EmptyReasonerCaller(SUT.HERMIT);
+            foundAnomalies.add(new ExceptionAnomaly(e, SUT.HERMIT));
+        }
+        hermit = hermit1;
+
+        ReasonerInteractor openllet1;
+        try {
+            openllet1 = callerFactory.getCaller(ont, SUT.OPENLLET);
+        }
+        catch (Exception e) {
+            openllet1 = new EmptyReasonerCaller(SUT.OPENLLET);
+            foundAnomalies.add(new ExceptionAnomaly(e, SUT.OPENLLET));
+        }
+        openllet = openllet1;
+
+        ReasonerInteractor elk1;
+        try {
+            elk1 = callerFactory.getCaller(ont, SUT.ELK);
+        } catch (Exception e) {
+            elk1 = new EmptyReasonerCaller(SUT.ELK);
+            foundAnomalies.add(new ExceptionAnomaly(e, SUT.ELK));
+        }
+        elk = elk1;
     }
 
     public Set<Anomaly> getFoundAnomalies() {
@@ -43,37 +69,38 @@ public class ElReasonerTester {
     }
 
     private void testConsistency() {
-        ResultWithAnomalie<Boolean> hermitConsistent = hermit.isConsistent();
-        ResultWithAnomalie<Boolean> openlletConsistent = openllet.isConsistent();
-        ResultWithAnomalie<Boolean> elkConsistent = elk.isConsistent();
+            System.out.println("run consistency tests");
 
-        // add any found anomalies
-        foundAnomalies.addAll(hermitConsistent.foundAnomalies);
-        foundAnomalies.addAll(openlletConsistent.foundAnomalies);
-        foundAnomalies.addAll(elkConsistent.foundAnomalies);
+            ResultWithAnomalie<Boolean> hermitConsistent = hermit.isConsistent();
+            ResultWithAnomalie<Boolean> openlletConsistent = openllet.isConsistent();
+            ResultWithAnomalie<Boolean> elkConsistent = elk.isConsistent();
 
-        // check for deviating results and add anomalies if necessary
-        foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, openlletConsistent));
-        foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, elkConsistent));
-        foundAnomalies.addAll(compareConsistencyChecks(openlletConsistent, elkConsistent));
+            // add any found anomalies
+            foundAnomalies.addAll(hermitConsistent.foundAnomalies);
+            foundAnomalies.addAll(openlletConsistent.foundAnomalies);
+            foundAnomalies.addAll(elkConsistent.foundAnomalies);
 
-        System.out.println("run consistency tests");
+            // check for deviating results and add anomalies if necessary
+            foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, openlletConsistent));
+            foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, elkConsistent));
+            foundAnomalies.addAll(compareConsistencyChecks(openlletConsistent, elkConsistent));
+
     }
 
     private void testInferredAxioms() {
-        ResultWithAnomalie<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
-        ResultWithAnomalie<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
-        ResultWithAnomalie<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
+            ResultWithAnomalie<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
+            ResultWithAnomalie<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
+            ResultWithAnomalie<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
 
-        // add any found anomalies
-        foundAnomalies.addAll(hermitInfers.foundAnomalies);
-        foundAnomalies.addAll(openlletInfers.foundAnomalies);
-        foundAnomalies.addAll(elkInfers.foundAnomalies);
+            // add any found anomalies
+            foundAnomalies.addAll(hermitInfers.foundAnomalies);
+            foundAnomalies.addAll(openlletInfers.foundAnomalies);
+            foundAnomalies.addAll(elkInfers.foundAnomalies);
 
-        // check for conflicting results and add anomalies if necessary
-        foundAnomalies.addAll(compareInferredAxioms(hermitInfers, openlletInfers));
-        foundAnomalies.addAll(compareInferredAxioms(hermitInfers,elkInfers));
-        foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers));
+            // check for conflicting results and add anomalies if necessary
+            foundAnomalies.addAll(compareInferredAxioms(hermitInfers, openlletInfers));
+            foundAnomalies.addAll(compareInferredAxioms(hermitInfers, elkInfers));
+            foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers));
 
     }
 
