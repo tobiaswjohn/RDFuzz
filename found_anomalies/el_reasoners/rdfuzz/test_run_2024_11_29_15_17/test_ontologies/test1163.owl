@@ -1,0 +1,49 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation( :anr :annotation3) Annotation( :anq :annotation2) Annotation( :ans :annotation4) Annotation( :ans :annotation4) Annotation( :ans :annotation1)  :anp :annotation1) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+DisjointClasses( DataHasValue(:dr "s4") ObjectIntersectionOf(ObjectOneOf(:b) ObjectSomeValuesFrom(:qnonsim DataSomeValuesFrom(:dp DataOneOf("s1"@no) )) :D ObjectHasValue(:psim :c) ObjectHasSelf(:ssim) :B ObjectHasValue(:snonsim :a) :A :C :C DataSomeValuesFrom(:dq xsd:string) DataSomeValuesFrom(:ds DataIntersectionOf(rdfs:Literal rdf:PlainLiteral ) ) ObjectHasValue(:pnonsim :d) ObjectOneOf(:c) ObjectOneOf(:d) DataHasValue(:dr "s3"^^xsd:string) DataHasValue(:dp "s3"@de) DataHasValue(:dr "s2") ObjectSomeValuesFrom(:qsim :D) ) )
+
+ObjectPropertyAssertion( :rnonsim :d :b)
+
+DatatypeDefinition( :dtc DataIntersectionOf(DataOneOf("s3")  DataIntersectionOf(DataOneOf("s1")  DataOneOf("s2"@en)  rdf:PlainLiteral xsd:string )  DataOneOf("s2"@fr)  DataOneOf("s1")  ) )
+
+HasKey( ObjectHasSelf(:rsim) ( :rsim  ) ( ) )
+
+ObjectPropertyAssertion( :qnonsim :d :b) 
+)

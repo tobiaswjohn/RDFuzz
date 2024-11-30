@@ -1,0 +1,55 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+EquivalentClasses(Annotation(Annotation( :anp :annotation2)  :anq :annotation4) Annotation( :ans :annotation1) Annotation( :anr :annotation3) Annotation( :anp :annotation3)  ObjectHasSelf(:ssim) ObjectHasValue(:rsim :a) )
+
+EquivalentObjectProperties(Annotation( :anr :annotation1) Annotation( :anr :annotation4) Annotation( :anr :annotation4) Annotation( :anp :annotation2)  :rnonsim :qnonsim :pnonsim )
+
+DataPropertyDomain( :ds DataSomeValuesFrom(:dq DataIntersectionOf(DataOneOf("s2"^^rdfs:Literal)  rdf:PlainLiteral xsd:string ) ))
+
+ObjectPropertyAssertion(Annotation( :anr :annotation4)  :snonsim :c :d)
+
+EquivalentDataProperties( :dr :dr :dp )
+
+NegativeDataPropertyAssertion(Annotation(Annotation(Annotation(Annotation( :anr :annotation3)  :anr :annotation4)  :anp :annotation1)  :anr :annotation2) Annotation( :anr :annotation1) Annotation(Annotation(Annotation(Annotation( :ans :annotation4)  :anq :annotation1)  :anq :annotation2)  :anr :annotation4)  :dp :b "s4")
+
+DatatypeDefinition( :dtb DataOneOf("s1"@en) )
+
+NegativeObjectPropertyAssertion( :qsim :d :b) 
+)

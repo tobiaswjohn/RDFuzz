@@ -1,0 +1,66 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17/test_ontologies/test957.owl
+
+Anomaly 1: Inference differentiation between HERMIT and OPENLLET:
+	additional axioms HERMIT: []
+	additional axioms OPENLLET: [FunctionalDataProperty(<http://www.example.org/reasonerTester#dp>)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+ObjectPropertyAssertion(Annotation(Annotation( :anp :annotation3)  :ans :annotation4) Annotation( :anr :annotation1) Annotation( :anq :annotation2)  :snonsim :c :b)
+
+DatatypeDefinition( :dtb DataIntersectionOf(DataOneOf("s1"^^rdfs:Literal)  xsd:string rdf:PlainLiteral ) )
+
+SameIndividual( :a :a :d )
+
+DataPropertyRange( :dp DataOneOf("s3") )
+
+EquivalentDataProperties(Annotation(Annotation( :ans :annotation3) Annotation( :anr :annotation3)  :ans :annotation4) Annotation( :anp :annotation4)  :dr :ds )
+
+DisjointClasses( DataHasValue(:dq "s2"@en) ObjectSomeValuesFrom(:psim ObjectHasValue(:qsim :b)) :A )
+
+ReflexiveObjectProperty( :rnonsim)
+
+DatatypeDefinition( :dtc DataOneOf("s4"@de) ) 
+)

@@ -1,0 +1,55 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+DataPropertyAssertion(Annotation(Annotation( :anq :annotation1)  :ans :annotation3) Annotation( :anr :annotation2) Annotation( :anp :annotation4)  :ds :a "s2")
+
+EquivalentClasses( ObjectIntersectionOf(:C ObjectSomeValuesFrom(:psim ObjectOneOf(:b)) ) ObjectHasSelf(:ssim) ObjectHasValue(:rnonsim :c) DataHasValue(:dq "s3"^^rdf:PlainLiteral) DataSomeValuesFrom(:dp rdfs:Literal) :B :A :C :D DataSomeValuesFrom(:dp DataOneOf("s1"@no) ) DataSomeValuesFrom(:dr DataIntersectionOf(xsd:string DataIntersectionOf(rdfs:Literal DataOneOf("s4")  DataOneOf("s2")  )  ) ) ObjectOneOf(:d) ObjectHasValue(:snonsim :d) ObjectSomeValuesFrom(:pnonsim :D) ObjectSomeValuesFrom(:qsim :D) )
+
+SameIndividual( :d :c :a )
+
+ObjectPropertyAssertion( :rsim :b :a)
+
+DatatypeDefinition( :dtb DataOneOf("s2"@en) )
+
+ObjectPropertyRange( :qnonsim ObjectHasValue(:rsim :c))
+
+ObjectPropertyAssertion( :qsim :b :c)
+
+SubObjectPropertyOf(Annotation( :anp :annotation2)  ObjectPropertyChain(:rsim :snonsim :snonsim ) :pnonsim) 
+)
