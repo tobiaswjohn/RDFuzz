@@ -1,0 +1,23 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+
+Declaration(Class(:B))
+
+Declaration(DataProperty(:dr))
+
+
+EquivalentClasses(
+    DataHasValue(:dr "s3") 
+    DataHasValue(:dr "s4") 
+    :B 
+)
+
+DisjointClasses( 
+    DataHasValue(:dr "s4") 
+    DataHasValue(:dr "s3"@en) 
+    # problem: ELK unifies "s3" and "s3"@en --> infers that :B is empty
+)
+
+)

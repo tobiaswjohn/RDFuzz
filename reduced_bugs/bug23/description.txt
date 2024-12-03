@@ -1,0 +1,22 @@
+error in reasoners
+
+--> openllet infers incorrectly that ontology is inconsistent, if the individual :c is used. When :a is used, openllet is correct
+
+hermit does always infer "consistent" 
+
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+
+openllet.isConsistent()
+
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script testReasoners.sh
+
+found on 03.12.2024
+
+
+reported:

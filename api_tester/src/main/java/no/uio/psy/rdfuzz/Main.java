@@ -3,6 +3,7 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
+import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.impl.OWLDLProfile;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -11,6 +12,8 @@ import org.semanticweb.owlapi.profiles.OWL2DLProfile;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.util.*;
 
 
 import java.io.*;
@@ -57,6 +60,9 @@ public class Main {
             catch (Exception e) {
                 System.out.println("could not create ontology");
             }
+            System.out.println("run temp test");
+            temp(ont);
+            System.out.println("end temp test");
             if (!isEL(ont)) {
                 System.out.println("not in EL!");
                 if (!isDL(ont))
@@ -145,7 +151,12 @@ public class Main {
         return false;
     }
 
+    public static void temp(OWLOntology ont) throws OWLOntologyCreationException {
+        OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
+        openllet.isConsistent();
+
+    }
 
     // checks if ontology is in profile
     public static boolean isEL(OWLOntology ont) {

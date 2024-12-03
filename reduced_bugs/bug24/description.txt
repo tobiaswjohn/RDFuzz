@@ -1,0 +1,20 @@
+error in reasoners
+
+--> openllet throws exception when testing for consistency
+
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+
+openllet.isConsistent()
+
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script testReasoners.sh
+
+found on 03.12.2024
+
+
+reported:
