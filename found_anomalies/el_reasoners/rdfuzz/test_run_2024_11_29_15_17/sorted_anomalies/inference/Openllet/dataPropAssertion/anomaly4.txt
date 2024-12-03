@@ -1,0 +1,72 @@
+Found anomalies while testing file ../found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17/test_ontologies/test10.owl
+
+Anomaly 1: Inference differentiation between HERMIT and OPENLLET:
+	additional axioms HERMIT: []
+	additional axioms OPENLLET: [DataPropertyAssertion(<http://www.example.org/reasonerTester#dr> <http://www.example.org/reasonerTester#c> "s2"^^xsd:string)]
+
+
+––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––    Ontology File    ––––––––––––
+––––––––––––––––––––––––––––––––––––––––––––
+
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+Ontology (
+
+Annotation(Annotation(Annotation( :anr :annotation3) Annotation( :ans :annotation1)  :anp :annotation1) Annotation( :anr :annotation2) Annotation( :anq :annotation3)  :anq :annotation4) 
+Declaration(Class(:A))
+Declaration(Class(:B))
+Declaration(Class(:C))
+Declaration(Class(:D))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+Declaration(NamedIndividual(:c))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:psim))
+Declaration(ObjectProperty(:qsim))
+Declaration(ObjectProperty(:rsim))
+Declaration(ObjectProperty(:ssim))
+Declaration(ObjectProperty(:pnonsim))
+Declaration(ObjectProperty(:qnonsim))
+Declaration(ObjectProperty(:rnonsim))
+Declaration(ObjectProperty(:snonsim))
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+Declaration(DataProperty(:dr))
+Declaration(DataProperty(:ds))
+Declaration(AnnotationProperty(:anp))
+Declaration(AnnotationProperty(:anq))
+Declaration(AnnotationProperty(:anr))
+Declaration(AnnotationProperty(:ans))
+Declaration(Datatype(:dta))
+Declaration(Datatype(:dtb))
+Declaration(Datatype(:dtc))
+
+
+NegativeObjectPropertyAssertion( :ssim :a :b)
+
+SubClassOf(Annotation( :anr :annotation2)  ObjectOneOf(:c) DataHasValue(:dr "s2"))
+
+ObjectPropertyAssertion(Annotation(Annotation( :ans :annotation2) Annotation(Annotation(Annotation( :anp :annotation3)  :ans :annotation3)  :anq :annotation3)  :ans :annotation2)  :rnonsim :d :d)
+
+TransitiveObjectProperty( :snonsim)
+
+HasKey( :C ( ) ( :ds  ) )
+
+EquivalentClasses( :A :B )
+
+DatatypeDefinition( :dtc xsd:string)
+
+ReflexiveObjectProperty( :psim)
+
+ReflexiveObjectProperty( :qsim)
+
+FunctionalDataProperty( :dq)
+
+FunctionalDataProperty( :dp) 
+)
