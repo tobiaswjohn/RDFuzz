@@ -1,0 +1,33 @@
+I am using HermiT to compute inferred axioms and I discovered a missing inference. Here is a minimal example. 
+
+- Ontology in functional syntax:
+```
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+	Declaration(DataProperty(:dp))
+	
+    DataPropertyRange(:dp DataOneOf("s") )
+)
+```
+
+- The problem:
+HermiT does not infer the axiom `FuctionalDataProp(:dp)`. I cro
+- The behavior of Openllet is a bit puzzling as the result of the inference seems to depend on the name of the individual and class used in the `EquivalentClass` axiom. E.g., the incorrectly inferred axiom disappears if one uses the individual `:a` instead of `:d` or the class `:A` instead of `:D`. As far as I can see, there should be no difference in the behavior of the reasoner.
+
+- For reproduction, here is the call from my program using OWL API:
+```
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(openllet, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+```
+

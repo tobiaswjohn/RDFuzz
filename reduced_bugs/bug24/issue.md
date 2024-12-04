@@ -1,18 +1,28 @@
-error in reasoners
+I am using Openllet to decide the consistency of an ontology and found an example where an exception occurs. Here is a minimal example. 
 
---> openllet throws exception when testing for consistency
+- Ontology in functional syntax:
+```
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
+Ontology (
+	Declaration(NamedIndividual(:a))
+	Declaration(DataProperty(:dq))
+	Declaration(DataProperty(:dr))
+	
+	HasKey(owl:Thing ( ) ( :dq :dr  ))
+	
+	EquivalentClasses( 
+	    DataSomeValuesFrom(:dr rdfs:Literal) 
+	    ObjectOneOf(:a) 
+	    DataHasValue(:dq "s") 
+	)
+)
 
-call:
-OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
-OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-ont = manager.loadOntologyFromOntologyDocument(source);
-OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+```
 
-openllet.isConsistent()
-
-
-exception:
+- The following exception is thrown when checking if the ontology is consistent:
+```
 Exception in thread "main" java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because the return value of "openllet.core.boxes.abox.Node.getTerm()" is null
 	at openllet.core.rules.rete.JoinCondition.test(JoinCondition.java:26)
 	at openllet.core.rules.rete.BetaMemoryNode.testConditions(BetaMemoryNode.java:83)
@@ -41,11 +51,15 @@ Exception in thread "main" java.lang.NullPointerException: Cannot invoke "Object
 	at openllet.core.KnowledgeBaseImpl.isConsistent(KnowledgeBaseImpl.java:1877)
 	at openllet.core.KnowledgeBaseImplFullSync.isConsistent(KnowledgeBaseImplFullSync.java:403)
 	at openllet.owlapi.PelletReasoner.isConsistent(PelletReasoner.java:1032)
+```
 
+- For reproduction, here is the call from my program using OWL API:
+```
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
-grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script testReasoners.sh
+openllet.isConsistent()
+```
 
-found on 03.12.2024
-
-
-reported:
