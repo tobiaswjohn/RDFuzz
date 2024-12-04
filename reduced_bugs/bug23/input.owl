@@ -18,8 +18,7 @@ Declaration(DataProperty(:dr))
 
 EquivalentClasses(
     ObjectHasSelf(:rsim) 
-    #ObjectOneOf(:a) 
-    ObjectOneOf(:c) # renaming :c to :a makes a difference???
+    ObjectOneOf(:c) # renaming :c to :a makes a difference
     ObjectSomeValuesFrom(
         :snonsim 
         DataSomeValuesFrom(:dp rdfs:Literal)

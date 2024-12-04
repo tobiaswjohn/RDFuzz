@@ -1,0 +1,31 @@
+error in reasoners
+
+--> HermiT does not infer DataPropertyAssertion(:dp :a "data")
+
+openllet does it correctly
+
+
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+ReasonerFactory rf = new ReasonerFactory();
+OWLReasoner hermit = rf.createReasoner(ont);
+
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredPropertyAssertionGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(hermit, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
+
+
+grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script testReasoners.sh
+
+found on 03.12.2024
+
+
+reported:

@@ -1,0 +1,15 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+Ontology (
+
+Declaration(NamedIndividual(:a))
+
+Declaration(DataProperty(:dp))
+
+
+
+EquivalentClasses(  
+    ObjectOneOf(:a) 
+    DataHasValue(:dp "data")  
+    )
+
+)

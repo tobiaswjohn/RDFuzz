@@ -1,0 +1,32 @@
+I am using Openllet to decide if an ontology is consistent and found a case where the decision is not correct. Here is a minimal example. 
+
+- Ontology in functional syntax:
+```
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+	Declaration(DataProperty(:dp))
+	FunctionalDataProperty(:dp)
+	
+	EquivalentClasses(
+	    owl:Thing
+	    DataHasValue(:dp "s1"@en) 	
+	    DataHasValue(:dp "s2") 
+	)
+)
+
+```
+
+- The problem:
+Openllet infers that the ontology is consistent, although it is not. It seems to be some problem with how the language tags are treated, because removing the language tag of "s1" leads to openllet computing the correct result.
+
+- For reproduction, is here call from my program using OWL API:
+```
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+ont = manager.loadOntologyFromOntologyDocument(source);
+OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
+
+openllet.isConsistent()
+```
+

@@ -1,10 +1,7 @@
 error in reasoners
 
---> openllet infers incorrectly that ontology is inconsistent, if the individual :c is used. When :a is used, openllet is correct
-
-hermit does always infer "consistent" 
-
---> similarly strange as bug25, bug27
+--> openllet infers IrreflexiveObjectProtperty(:p), which is incorrect
+hermit does not (which is correct)
 
 
 
@@ -14,7 +11,14 @@ OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 ont = manager.loadOntologyFromOntologyDocument(source);
 OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
-openllet.isConsistent()
+List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
+gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
+
+InferredOntologyGenerator iog = new InferredOntologyGenerator(openllet, gens);
+OWLOntology infOnt = manager.createOntology();
+iog.fillOntology(ont.getOWLOntologyManager().getOWLDataFactory(), infOnt);
+
+
 
 
 grammar version: functional_OWL_EL.bnf  with functional_owl_el.isla with script testReasoners.sh

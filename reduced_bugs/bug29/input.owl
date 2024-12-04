@@ -1,0 +1,24 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+Declaration(Class(:A))
+
+Declaration(ObjectProperty(:p))
+Declaration(ObjectProperty(:q))
+Declaration(ObjectProperty(:r))
+
+
+
+SubClassOf(  
+    ObjectHasSelf(:q) 
+    ObjectSomeValuesFrom(:r :A)
+)
+
+
+SubObjectPropertyOf(  
+    :p 
+    :q
+)
+
+)

@@ -1,0 +1,9 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+
+Declaration(DataProperty(:dp))
+    DataPropertyRange(:dp DataOneOf("s") )
+
+)
