@@ -1,0 +1,18 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+
+Declaration(Class(:C))
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:d))
+Declaration(ObjectProperty(:qsim))
+
+
+
+EquivalentClasses(  
+    ObjectHasSelf(:qsim) 
+    ObjectOneOf(:d) 
+    :C 
+    )
+)

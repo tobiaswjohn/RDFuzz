@@ -28,6 +28,7 @@ ELK infers the axiom `EquivalentClasses(:B owl:Nothing)`. As far as I understand
 
 - I am aware that the support for literals is only limited but I think users could benefit from extending the existing warnings. The warnings I get contain information that the class inclusions may be incomplete and mention the occurrence of `DataHasValue` as the reason. However, this issue shows a soundness problem. Maybe one can add a warning that if language tags occur, the class inclusions might not be sound?
 
+
 - For reproduction, here is the call from my program using OWL API:
 ```
 OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());

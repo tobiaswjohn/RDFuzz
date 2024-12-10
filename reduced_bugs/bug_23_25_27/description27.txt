@@ -1,8 +1,10 @@
 error in reasoners
 
---> openllet infers IrreflexiveObjectProtperty(:p), which is incorrect
+--> openllet infers ClassAssertion(:C :a), which is incorrect
 hermit does not (which is correct)
 
+strange: if :d, :qsim or :C is renamed the bug sometimes didsapears (e.g. :d to :a, :qsim to :r)
+--> similarly strange as bug23, bug25
 
 
 call:
@@ -12,7 +14,7 @@ ont = manager.loadOntologyFromOntologyDocument(source);
 OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
 List<InferredAxiomGenerator<? extends OWLAxiom>> gens = new ArrayList<>();
-gens.add( new InferredObjectPropertyCharacteristicAxiomGenerator());
+gens.add( new InferredClassAssertionAxiomGenerator());
 
 InferredOntologyGenerator iog = new InferredOntologyGenerator(openllet, gens);
 OWLOntology infOnt = manager.createOntology();
@@ -27,4 +29,4 @@ found on 03.12.2024
 
 
 reported:
-https://github.com/Galigator/openllet/issues/92
+https://github.com/Galigator/openllet/issues/89

@@ -1,0 +1,31 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+Declaration(NamedIndividual(:a))
+Declaration(NamedIndividual(:b))
+
+
+Declaration(ObjectProperty(:p))
+Declaration(ObjectProperty(:q))
+
+Declaration(DataProperty(:dp))
+Declaration(DataProperty(:dq))
+
+
+
+
+
+ObjectPropertyDomain( 
+    :q
+    ObjectHasSelf(:p)
+)
+
+SubClassOf(  
+    DataHasValue(:dq "s") 
+    DataHasValue(:dp "s1")
+)
+
+ ObjectPropertyAssertion( :q :a :b ) 
+ NegativeObjectPropertyAssertion( :p :a :b ) 
+
+)

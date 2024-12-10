@@ -1,0 +1,18 @@
+Prefix(:=<http://www.example.org/reasonerTester#>)
+
+Ontology (
+
+Declaration(NamedIndividual(:a))
+
+Declaration(DataProperty(:dp))
+
+
+DataPropertyRange(:dp DataOneOf("s") )
+
+EquivalentClasses(
+ DataMinCardinality( 2 :dp rdfs:Literal )
+ owl:Thing
+)
+
+
+)

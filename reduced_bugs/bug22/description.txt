@@ -28,3 +28,4 @@ found on 03.12.2024
 
 
 reported:
+https://github.com/liveontologies/elk-reasoner/issues/71

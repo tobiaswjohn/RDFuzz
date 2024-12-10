@@ -6,6 +6,7 @@ import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.impl.OWLDLProfile;
+import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.profiles.OWL2DLProfile;
@@ -63,6 +64,8 @@ public class Main {
             System.out.println("run temp test");
             temp(ont);
             System.out.println("end temp test");
+
+
             if (!isEL(ont)) {
                 System.out.println("not in EL!");
                 if (!isDL(ont))
@@ -154,7 +157,11 @@ public class Main {
     public static void temp(OWLOntology ont) throws OWLOntologyCreationException {
         OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
 
-        openllet.isConsistent();
+        ReasonerFactory rf = new ReasonerFactory();
+        OWLReasoner hermit = rf.createReasoner(ont);
+
+        System.out.println("Openllet: " + openllet.isConsistent());
+        System.out.println("HermiT: " + hermit.isConsistent());
 
     }
 

@@ -2,6 +2,7 @@ Prefix(:=<http://www.example.org/reasonerTester#>)
 
 Ontology (
 
+Declaration(NamedIndividual(:a))
 
 Declaration(Class(:B))
 
@@ -19,5 +20,7 @@ DisjointClasses(
     DataHasValue(:dr "s1"@en) 
     # problem: ELK unifies "s1" and "s1"@en --> infers that :B is empty
 )
+
+ClassAssertion(:B :a)
 
 )
