@@ -1,5 +1,0 @@
-<B> owl:disjointWith <B> .    
-<B> owl:disjointWith <C> .    
-
-  
-
