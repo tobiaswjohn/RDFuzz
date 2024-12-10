@@ -1,7 +1,0 @@
-id,folder,ontology,inEL,exceptions,consistencyAnomalies,inferenceAnomalies,anomalyReport
-1,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test1.owl,true,0,0,1,anomaly0.txt
-2,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test2.owl,false,0,0,0,anomaly1.txt
-3,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test3.owl,true,0,0,0,-
-4,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test4.owl,false,0,0,0,anomaly2.txt
-5,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test5.owl,true,0,0,1,anomaly3.txt
-6,found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_25_16_33,test6.owl,true,0,0,0,-
