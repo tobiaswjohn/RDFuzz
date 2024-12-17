@@ -2,7 +2,7 @@
 
 # generates test cases until time limit is reached
 
-if [$# -ne 1]; then 
+if [ $# -ne 1 ]; then 
     echo "Please provide a time limit."
     exit 1
 fi
