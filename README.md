@@ -1,6 +1,6 @@
 # Supplementary Material for Paper "Language-Based Testing for Knowledge Graphs"
 
-this repository contains the code for generating random OWL ontologies and turtle files using [ISLa](https://github.com/rindPHI/isla) and the test cases and found anomalies documented in the paper.
+This repository contains the code for generating random OWL ontologies and turtle files using [ISLa](https://github.com/rindPHI/isla) and the test cases and found anomalies documented in the paper.
 
 ## Structure of Repostitory
  - ISLaResources: contains environment to run ISLa and grammars and scripts to call generate test files
@@ -8,15 +8,26 @@ this repository contains the code for generating random OWL ontologies and turtl
  - found_anomalies: folder that saves test runs and contains found anomalies (in sub-folders) 
  - found_bugs: the indentified bugs that are mentioned in the paper
 
- 
-## Installation
-- comments to set up docker 
-
-## Results In Paper
+## Results Discussed in Paper
 - the test cases and found anomalies for the OWL-EL campaign, as well as the anomalies sorted as described in the paper are in folder [found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17](found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17)
 - the test cases found anomalies for the RDF-TTL campaign, as well as the anomalies sorted as described in the paper are in folder [found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14](found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14)
 
-## Generate Test Inputs
+## Usage
+### Usage using Docker
+- build the docker image
+```
+docker build -t rdfuzz .
+```
+- create a new container, where you can run the scripts in
+```
+docker run -it rdfuzz
+```
+
+### Manual Installation
+If you do not want to use docker, you can find the instructions how to install  ISLa, our tool and all necessary requirements in [installation.md](installation.md).
+
+
+### Generate Test Inputs
  - `rdf-ttl-generator.sh`
 	 + script to generate RDF-TTL files
 	 + argument 1 (type of grammar): 
@@ -37,7 +48,7 @@ this repository contains the code for generating random OWL ontologies and turtl
 ./owl-el-generator.sh -time 60
 ```
 	 
-## Reproduce Fuzzing Campaigns
+### Reproduce Fuzzing Campaigns
  - `owl-el-campaign.sh`
 	 + script to test OWL-EL reasoners (HermiT, Openllet, ELK) 
 	 + argument: number of minutes the fuzzing should run (default: 1min)

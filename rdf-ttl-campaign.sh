@@ -39,13 +39,13 @@ echo "id,folder,ontology,inEL,exceptions,consistencyAnomalies,inferenceAnomalies
 #rm $log
 
 # build 
-cd api_tester
-echo "build java sources"
-echo "build java sources" >> ../$log
+#cd api_tester
+#echo "build java sources"
+#echo "build java sources" >> ../$log
 
-mvn clean package >> ../$log
+#mvn clean package >> ../$log
 
-cd ..
+#cd ..
 
 cd ISLaResources
 # source to have access to ISLA
