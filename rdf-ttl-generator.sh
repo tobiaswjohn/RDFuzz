@@ -13,6 +13,10 @@ time=false
 
 
 #### parse arguments
+if [$# -ne 3]; then 
+    echo "Please provide all three arguments."
+    exit 1
+fi
 
 # parse first argument
 if [ $1 == "-pure" ]; then

@@ -2,6 +2,11 @@
 
 # generates test cases until time limit is reached
 
+if [$# -ne 1]; then 
+    echo "Please provide a time limit."
+    exit 1
+fi
+
 #runs=${1:-10}
 timeLimit=${1:-1}   # timeLimit in minutes
 timeLimit=$(( timeLimit * 60 ))

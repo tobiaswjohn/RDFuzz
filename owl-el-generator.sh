@@ -11,6 +11,10 @@ time=false
 
 
 #### parse arguments
+if [$# -ne 2]; then 
+    echo "Please provide two arguments."
+    exit 1
+fi
 
 # parse first argument
 if [ $1 == "-time" ]; then
