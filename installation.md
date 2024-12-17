@@ -1,14 +1,14 @@
 # Installation 
- - download our source files from Zenodo or obtaine them from [github](https://github.com/tobiaswjohn/RDFuzz)
- - the following commands are expected to be exevuted in the folder containing our source files
+ - download our source files from Zenodo or obtain them from [github](https://github.com/tobiaswjohn/RDFuzz)
+ - the following commands are expected to be executed in the folder containing our source files
 
 
 # Install ISLa (incl. Requirements)
  - Python 3
 	 + `sudo apt -y upgrade`
- - Isla
-	 + see [github](https://github.com/rindPHI/isla#build-run-install)
+ - requirements for Isla
 	 + `sudo apt install python3.10 python3.10-dev python3.10-venv gcc g++ make cmake git clang`
+   	 + see the [ISLa repo on github](https://github.com/rindPHI/isla#build-run-install) for further information, if issues arise
 	 
  - create python environment and install ISLa (and where our tool finds it later)
  	 + `cd ISLaResources`
