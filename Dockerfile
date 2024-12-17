@@ -21,6 +21,7 @@ RUN apt-get -y upgrade
 RUN apt install -y python3.10 python3.10-dev python3.10-venv python3-pip gcc g++ make cmake git clang
 WORKDIR "/RDFuzz/ISLaResources"
 RUN python3.10 -m venv venv
+ENV PATH="/venv/bin:$PATH"
 RUN pip install --upgrade pip
 RUN pip install isla-solver
 WORKDIR "/"
