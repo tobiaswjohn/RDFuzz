@@ -84,10 +84,8 @@ else
         ontFile="../${directory}/${ontName}" 
         # generate test file
         if $pure ; then
-            echo "generate pure"
             python turtle_generator_initial.py $ontFile >> ../$log
         else
-            echo "generate tailored"
             python turtle_generator.py $ontFile >> ../$log
         fi
     done
