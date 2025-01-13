@@ -2,16 +2,12 @@ package no.uio.psy.rdfuzz;
 
 import no.uio.psy.rdfuzz.anomalies.*;
 import no.uio.psy.rdfuzz.reasoners.EmptyReasonerCaller;
-import no.uio.psy.rdfuzz.reasoners.ReasonerCaller;
 import no.uio.psy.rdfuzz.reasoners.ReasonerCallerFactory;
 import no.uio.psy.rdfuzz.reasoners.ReasonerInteractor;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 // tests the EL reasoners
@@ -145,10 +141,10 @@ public class ElReasonerTester {
             boolean isAnomaly = false; // tracks, if this comparison is an anomaly
 
             // compute the differences between the two results
-            Set<OWLAxiom> additional1 = new HashSet<OWLAxiom>(infers1.result);
+            Set<OWLAxiom> additional1 = new HashSet<>(infers1.result);
             additional1.removeAll(infers2.result);
 
-            Set<OWLAxiom> additional2 = new HashSet<OWLAxiom>(infers2.result);
+            Set<OWLAxiom> additional2 = new HashSet<>(infers2.result);
             additional2.removeAll(infers1.result);
 
             // if one of the reasoners is ELK, only check for subset relation of result

@@ -6,7 +6,7 @@ public abstract class Anomaly implements Comparable {
     // adds information about current anomaly to the summary
     public AnomalySummary getSummary() {
         return new AnomalySummary();
-    };
+    }
 
     @Override
     public int hashCode() {

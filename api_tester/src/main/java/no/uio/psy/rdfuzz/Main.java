@@ -3,23 +3,16 @@ package no.uio.psy.rdfuzz;
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
 import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
 import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
-import openllet.owlapi.OpenlletReasonerFactory;
-import org.apache.jena.base.Sys;
-import org.apache.jena.ontology.impl.OWLDLProfile;
-import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.profiles.OWL2DLProfile;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.util.*;
 
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Pattern;
 
 import static java.lang.System.exit;
 
@@ -31,7 +24,7 @@ public class Main {
     );
 
 
-    public static void main(String[] args) throws OWLOntologyCreationException {
+    public static void main(String[] args) {
         String fileName=args[0];
         String pathToReportAnomalies = args[1];
         String pathToReportCSV = args[2];
@@ -160,16 +153,6 @@ public class Main {
         return false;
     }
 
-    public static void temp(OWLOntology ont) throws OWLOntologyCreationException {
-        OWLReasoner openllet = OpenlletReasonerFactory.getInstance().createReasoner(ont);
-
-        ReasonerFactory rf = new ReasonerFactory();
-        OWLReasoner hermit = rf.createReasoner(ont);
-
-        System.out.println("Openllet: " + openllet.isConsistent());
-        System.out.println("HermiT: " + hermit.isConsistent());
-
-    }
 
     // checks if ontology is in profile
     public static boolean isEL(OWLOntology ont) {

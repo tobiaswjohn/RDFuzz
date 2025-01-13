@@ -2,7 +2,6 @@ package no.uio.psy.rdfuzz;
 
 
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
-import openllet.owlapi.OWL;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
