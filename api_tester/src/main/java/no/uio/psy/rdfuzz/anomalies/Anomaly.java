@@ -15,7 +15,7 @@ public abstract class Anomaly implements Comparable {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return this.compareTo(obj) == 0;
     }
 
     @Override

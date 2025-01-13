@@ -21,10 +21,12 @@ public class ElReasonerTester {
     private final ReasonerInteractor openllet;
     private final ReasonerInteractor elk;
 
+    private final OWLOntology ont;
 
     private final Set<Anomaly> foundAnomalies = new HashSet<>();
 
     ElReasonerTester(OWLOntology ont) {
+        this.ont = ont;
 
         ReasonerCallerFactory callerFactory = new ReasonerCallerFactory();
 
@@ -65,8 +67,22 @@ public class ElReasonerTester {
     // runs all kinds of test with the ontology
     public void runTests() {
         testConsistency();
-        testInferredAxioms();
+        //testInferredAxioms();
     }
+
+    // reudces the ontology while keeping all anomalies
+    public void minimalWitness() {
+        OWLOntology reduced = minimalOnt();
+        System.out.println("reduced ontology (" + reduced.axioms().count() + " axioms):");
+        for (OWLAxiom a : reduced.axioms().toList())
+            System.out.println(a);
+    }
+
+    private OWLOntology minimalOnt() {
+        TestCaseReducer ontReducer = new TestCaseReducer();
+        return ontReducer.reduceOnt(ont, foundAnomalies);
+    }
+
 
     private void testConsistency() {
             System.out.println("run consistency tests");
@@ -74,6 +90,8 @@ public class ElReasonerTester {
             ResultWithAnomalie<Boolean> hermitConsistent = hermit.isConsistent();
             ResultWithAnomalie<Boolean> openlletConsistent = openllet.isConsistent();
             ResultWithAnomalie<Boolean> elkConsistent = elk.isConsistent();
+
+            //System.out.println("ELK consistent: " + elk.isConsistent().result);
 
             // add any found anomalies
             foundAnomalies.addAll(hermitConsistent.foundAnomalies);

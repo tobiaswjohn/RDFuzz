@@ -52,7 +52,7 @@ public class Main {
 
         if (List.of(args).contains("--no-export")) {
             // print anomalies instead of exporting them
-            System.out.println("detailed inspection");
+           /* System.out.println("detailed inspection");
             OntologyLoader ontL = new OntologyLoader(manager);
             OWLOntology ont = null;
             try {
@@ -73,10 +73,13 @@ public class Main {
                 else
                     System.out.println("in DL!");
                 foundAnomalies.add(new NotElAnomaly(getDlViolations(ont)));
-            }
+            }*/
 
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
+
+            if (foundAnomalies.isEmpty())
+                System.out.println("No anomalies detected.");
         }
         else {
             // export found anomalies
@@ -117,6 +120,9 @@ public class Main {
         ElReasonerTester tester = new ElReasonerTester(ont);
 
         tester.runTests();
+        if (!tester.getFoundAnomalies().isEmpty()) {
+            tester.minimalWitness();
+        }
         return tester.getFoundAnomalies().stream().sorted().toList();
 
     }

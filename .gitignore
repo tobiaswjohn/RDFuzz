@@ -16,3 +16,4 @@ temp/*
 README.md.backup
 found_anomalies/el_reasoners/tobias-HP/*
 found_anomalies/turtle_parsers/tobias-HP/*
+test_cases/ore_2015/consistency/ontologies/*.owl
