@@ -97,7 +97,7 @@ public class TestCaseReducer {
     private Set<Anomaly> entailedAnomalies(OWLOntology ont) {
         ElReasonerTester tester = new ElReasonerTester(ont);
 
-        tester.runTests();
+        tester.runAllTests();
         return tester.getFoundAnomalies();
     }
 }

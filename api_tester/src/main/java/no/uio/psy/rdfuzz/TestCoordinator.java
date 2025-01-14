@@ -46,7 +46,7 @@ public class TestCoordinator {
         System.out.println("is in EL");
         ElReasonerTester tester = new ElReasonerTester(ont);
 
-        tester.runTests();
+        tester.runAllTests();
         //if (!tester.getFoundAnomalies().isEmpty()) {
         //   tester.minimalWitness();
         //}

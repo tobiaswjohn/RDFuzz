@@ -61,7 +61,7 @@ public class ElReasonerTester {
     }
 
     // runs all kinds of test with the ontology
-    public void runTests() {
+    public void runAllTests() {
         testConsistency();
         testInferredAxioms();
     }
