@@ -1,11 +1,17 @@
 no/uio/psy/rdfuzz/reasoners/ReasonerCallerFactory.class
+no/uio/psy/rdfuzz/Tuple.class
 no/uio/psy/rdfuzz/reasoners/ReasonerCaller.class
 no/uio/psy/rdfuzz/anomalies/ConsistencyAnomaly.class
+no/uio/psy/rdfuzz/anomalies/NotCreatedAnomaly.class
 no/uio/psy/rdfuzz/anomalies/InferenceAnomaly.class
+no/uio/psy/rdfuzz/reasoners/ReasonerInteractor.class
 no/uio/psy/rdfuzz/ParserTester.class
 no/uio/psy/rdfuzz/anomalies/AnomalySummary.class
+no/uio/psy/rdfuzz/reasoners/EmptyReasonerCaller.class
+no/uio/psy/rdfuzz/TestCaseReducer.class
 no/uio/psy/rdfuzz/anomalies/NotElAnomaly.class
 no/uio/psy/rdfuzz/SUT.class
+no/uio/psy/rdfuzz/TestCoordinator.class
 no/uio/psy/rdfuzz/ElReasonerTester.class
 no/uio/psy/rdfuzz/Main.class
 no/uio/psy/rdfuzz/anomalies/DifferentialAnomaly.class
