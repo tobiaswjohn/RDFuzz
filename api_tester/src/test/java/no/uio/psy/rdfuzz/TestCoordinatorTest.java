@@ -22,6 +22,16 @@ class TestCoordinatorTest {
             );
 
 
+    Set<REASONING_TASKS> consistencyAndInferred = Set.of(
+            REASONING_TASKS.CONSISTENCY,
+            REASONING_TASKS.INFERRED_AXIOMS
+    );
+
+    Set<REASONING_TASKS> consistencyTask = Set.of(
+            REASONING_TASKS.CONSISTENCY
+    );
+
+
     @Test
     void testReasoners() {
 
@@ -32,6 +42,9 @@ class TestCoordinatorTest {
         File ontFile2 = new File("src/test/resources/inferenceAnomaly_test1456.owl");
         List<Anomaly> anomalies2 = testCoordinator.testReasoners(ontFile2, allReasoningTasks);
         assertEquals(3, anomalies2.size());
+
+        List<Anomaly> anomalies3 = testCoordinator.testReasoners(ontFile2, consistencyTask);
+        assertEquals(0, anomalies3.size());
     }
 
     @Test
@@ -53,10 +66,6 @@ class TestCoordinatorTest {
 
     @Test
     void minimalWitness() {
-        Set<REASONING_TASKS> consistencyAndInferred = Set.of(
-                REASONING_TASKS.CONSISTENCY,
-                REASONING_TASKS.INFERRED_AXIOMS
-        );
         File ontFile = new File("src/test/resources/test5.owl");
         List<Anomaly> anomalies1 = testCoordinator.testReasoners(ontFile, consistencyAndInferred);
         OWLOntology minimalOnt1 = testCoordinator.minimalWitness(
