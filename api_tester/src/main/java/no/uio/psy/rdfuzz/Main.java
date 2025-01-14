@@ -6,8 +6,16 @@ import org.semanticweb.owlapi.model.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 
 import static java.lang.System.exit;
+
+
+
 
 public class Main {
 
@@ -26,6 +34,15 @@ public class Main {
 
         // list to save all found anomalies
         List<Anomaly> foundAnomalies = new ArrayList<>();
+
+
+        // set logging level to warning (important for ELK)
+        Logger rootLogger = LogManager.getLogManager().getLogger("");
+        rootLogger.setLevel(Level.WARNING);
+        for (Handler h : rootLogger.getHandlers()) {
+            h.setLevel(Level.WARNING);
+        }
+
 
         if (List.of(args).contains("--test-parsers")) {
             foundAnomalies.addAll(testCoordinator.testParsers(ontFile));
@@ -52,29 +69,6 @@ public class Main {
 
         if (List.of(args).contains("--no-export")) {
             // print anomalies instead of exporting them
-           /* System.out.println("detailed inspection");
-            OntologyLoader ontL = new OntologyLoader(manager);
-            OWLOntology ont = null;
-            try {
-                ont = ontL.loadOntologyFile(ontFile);
-            }
-            catch (Exception e) {
-                System.out.println("could not create ontology");
-            }
-            System.out.println("run temp test");
-            temp(ont);
-            System.out.println("end temp test");
-
-
-            if (!isEL(ont)) {
-                System.out.println("not in EL!");
-                if (!isDL(ont))
-                    System.out.println("not in DL!");
-                else
-                    System.out.println("in DL!");
-                foundAnomalies.add(new NotElAnomaly(getDlViolations(ont)));
-            }*/
-
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
 
