@@ -15,16 +15,19 @@ import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 // runs the different tests, e.g. tests of parsers, reasoners
 public class TestCoordinator {
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-    OWLAxiom inconsistent = manager.getOWLDataFactory().getOWLSubClassOfAxiom(
+    private final OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    private final OWLAxiom inconsistent = manager.getOWLDataFactory().getOWLSubClassOfAxiom(
             manager.getOWLDataFactory().getOWLThing(),
             manager.getOWLDataFactory().getOWLNothing()
     );
 
-    public List<Anomaly> testReasoners(File ontFile) {
+
+    public List<Anomaly> testReasoners(File ontFile,
+                                       Set<REASONING_TASKS> reasoningTasks) {
         // load ontology
         OntologyLoader ontL = new OntologyLoader(manager);
         OWLOntology ont;
@@ -35,7 +38,7 @@ public class TestCoordinator {
             return List.of(new ExceptionAnomaly(e, SUT.OWLAPI));
         }
 
-        // check if ontology is in EL --> only use for those for testing
+        // check if ontology is in EL --> only use those for testing
         if (!isEL(ont)) {
             System.out.println("profiler indicates not EL. Check for known bugs");
             List<OWLProfileViolation> violations = getElViolations(ont);
@@ -44,14 +47,12 @@ public class TestCoordinator {
         }
 
         System.out.println("is in EL");
+
+        // run tests
         ElReasonerTester tester = new ElReasonerTester(ont);
+        tester.runTests(reasoningTasks);
 
-        tester.runAllTests();
-        //if (!tester.getFoundAnomalies().isEmpty()) {
-        //   tester.minimalWitness();
-        //}
         return tester.getFoundAnomalies().stream().sorted().toList();
-
     }
 
 
@@ -61,6 +62,39 @@ public class TestCoordinator {
         parserTester.testParsers(ontFile);
         return parserTester.getFoundAnomalies().stream().sorted().toList();
     }
+
+    // reduces the ontology while keeping all anomalies
+    // if there are no anomalies: returns empty ontology
+    public OWLOntology minimalWitness(Set<Anomaly> foundAnomalies,
+                                      File ontFile,
+                                      Set<REASONING_TASKS> reasoningTasks) {
+        try {
+            return minimalOnt(foundAnomalies, ontFile, reasoningTasks);
+        } catch (OWLOntologyCreationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // if there are no anomalies: returns empty ontology
+    private OWLOntology minimalOnt(Set<Anomaly> foundAnomalies,
+                                   File ontFile,
+                                   Set<REASONING_TASKS> reasoningTasks) throws OWLOntologyCreationException {
+
+        // return empty ontology if there are no anomalies
+        if (foundAnomalies.isEmpty()) {
+            System.out.println("not anomalies found --> no reduction necessary");
+            return manager.createOntology();
+        }
+
+        // load ontology from file
+        OntologyLoader ontL = new OntologyLoader(manager);
+        OWLOntology ont = ontL.loadOntologyFile(ontFile);
+
+        // reduce test case
+        TestCaseReducer ontReducer = new TestCaseReducer();
+        return ontReducer.reduceOnt(ont, foundAnomalies, reasoningTasks);
+    }
+
 
     // checks, if the violations result from bugs
     // CAVE: assumes that ontologies are created using the EL profile grammar!

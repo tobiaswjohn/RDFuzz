@@ -1,14 +1,7 @@
 package no.uio.psy.rdfuzz;
 
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
-import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
-import no.uio.psy.rdfuzz.anomalies.NotElAnomaly;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.profiles.OWL2DLProfile;
-import org.semanticweb.owlapi.profiles.OWL2ELProfile;
-import org.semanticweb.owlapi.profiles.OWLProfileReport;
-import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 
 
 import java.io.*;
@@ -26,6 +19,11 @@ public class Main {
         File ontFile = new File(fileName);
         TestCoordinator testCoordinator = new TestCoordinator();
 
+        // the reasoning tasks that are used
+        Set<REASONING_TASKS> reasoningTasks = new HashSet<>();
+        reasoningTasks.add(REASONING_TASKS.CONSISTENCY);
+        reasoningTasks.add(REASONING_TASKS.INFERRED_AXIOMS);
+
         // list to save all found anomalies
         List<Anomaly> foundAnomalies = new ArrayList<>();
 
@@ -35,7 +33,21 @@ public class Main {
 
         if (List.of(args).contains("--test-reasoners")) {
             System.out.println("test reasoners");
-            foundAnomalies.addAll(testCoordinator.testReasoners(ontFile));
+            foundAnomalies.addAll(testCoordinator.testReasoners(ontFile, reasoningTasks));
+        }
+
+        if (List.of(args).contains("--minimize-ontology")) {
+            System.out.println("minimize test ontology");
+
+            OWLOntology minimalOnt = testCoordinator.minimalWitness(
+                    new HashSet<>(foundAnomalies),
+                    ontFile,
+                    reasoningTasks
+            );
+
+            System.out.println("reduced ontology (" + minimalOnt.axioms().count() + " axioms):");
+            for (OWLAxiom a : minimalOnt.axioms().toList())
+                System.out.println(a);
         }
 
         if (List.of(args).contains("--no-export")) {

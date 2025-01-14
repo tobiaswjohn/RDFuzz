@@ -16,8 +16,13 @@ import java.util.stream.Collectors;
 public class TestCaseReducer {
     private final OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 
-    public OWLOntology reduceOnt(OWLOntology ont, Set<Anomaly> anomalies) {
+    private Set<REASONING_TASKS> reasoningTasks = new HashSet<>();
 
+    public OWLOntology reduceOnt(OWLOntology ont,
+                                 Set<Anomaly> anomalies,
+                                 Set<REASONING_TASKS> reasoningTasks) {
+
+        this.reasoningTasks = reasoningTasks;
         // compute justification, i.e. minimal set of axioms
         try {
 
@@ -97,7 +102,8 @@ public class TestCaseReducer {
     private Set<Anomaly> entailedAnomalies(OWLOntology ont) {
         ElReasonerTester tester = new ElReasonerTester(ont);
 
-        tester.runAllTests();
+        // run the tests, specified by the configuration
+        tester.runTests(reasoningTasks);
         return tester.getFoundAnomalies();
     }
 }

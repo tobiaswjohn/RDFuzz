@@ -3,6 +3,7 @@ package no.uio.psy.rdfuzz.anomalies;
 import no.uio.psy.rdfuzz.SUT;
 import org.semanticweb.owlapi.model.OWLAxiom;
 
+import java.util.List;
 import java.util.Set;
 
 public class InferenceAnomaly extends DifferentialAnomaly{
@@ -20,9 +21,12 @@ public class InferenceAnomaly extends DifferentialAnomaly{
 
     @Override
     public String toString() {
+        // sorting ensures that same anomalies have same string representation
+        List<String> sortedAdditional1 = additional1.stream().sorted().map(Object::toString).toList();
+        List<String> sortedAdditional2 = additional2.stream().sorted().map(Object::toString).toList();
         return "Inference differentiation between "+ sut1 + " and "+ sut2 + ":\n\t" +
-                "additional axioms " + sut1 + ": " + additional1 + "\n\t" +
-                "additional axioms " + sut2 + ": " + additional2;
+                "additional axioms " + sut1 + ": " + sortedAdditional1 + "\n\t" +
+                "additional axioms " + sut2 + ": " + sortedAdditional2;
     }
 
     @Override

@@ -66,21 +66,17 @@ public class ElReasonerTester {
         testInferredAxioms();
     }
 
-    // reudces the ontology while keeping all anomalies
-    public void minimalWitness() {
-        OWLOntology reduced = minimalOnt();
-        System.out.println("reduced ontology (" + reduced.axioms().count() + " axioms):");
-        for (OWLAxiom a : reduced.axioms().toList())
-            System.out.println(a);
-    }
+    // runs the tests specified by the parameter
+    public void runTests(Set<REASONING_TASKS> reasoningTasks) {
+        if (reasoningTasks.contains(REASONING_TASKS.CONSISTENCY))
+            testConsistency();
 
-    private OWLOntology minimalOnt() {
-        TestCaseReducer ontReducer = new TestCaseReducer();
-        return ontReducer.reduceOnt(ont, foundAnomalies);
+        if (reasoningTasks.contains(REASONING_TASKS.INFERRED_AXIOMS))
+            testInferredAxioms();
     }
 
 
-    private void testConsistency() {
+    public void testConsistency() {
             System.out.println("run consistency tests");
 
             ResultWithAnomalie<Boolean> hermitConsistent = hermit.isConsistent();
@@ -101,7 +97,7 @@ public class ElReasonerTester {
 
     }
 
-    private void testInferredAxioms() {
+    public void testInferredAxioms() {
             ResultWithAnomalie<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
             ResultWithAnomalie<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
             ResultWithAnomalie<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
