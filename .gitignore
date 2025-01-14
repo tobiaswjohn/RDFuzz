@@ -6,6 +6,7 @@ turtle/tests
 # java stuff
 *.jar
 *.class
+api_tester/target
 
 # temporary ontologies
 *temp*.ttl
@@ -17,3 +18,4 @@ README.md.backup
 found_anomalies/el_reasoners/tobias-HP/*
 found_anomalies/turtle_parsers/tobias-HP/*
 test_cases/ore_2015/consistency/ontologies/*.owl
+test_cases/ore_2015/consistency/ontologies_larger_5mb/*.owl
