@@ -71,52 +71,73 @@ public class ElReasonerTester {
         if (reasoningTasks.contains(REASONING_TASKS.CONSISTENCY))
             testConsistency();
 
+        if (reasoningTasks.contains(REASONING_TASKS.CLASS_HIERARCHY))
+            testClassHierarchy();
+
         if (reasoningTasks.contains(REASONING_TASKS.INFERRED_AXIOMS))
             testInferredAxioms();
     }
 
-
     public void testConsistency() {
-            System.out.println("run consistency tests");
+        System.out.println("run consistency tests");
 
-            ResultWithAnomalie<Boolean> hermitConsistent = hermit.isConsistent();
-            ResultWithAnomalie<Boolean> openlletConsistent = openllet.isConsistent();
-            ResultWithAnomalie<Boolean> elkConsistent = elk.isConsistent();
+        ResultWithAnomaly<Boolean> hermitConsistent = hermit.isConsistent();
+        ResultWithAnomaly<Boolean> openlletConsistent = openllet.isConsistent();
+        ResultWithAnomaly<Boolean> elkConsistent = elk.isConsistent();
 
-            //System.out.println("ELK consistent: " + elk.isConsistent().result);
+        //System.out.println("ELK consistent: " + elk.isConsistent().result);
 
-            // add any found anomalies
-            foundAnomalies.addAll(hermitConsistent.foundAnomalies);
-            foundAnomalies.addAll(openlletConsistent.foundAnomalies);
-            foundAnomalies.addAll(elkConsistent.foundAnomalies);
+        // add any found anomalies
+        foundAnomalies.addAll(hermitConsistent.foundAnomalies);
+        foundAnomalies.addAll(openlletConsistent.foundAnomalies);
+        foundAnomalies.addAll(elkConsistent.foundAnomalies);
 
-            // check for deviating results and add anomalies if necessary
-            foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, openlletConsistent));
-            foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, elkConsistent));
-            foundAnomalies.addAll(compareConsistencyChecks(openlletConsistent, elkConsistent));
+        // check for deviating results and add anomalies if necessary
+        foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, openlletConsistent));
+        foundAnomalies.addAll(compareConsistencyChecks(hermitConsistent, elkConsistent));
+        foundAnomalies.addAll(compareConsistencyChecks(openlletConsistent, elkConsistent));
+    }
 
+    public void testClassHierarchy() {
+        System.out.println("compute class hierarchies");
+
+        ResultWithAnomaly<Set<OWLAxiom>> hermitHierarchy = hermit.classHierarchy();
+        ResultWithAnomaly<Set<OWLAxiom>> openlletHierarchy = openllet.classHierarchy();
+        ResultWithAnomaly<Set<OWLAxiom>> elkHierarchy = elk.classHierarchy();
+
+        // add any found anomalies
+        foundAnomalies.addAll(hermitHierarchy.foundAnomalies);
+        foundAnomalies.addAll(openlletHierarchy.foundAnomalies);
+        foundAnomalies.addAll(elkHierarchy.foundAnomalies);
+
+        boolean isClassHierarchy = true;
+        // check for conflicting results and add anomalies if necessary
+        foundAnomalies.addAll(compareInferredAxioms(hermitHierarchy, openlletHierarchy, isClassHierarchy));
+        foundAnomalies.addAll(compareInferredAxioms(hermitHierarchy, elkHierarchy, isClassHierarchy));
+        foundAnomalies.addAll(compareInferredAxioms(elkHierarchy, openlletHierarchy, isClassHierarchy));
     }
 
     public void testInferredAxioms() {
-            ResultWithAnomalie<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
-            ResultWithAnomalie<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
-            ResultWithAnomalie<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
+        ResultWithAnomaly<Set<OWLAxiom>> hermitInfers = hermit.inferredAxioms();
+        ResultWithAnomaly<Set<OWLAxiom>> openlletInfers = openllet.inferredAxioms();
+        ResultWithAnomaly<Set<OWLAxiom>> elkInfers = elk.inferredAxioms();
 
-            // add any found anomalies
-            foundAnomalies.addAll(hermitInfers.foundAnomalies);
-            foundAnomalies.addAll(openlletInfers.foundAnomalies);
-            foundAnomalies.addAll(elkInfers.foundAnomalies);
+        // add any found anomalies
+        foundAnomalies.addAll(hermitInfers.foundAnomalies);
+        foundAnomalies.addAll(openlletInfers.foundAnomalies);
+        foundAnomalies.addAll(elkInfers.foundAnomalies);
 
-            // check for conflicting results and add anomalies if necessary
-            foundAnomalies.addAll(compareInferredAxioms(hermitInfers, openlletInfers));
-            foundAnomalies.addAll(compareInferredAxioms(hermitInfers, elkInfers));
-            foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers));
+        boolean isClassHierarchy = false;
+        // check for conflicting results and add anomalies if necessary
+        foundAnomalies.addAll(compareInferredAxioms(hermitInfers, openlletInfers, isClassHierarchy));
+        foundAnomalies.addAll(compareInferredAxioms(hermitInfers, elkInfers, isClassHierarchy));
+        foundAnomalies.addAll(compareInferredAxioms(elkInfers, openlletInfers, isClassHierarchy));
 
     }
 
     // checks, if the two systems found a result (i.e. no anomaly in computation) and if the results are the same
-    private Set<Anomaly> compareConsistencyChecks(ResultWithAnomalie<Boolean> consistency1,
-                                                  ResultWithAnomalie<Boolean> consistency2) {
+    private Set<Anomaly> compareConsistencyChecks(ResultWithAnomaly<Boolean> consistency1,
+                                                  ResultWithAnomaly<Boolean> consistency2) {
         if (!consistency1.anyAnomaly && !consistency2.anyAnomaly)
             if (consistency1.result != consistency2.result)
                 return Set.of(new ConsistencyAnomaly(
@@ -129,8 +150,11 @@ public class ElReasonerTester {
         return Set.of();
     }
 
-    private Set<Anomaly> compareInferredAxioms(ResultWithAnomalie<Set<OWLAxiom>> infers1,
-                                               ResultWithAnomalie<Set<OWLAxiom>> infers2) {
+    // compares the sets of axioms and adds an anomaly if they differ
+    // third argument indicates, whether the axioms form a class hierarchy --> different (more specific) type of anomaly
+    private Set<Anomaly> compareInferredAxioms(ResultWithAnomaly<Set<OWLAxiom>> infers1,
+                                               ResultWithAnomaly<Set<OWLAxiom>> infers2,
+                                               Boolean isClassHierarchy) {
 
         // check, if both systems found a result (i.e. no anomaly in computation)
         if (!infers1.anyAnomaly && !infers2.anyAnomaly) {
@@ -154,12 +178,19 @@ public class ElReasonerTester {
                 isAnomaly = true;
 
             if (isAnomaly)
-                return Set.of(new InferenceAnomaly(
-                        infers1.sut,
-                        infers2.sut,
-                        additional1,
-                        additional2
-                ));
+                if (isClassHierarchy)
+                    return Set.of(new ClassHierarchyAnomaly(
+                            infers1.sut,
+                            infers2.sut,
+                            additional1,
+                            additional2
+                    ));
+                else return Set.of(new InferenceAnomaly(
+                            infers1.sut,
+                            infers2.sut,
+                            additional1,
+                            additional2
+                    ));
         }
 
         return Set.of();

@@ -10,6 +10,10 @@ public class InferenceAnomaly extends DifferentialAnomaly{
     Set<OWLAxiom> additional1;
     Set<OWLAxiom> additional2;
 
+    protected String getName() {
+        return "Inference differentiation";
+    }
+
     public InferenceAnomaly(SUT sut1,
                             SUT sut2,
                             Set<OWLAxiom> additional1,
@@ -24,7 +28,7 @@ public class InferenceAnomaly extends DifferentialAnomaly{
         // sorting ensures that same anomalies have same string representation
         List<String> sortedAdditional1 = additional1.stream().sorted().map(Object::toString).toList();
         List<String> sortedAdditional2 = additional2.stream().sorted().map(Object::toString).toList();
-        return "Inference differentiation between "+ sut1 + " and "+ sut2 + ":\n\t" +
+        return getName() + " between "+ sut1 + " and "+ sut2 + ":\n\t" +
                 "additional axioms " + sut1 + ": " + sortedAdditional1 + "\n\t" +
                 "additional axioms " + sut2 + ": " + sortedAdditional2;
     }

@@ -5,13 +5,13 @@ import no.uio.psy.rdfuzz.SUT;
 import java.util.Set;
 
 // represents a result T, together with a report about anomalies
-public class ResultWithAnomalie<R> {
+public class ResultWithAnomaly<R> {
     public final R result;   // resutl
     public final Set<Anomaly> foundAnomalies;  // the found anomalies
     public final boolean anyAnomaly;  // indicates if any anomalie was found
     public final SUT sut;   // the sut from which the result was obtained
 
-    public ResultWithAnomalie(R result, Set<Anomaly> foundAnomalies, SUT sut) {
+    public ResultWithAnomaly(R result, Set<Anomaly> foundAnomalies, SUT sut) {
         this.result = result;
         this.foundAnomalies = foundAnomalies;
         this.anyAnomaly = !foundAnomalies.isEmpty();
@@ -19,7 +19,7 @@ public class ResultWithAnomalie<R> {
     }
 
     // no anomaly found
-    public ResultWithAnomalie(R result, SUT sut) {
+    public ResultWithAnomaly(R result, SUT sut) {
         this.result = result;
         this.foundAnomalies = Set.of();
         this.anyAnomaly = false;

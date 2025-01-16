@@ -2,7 +2,7 @@ package no.uio.psy.rdfuzz.reasoners;
 
 import no.uio.psy.rdfuzz.SUT;
 import no.uio.psy.rdfuzz.anomalies.NotCreatedAnomaly;
-import no.uio.psy.rdfuzz.anomalies.ResultWithAnomalie;
+import no.uio.psy.rdfuzz.anomalies.ResultWithAnomaly;
 import org.semanticweb.owlapi.model.OWLAxiom;
 
 import java.util.Set;
@@ -16,8 +16,8 @@ public class EmptyReasonerCaller implements  ReasonerInteractor{
         this.sut = sut;
     }
     @Override
-    public ResultWithAnomalie<Boolean> isConsistent() {
-        return new ResultWithAnomalie<Boolean>(
+    public ResultWithAnomaly<Boolean> isConsistent() {
+        return new ResultWithAnomaly<Boolean>(
                 false,
                 Set.of(new NotCreatedAnomaly(sut)),
                 sut
@@ -25,8 +25,17 @@ public class EmptyReasonerCaller implements  ReasonerInteractor{
     }
 
     @Override
-    public ResultWithAnomalie<Set<OWLAxiom>> inferredAxioms() {
-        return new ResultWithAnomalie<>(
+    public ResultWithAnomaly<Set<OWLAxiom>> inferredAxioms() {
+        return new ResultWithAnomaly<>(
+                Set.of(),
+                Set.of(new NotCreatedAnomaly(sut)),
+                sut
+        );
+    }
+
+    @Override
+    public ResultWithAnomaly<Set<OWLAxiom>> classHierarchy() {
+        return new ResultWithAnomaly<>(
                 Set.of(),
                 Set.of(new NotCreatedAnomaly(sut)),
                 sut

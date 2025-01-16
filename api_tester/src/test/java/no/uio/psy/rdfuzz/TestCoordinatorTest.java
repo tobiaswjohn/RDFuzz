@@ -18,7 +18,8 @@ class TestCoordinatorTest {
     TestCoordinator testCoordinator = new TestCoordinator();
     Set<REASONING_TASKS> allReasoningTasks = Set.of(
             REASONING_TASKS.CONSISTENCY,
-            REASONING_TASKS.INFERRED_AXIOMS
+            REASONING_TASKS.INFERRED_AXIOMS,
+            REASONING_TASKS.CLASS_HIERARCHY
             );
 
 
@@ -37,13 +38,18 @@ class TestCoordinatorTest {
 
         File ontFile1 = new File("src/test/resources/test5.owl");
         List<Anomaly> anomalies1 = testCoordinator.testReasoners(ontFile1, allReasoningTasks);
-        assertEquals(4, anomalies1.size());
+
+
+        assertEquals(6, anomalies1.size());
+
+
 
         File ontFile2 = new File("src/test/resources/inferenceAnomaly_test1456.owl");
         List<Anomaly> anomalies2 = testCoordinator.testReasoners(ontFile2, allReasoningTasks);
-        assertEquals(3, anomalies2.size());
+        assertEquals(5, anomalies2.size());
 
         List<Anomaly> anomalies3 = testCoordinator.testReasoners(ontFile2, consistencyTask);
+
         assertEquals(0, anomalies3.size());
     }
 
@@ -71,7 +77,7 @@ class TestCoordinatorTest {
         OWLOntology minimalOnt1 = testCoordinator.minimalWitness(
                 new HashSet<>(anomalies1),
                 ontFile,
-                allReasoningTasks);
+                consistencyAndInferred);
 
         // actual size of minimal ontology can vary as there are multiple solutions with different sizes
         assertTrue(minimalOnt1.axioms().count() < 15);

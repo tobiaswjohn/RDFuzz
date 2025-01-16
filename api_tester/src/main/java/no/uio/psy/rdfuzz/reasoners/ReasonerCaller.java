@@ -1,10 +1,10 @@
 package no.uio.psy.rdfuzz.reasoners;
 
 import no.uio.psy.rdfuzz.SUT;
-import no.uio.psy.rdfuzz.anomalies.Anomaly;
-import no.uio.psy.rdfuzz.anomalies.ExceptionAnomaly;
-import no.uio.psy.rdfuzz.anomalies.ResultWithAnomalie;
+import no.uio.psy.rdfuzz.anomalies.ResultWithAnomaly;
+import no.uio.psy.rdfuzz.anomalies.ResultWithAnomalyFactory;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.util.*;
@@ -25,6 +25,9 @@ public class ReasonerCaller implements ReasonerInteractor {
 
     // generators used for inferred axioms
     private final List<InferredAxiomGenerator<? extends OWLAxiom>> gens;
+
+    // factory for results with anomaly
+    private final ResultWithAnomalyFactory resultWithAnomalyFactory = new ResultWithAnomalyFactory();
 
     ReasonerCaller(OWLReasoner reasoner, SUT sut)  {
         this.reasoner = reasoner;
@@ -63,52 +66,64 @@ public class ReasonerCaller implements ReasonerInteractor {
         );
     }
 
-    public ResultWithAnomalie<Boolean> isConsistent() {
+    public ResultWithAnomaly<Boolean> isConsistent() {
         try {
             boolean consistent = reasoner.isConsistent();
-            return new ResultWithAnomalie<>(consistent, sut);
+            return new ResultWithAnomaly<>(consistent, sut);
         } catch (Exception e) {
-            return  new ResultWithAnomalie<>(
-                    false,
-                    Set.of(new ExceptionAnomaly(e, sut)),
-                    sut
-            );
+            return resultWithAnomalyFactory.getFalseWithException(sut, e);
         }
     }
 
-    public ResultWithAnomalie<Set<OWLAxiom>> inferredAxioms() {
+    // computes all subclass axioms
+    // method is inspired by implementation in https://github.com/ykazakov/ore-2015-competition-framework/tree/master
+    // from Class "OREv2ReasonerWrapper"
+    public ResultWithAnomaly<Set<OWLAxiom>> classHierarchy() {
+        InferredSubClassAxiomGenerator subClassGenerator = new InferredSubClassAxiomGenerator();
+        InferredEquivalentClassAxiomGenerator equivClassGenerator = new InferredEquivalentClassAxiomGenerator();
+        Set<OWLAxiom> resultAxioms = new HashSet<OWLAxiom>();
+
+        try {
+            if (reasoner.isConsistent()) {
+                reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+                Set<OWLSubClassOfAxiom> subClassAxioms = subClassGenerator.createAxioms(manager.getOWLDataFactory(), reasoner);
+                Set<OWLEquivalentClassesAxiom> equivClassAxioms = equivClassGenerator.createAxioms(manager.getOWLDataFactory(), reasoner);
+                resultAxioms.addAll(subClassAxioms);
+                resultAxioms.addAll(equivClassAxioms);
+                return new ResultWithAnomaly<>(resultAxioms, sut);
+            } else
+                return new ResultWithAnomaly<>(Set.of(inconsistent), sut);
+        } catch (Exception e) {
+            return resultWithAnomalyFactory.getEmptyAxiomSetWithException(sut, e);
+        }
+    }
+
+
+    public ResultWithAnomaly<Set<OWLAxiom>> inferredAxioms() {
         try {
             if (reasoner.isConsistent()) {
                 InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner, gens);
                 OWLOntology infOnt = manager.createOntology();
                 iog.fillOntology(manager.getOWLDataFactory(), infOnt);
-                return new ResultWithAnomalie<>(infOnt.getAxioms(), sut);
+                return new ResultWithAnomaly<>(infOnt.getAxioms(), sut);
             }
             else
-                return new ResultWithAnomalie<>(Set.of(inconsistent), sut);
+                return new ResultWithAnomaly<>(Set.of(inconsistent), sut);
         } catch (Exception e) {
-            return  new ResultWithAnomalie<>(
-                    Set.of(),
-                    Set.of(new ExceptionAnomaly(e, sut)),
-                    sut
-            );
+            return resultWithAnomalyFactory.getEmptyAxiomSetWithException(sut, e);
         }
     }
 
     // returns instances provided by a class expression
-    public ResultWithAnomalie<Set<OWLNamedIndividual>> getInstances(OWLClassExpression classExpression) {
+    public ResultWithAnomaly<Set<OWLNamedIndividual>> getInstances(OWLClassExpression classExpression) {
         try {
             NodeSet<OWLNamedIndividual> individuals = reasoner.getInstances(classExpression);
-            return new ResultWithAnomalie<>(
+            return new ResultWithAnomaly<>(
                     individuals.getFlattened(),
                     sut
             );
         } catch (Exception e) {
-            return new ResultWithAnomalie<>(
-                    Set.of(),
-                    Set.of(new ExceptionAnomaly(e, sut)),
-                    sut
-            );
+            return resultWithAnomalyFactory.getEmptyIndividualSetWithException(sut, e);
         }
     }
 }

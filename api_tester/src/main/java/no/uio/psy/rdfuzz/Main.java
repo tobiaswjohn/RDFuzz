@@ -27,7 +27,8 @@ public class Main {
     // the tasks that are used to test reasoners
     static Set<REASONING_TASKS> reasoningTasks = Set.of(
         REASONING_TASKS.CONSISTENCY,
-        REASONING_TASKS.INFERRED_AXIOMS
+        REASONING_TASKS.INFERRED_AXIOMS,
+        REASONING_TASKS.CLASS_HIERARCHY
     );
 
     // list to save all found anomalies
@@ -101,7 +102,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         parseArguments(args);
         runTests();
 

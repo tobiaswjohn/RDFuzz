@@ -5,6 +5,7 @@ public class AnomalySummary {
     public boolean inEL = true;
     public int exceptions = 0;
     public int consistencyAnomalies = 0;
+    public int hierarchyAnomalies = 0;
     public int inferenceAnomalies = 0;
 
     // adds another summary to this one
