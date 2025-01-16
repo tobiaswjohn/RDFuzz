@@ -6,10 +6,6 @@ import org.semanticweb.owlapi.model.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 
 import static java.lang.System.exit;
@@ -19,41 +15,58 @@ import static java.lang.System.exit;
 
 public class Main {
 
-    public static void main(String[] args) {
-        String fileName=args[0];
-        String pathToReportAnomalies = args[1];
-        String pathToReportCSV = args[2];
+    static String ontologyFileName ="";
+    static String pathToReportAnomalies = "";
+    static String pathToReportCSV = "";
 
-        File ontFile = new File(fileName);
+    static boolean testParsers = false;
+    static boolean testReasoners = false;
+    static boolean minimizeOntology = false;
+    static boolean noExport = false;
+
+    // the tasks that are used to test reasoners
+    static Set<REASONING_TASKS> reasoningTasks = Set.of(
+        REASONING_TASKS.CONSISTENCY,
+        REASONING_TASKS.INFERRED_AXIOMS
+    );
+
+    // list to save all found anomalies
+    static List<Anomaly> foundAnomalies = new ArrayList<>();
+
+    public static void parseArguments(String[] args) {
+        ontologyFileName =args[0];
+        pathToReportAnomalies = args[1];
+        pathToReportCSV = args[2];
+
+        List<String> listOfArguments = List.of(args);
+
+        if (listOfArguments.contains("--test-parsers"))
+            testParsers = true;
+
+        if (listOfArguments.contains("--test-reasoners"))
+            testReasoners = true;
+
+        if (listOfArguments.contains("--minimize-ontology"))
+            minimizeOntology = true;
+
+        if (listOfArguments.contains("--no-export"))
+            noExport = true;
+    }
+
+    private static void runTests() {
+        File ontFile = new File(ontologyFileName);
         TestCoordinator testCoordinator = new TestCoordinator();
 
-        // the reasoning tasks that are used
-        Set<REASONING_TASKS> reasoningTasks = new HashSet<>();
-        reasoningTasks.add(REASONING_TASKS.CONSISTENCY);
-        reasoningTasks.add(REASONING_TASKS.INFERRED_AXIOMS);
-
-        // list to save all found anomalies
-        List<Anomaly> foundAnomalies = new ArrayList<>();
-
-
-        // set logging level to warning (important for ELK)
-        Logger rootLogger = LogManager.getLogManager().getLogger("");
-        rootLogger.setLevel(Level.WARNING);
-        for (Handler h : rootLogger.getHandlers()) {
-            h.setLevel(Level.WARNING);
-        }
-
-
-        if (List.of(args).contains("--test-parsers")) {
+        if (testParsers) {
             foundAnomalies.addAll(testCoordinator.testParsers(ontFile));
         }
 
-        if (List.of(args).contains("--test-reasoners")) {
+        if (testReasoners) {
             System.out.println("test reasoners");
             foundAnomalies.addAll(testCoordinator.testReasoners(ontFile, reasoningTasks));
         }
 
-        if (List.of(args).contains("--minimize-ontology")) {
+        if (minimizeOntology) {
             System.out.println("minimize test ontology");
 
             OWLOntology minimalOnt = testCoordinator.minimalWitness(
@@ -67,7 +80,7 @@ public class Main {
                 System.out.println(a);
         }
 
-        if (List.of(args).contains("--no-export")) {
+        if (noExport) {
             // print anomalies instead of exporting them
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
@@ -85,6 +98,12 @@ public class Main {
 
             anomalyLogger.logSummary(foundAnomalies, pathToReportCSV, ",");
         }
+    }
+
+    public static void main(String[] args) {
+
+        parseArguments(args);
+        runTests();
 
         // indicate, that some anomaly was found
         if (!foundAnomalies.isEmpty())
