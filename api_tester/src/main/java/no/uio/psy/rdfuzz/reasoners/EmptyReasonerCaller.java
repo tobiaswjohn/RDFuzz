@@ -17,7 +17,7 @@ public class EmptyReasonerCaller implements  ReasonerInteractor{
     }
     @Override
     public ResultWithAnomaly<Boolean> isConsistent() {
-        return new ResultWithAnomaly<Boolean>(
+        return new ResultWithAnomaly<>(
                 false,
                 Set.of(new NotCreatedAnomaly(sut)),
                 sut

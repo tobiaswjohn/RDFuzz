@@ -81,7 +81,7 @@ public class ReasonerCaller implements ReasonerInteractor {
     public ResultWithAnomaly<Set<OWLAxiom>> classHierarchy() {
         InferredSubClassAxiomGenerator subClassGenerator = new InferredSubClassAxiomGenerator();
         InferredEquivalentClassAxiomGenerator equivClassGenerator = new InferredEquivalentClassAxiomGenerator();
-        Set<OWLAxiom> resultAxioms = new HashSet<OWLAxiom>();
+        Set<OWLAxiom> resultAxioms = new HashSet<>();
 
         try {
             if (reasoner.isConsistent()) {

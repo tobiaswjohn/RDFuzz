@@ -17,12 +17,10 @@ public class ElReasonerTester {
     private final ReasonerInteractor openllet;
     private final ReasonerInteractor elk;
 
-    private final OWLOntology ont;
 
     private final Set<Anomaly> foundAnomalies = new HashSet<>();
 
     ElReasonerTester(OWLOntology ont) {
-        this.ont = ont;
 
         ReasonerCallerFactory callerFactory = new ReasonerCallerFactory();
 
@@ -58,12 +56,6 @@ public class ElReasonerTester {
 
     public Set<Anomaly> getFoundAnomalies() {
         return foundAnomalies;
-    }
-
-    // runs all kinds of test with the ontology
-    public void runAllTests() {
-        testConsistency();
-        testInferredAxioms();
     }
 
     // runs the tests specified by the parameter
