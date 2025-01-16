@@ -23,12 +23,13 @@ public class Main {
     static boolean testReasoners = false;
     static boolean minimizeOntology = false;
     static boolean noExport = false;
+    static boolean printAnomalies = false; // indicates, whether anomalies are printed to terminal
 
     // the tasks that are used to test reasoners
     static Set<REASONING_TASKS> reasoningTasks = Set.of(
-        REASONING_TASKS.CONSISTENCY,
-        REASONING_TASKS.INFERRED_AXIOMS,
-        REASONING_TASKS.CLASS_HIERARCHY
+        REASONING_TASKS.CONSISTENCY//,
+        //REASONING_TASKS.INFERRED_AXIOMS,
+       // REASONING_TASKS.CLASS_HIERARCHY
     );
 
     // list to save all found anomalies
@@ -52,6 +53,9 @@ public class Main {
 
         if (listOfArguments.contains("--no-export"))
             noExport = true;
+
+        if (listOfArguments.contains("--print-anomalies"))
+            printAnomalies = true;
     }
 
     private static void runTests() {
@@ -81,15 +85,16 @@ public class Main {
                 System.out.println(a);
         }
 
-        if (noExport) {
-            // print anomalies instead of exporting them
+        if (printAnomalies) {
+            // print anomalies to terminal
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
 
             if (foundAnomalies.isEmpty())
                 System.out.println("No anomalies detected.");
         }
-        else {
+
+        if (!noExport) {
             // export found anomalies
             AnomalyLogger anomalyLogger = new AnomalyLogger();
             anomalyLogger.logAnomalies(
