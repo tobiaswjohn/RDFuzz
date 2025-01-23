@@ -87,9 +87,11 @@ public class TestCoordinator {
         }
 
         // load ontology from file
-        OntologyLoader ontL = new OntologyLoader(manager);
+        OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();;
+        OntologyLoader ontL = new OntologyLoader(newManager);
         OWLOntology ont = ontL.loadOntologyFile(ontFile);
 
+        System.out.println("original ontology: " + ont.axioms().count() + " axioms");
         // reduce test case
         TestCaseReducer ontReducer = new TestCaseReducer();
         return ontReducer.reduceOnt(ont, foundAnomalies, reasoningTasks);

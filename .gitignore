@@ -19,3 +19,11 @@ found_anomalies/el_reasoners/tobias-HP/*
 found_anomalies/turtle_parsers/tobias-HP/*
 test_cases/ore_2015/consistency/ontologies/*.owl
 test_cases/ore_2015/consistency/ontologies_larger_5mb/*.owl
+
+test_cases/ore_2015/all_el_smaller_1mb/*.owl
+test_cases/ore_2015/classification/ontologies/*.owl
+test_cases/ore_2015/consistency/ontologies_smaller_1mb/*.owl
+test_cases/ore_2015/instantiation/ontologies/*.owl
+
+test_cases/rdf_ttl/tobias-HP/generated_2024_12_17_18_54/*
+test_cases/rdf_ttl/tobias-HP/generated_2024_12_17_20_08/*

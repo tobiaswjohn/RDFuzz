@@ -23,7 +23,12 @@ public class OntologyLoader {
         if (ontFile.getName().endsWith(".ttl"))
             return loadTurtleFile(ontFile);
         else {
-            return loadFunctionalSyntaxFile(ontFile);
+            try {
+                return loadFunctionalSyntaxFile(ontFile);
+            } catch (OWLOntologyCreationException e) {
+                // try any other syntax to load the file
+                return loadOWLFile(ontFile);
+            }
         }
     }
 
@@ -37,6 +42,13 @@ public class OntologyLoader {
     public OWLOntology loadFunctionalSyntaxFile(File ontFile)  throws OWLOntologyCreationException {
         OWLOntologyDocumentSource source =
                 new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+
+        return manager.loadOntologyFromOntologyDocument(source);
+    }
+
+    public OWLOntology loadOWLFile(File ontFile)  throws OWLOntologyCreationException {
+        OWLOntologyDocumentSource source =
+                new FileDocumentSource(ontFile);
 
         return manager.loadOntologyFromOntologyDocument(source);
     }
