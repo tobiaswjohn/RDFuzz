@@ -1,17 +1,13 @@
-# Supplementary Material for Paper "Language-Based Testing for Knowledge Graphs"
+# Fuzzing of RDF Software
 
-This repository contains the code for generating random RDF-TTL files and OWL-EL ontologies using [ISLa](https://github.com/rindPHI/isla), a test oracle common for RDF-TTL parsers and OWL-EL reasoners and the test cases and found anomalies documented in the paper.
+this repository contains the code for generating random OWL ontologies and turtle files using [ISLa](https://github.com/rindPHI/isla)
+
+## Supplementary Material for Paper "Language-Based Testing for Knowledge Graphs"
+All files related to our paper can be found on branch _ESWC_
 
 ## Structure of Repostitory
  - ISLaResources: contains environment to run ISLa and grammars and scripts to call generate test files
  - api_tester: contains java files that call tools and classify and document anomalies
- - found_anomalies: folder that saves test runs and contains found anomalies (in sub-folders) 
- - found_bugs: the indentified bugs that are mentioned in the paper
-
-## Results Discussed in Paper
-- the test cases and found anomalies for the RDF-TTL campaign are in folder [found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14](found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14)
-- the test cases and found anomalies for the OWL-EL campaign, as well as the anomalies classified as discussed in the paper are in folder [found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17](found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17)
-
 
 ## Usage
 ### Usage using Docker (Recommended)
@@ -50,19 +46,14 @@ There are two scripts to generate random files for testing. Different options fo
 ./owl-el-generator.sh -time 60
 ```
 	 
-### Reproduce Fuzzing Campaigns
-There are two scripts to reproduce the testing campaigns from our paper. The scripts expect a time limit in minutes.
+### Run Fuzzing Campaigns
+There are two scripts to run testing campaigns. The scripts expect a time limit in minutes.
  - `rdf-ttl-campaign.sh`
 	 + script to test RDF-TTL parsers (OWL-API, Apache Jena) 
 	 + argument: number of minutes the fuzzing should run (default: 1min)
+	 + results will be in folder `found_anomalies/turtle_parsers`
  - `owl-el-campaign.sh`
 	 + script to test OWL-EL reasoners (HermiT, Openllet, ELK) 
 	 + argument: number of minutes the fuzzing should run (default: 1min)
 	 + results will be in folder `found_anomalies/el_reasoners`
-
-To run exactly the campaigns documented in the paper, one can call the scripts in the following way (note, that these calls need 58 hours of total run time):
-```
-./rdf-ttl-campaign.sh 1440
-./owl-el-campaign.sh 600
-```
 
