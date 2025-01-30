@@ -3,7 +3,7 @@
 this repository contains the code for generating random OWL ontologies and turtle files using [ISLa](https://github.com/rindPHI/isla)
 
 ## Supplementary Material for Paper "Language-Based Testing for Knowledge Graphs"
-All files related to our paper can be found on branch _ESWC_
+All files related to our submission for ESWC 2025 can be found on branch _eswc_
 
 ## Structure of Repostitory
  - ISLaResources: contains environment to run ISLa and grammars and scripts to call generate test files
