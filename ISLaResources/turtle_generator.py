@@ -37,7 +37,7 @@ solver = ISLaSolver(
     ),
 )
 
-print("used script: turtle_generator.py")
+print("used script: turtle_generator_3.py")
 print("used grammar: " + grammar_file)
 print("used no constraints")
 
