@@ -11,6 +11,7 @@ This repository contains the code for generating random RDF-TTL files and OWL-EL
 ## Results Discussed in Paper
 - the test cases and found anomalies for the RDF-TTL campaign are in folder [found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14](found_anomalies/turtle_parsers/rdfuzz/test_run_2024_11_30_10_14)
 - the test cases and found anomalies for the OWL-EL campaign, as well as the anomalies classified as discussed in the paper are in folder [found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17](found_anomalies/el_reasoners/rdfuzz/test_run_2024_11_29_15_17)
+- note: the test cases are in compressed folders `test-ontologies` to save space
 
 
 ## Usage
