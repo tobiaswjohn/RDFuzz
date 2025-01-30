@@ -2,6 +2,7 @@
 
 # runs test on provided .owl file
 # returns "pass" or "fail", depending on whether the reasoners agree with each other
+# in case of "fail" --> the anomaly is safed in root directory
 
 # optinal argument: timeout (in seconds)
 
@@ -17,8 +18,8 @@ rm -f $log
 wasTimeout=0
 
 # use java properties file to prevent unnormal logging
-timeout $maxTime java -Djava.util.logging.config.file=api_tester/src/main/resources/logging.properties -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile nothing nothing --test-reasoners --no-export >> $log 2>&1
-#java -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile nothing nothing --test-reasoners --no-export >> $log 2>&1
+#timeout $maxTime java -Djava.util.logging.config.file=api_tester/src/main/resources/logging.properties -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile nothing nothing --test-reasoners --no-export >> $log 2>&1
+timeout $maxTime java -Djava.util.logging.config.file=api_tester/src/main/resources/logging.properties -jar api_tester/target/api_tester-1.0-SNAPSHOT.jar $ontFile ./ nothing --test-reasoners --no-csv-log >> $log 2>&1
 
 exitCode=$?
 

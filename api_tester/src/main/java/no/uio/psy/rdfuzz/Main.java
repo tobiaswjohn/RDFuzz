@@ -30,6 +30,7 @@ public class Main {
     static boolean misc = false; // to some miscellaneous stuff
     static boolean minimizeOntology = false;
     static boolean noExport = false;
+    static boolean noCsvLog = false;
     static boolean printAnomalies = false; // indicates, whether anomalies are printed to terminal
 
     // the tasks that are used to test reasoners
@@ -63,6 +64,9 @@ public class Main {
 
         if (listOfArguments.contains("--no-export"))
             noExport = true;
+
+        if (listOfArguments.contains("--no-csv-log"))
+            noCsvLog = true;
 
         if (listOfArguments.contains("--print-anomalies"))
             printAnomalies = true;
@@ -128,8 +132,8 @@ public class Main {
                     foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
-
-            anomalyLogger.logSummary(foundAnomalies, pathToReportCSV, ",");
+            if (!noCsvLog)
+                anomalyLogger.logSummary(foundAnomalies, pathToReportCSV, ",");
         }
     }
 
