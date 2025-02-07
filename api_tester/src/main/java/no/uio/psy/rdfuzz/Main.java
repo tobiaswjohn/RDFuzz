@@ -170,6 +170,7 @@ public class Main {
                     foundAnomalies,
                     ontFile,
                     pathToReportAnomalies);
+
             if (!noCsvLog)
                 anomalyLogger.logSummary(foundAnomalies, pathToReportCSV, ",");
         }

@@ -59,7 +59,7 @@ public class AnomalyLogger {
             writer.println(a);
             count++;
         }
-
+/*
         writer.println();
         writer.println("\n––––––––––––––––––––––––––––––––––––––––––––");
         writer.println("–––––––––––    Ontology File    ––––––––––––");
@@ -78,6 +78,8 @@ public class AnomalyLogger {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        */
+
         writer.close();
     }
 
