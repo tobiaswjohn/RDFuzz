@@ -2,6 +2,7 @@ package no.uio.psy.rdfuzz;
 
 
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
+import org.apache.jena.ontology.Ontology;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -31,6 +32,7 @@ public class TestCaseReducer {
                     ont.axioms().collect(Collectors.toSet()),
                     anomalies
             );
+
 
            // System.out.println("check result: " + allAnomaliesEntailed(manager.createOntology(axioms), anomalies));
 
@@ -71,6 +73,7 @@ public class TestCaseReducer {
         Set<OWLAxiom> minimalY = singleJustification(minimalXPlusFixed, split.y, anomalies);
         // combine both sets
         minimalX.addAll(minimalY);
+
         return minimalX;
     }
 

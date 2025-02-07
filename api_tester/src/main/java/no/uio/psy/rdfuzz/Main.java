@@ -1,13 +1,18 @@
 package no.uio.psy.rdfuzz;
 
 import no.uio.psy.rdfuzz.anomalies.Anomaly;
+import no.uio.psy.rdfuzz.anomalies.ResultWithAnomaly;
+import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
 import org.semanticweb.owlapi.io.FileDocumentSource;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.util.InferredEquivalentClassAxiomGenerator;
+import org.semanticweb.owlapi.util.InferredSubClassAxiomGenerator;
 
 
 import java.io.*;
@@ -87,8 +92,9 @@ public class Main {
 
         if (misc) {
             // do some more stuff --> CAVE: this might part might change a lot!
+            System.out.println("start misc");
 
-            // load ontology with Hermit reasoner
+            // load ontology with Openllet reasoner
             OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
             OWLOntology ont = null;
@@ -98,8 +104,23 @@ public class Main {
                 throw new RuntimeException(e);
             }
 
-            ReasonerFactory rf = new ReasonerFactory();
-            OWLReasoner hermit = rf.createReasoner(ont);
+            OpenlletReasonerFactory rf = new OpenlletReasonerFactory();
+            OWLReasoner openllet = rf.createReasoner(ont);
+
+            /// class hierarchy
+            InferredSubClassAxiomGenerator subClassGenerator = new InferredSubClassAxiomGenerator();
+            try {
+                if (openllet.isConsistent()) {
+                    openllet.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+                    Set<OWLSubClassOfAxiom> subClassAxioms = subClassGenerator.createAxioms(manager.getOWLDataFactory(), openllet);
+                    for (OWLAxiom a :subClassAxioms)
+                        System.out.println("a: " + a);
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+
+            ///  end class hierarchy
         }
 
         if (minimizeOntology) {
@@ -113,6 +134,23 @@ public class Main {
             System.out.println("reduced ontology (" + minimalOnt.axioms().count() + " axioms):");
             for (OWLAxiom a : minimalOnt.axioms().toList())
                 System.out.println(a);
+
+            // try to safe ontology to file
+            File outputFile = new File(ontFile.getPath()+".minimal.owl");
+            if (outputFile.exists())
+                System.out.println("WARNING: minimal Ontology is not safes, because output file already exists");
+            else {
+                // save ontology
+                try {
+                    OWLManager.createOWLOntologyManager().saveOntology(
+                            minimalOnt,
+                            new FunctionalSyntaxDocumentFormat(),
+                            IRI.create(outputFile.toURI())
+                    );
+                } catch (OWLOntologyStorageException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             System.out.println();
         }
 
