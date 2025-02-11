@@ -132,8 +132,8 @@ public class Main {
                     reasoningTasks
             );
             System.out.println("reduced ontology (" + minimalOnt.axioms().count() + " axioms):");
-            for (OWLAxiom a : minimalOnt.axioms().toList())
-                System.out.println(a);
+            //for (OWLAxiom a : minimalOnt.axioms().toList())
+            //    System.out.println(a);
 
             // try to safe ontology to file
             File outputFile = new File(ontFile.getPath()+".minimal.owl");
@@ -156,6 +156,7 @@ public class Main {
 
         if (printAnomalies) {
             // print anomalies to terminal
+            System.out.println("Found " + foundAnomalies.size() + " anomalies.");
             for (Anomaly a : foundAnomalies)
                 System.out.println(a);
 

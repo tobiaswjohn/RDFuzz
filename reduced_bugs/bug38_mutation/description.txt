@@ -1,0 +1,35 @@
+bug in openllet
+
+--> Openllet infers inconsistent, which is not correctly
+
+--> renaming solves the issue (see ont_229.owl.minimal.manual.owl)
+
+--> already reported in https://github.com/Galigator/openllet/issues/89
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+OWLOntology ont = manager.loadOntologyFromOntologyDocument(source);
+
+OpenlletReasonerFactory rf = new OpenlletReasonerFactory();
+OWLReasoner openllet = rf.createReasoner(ont);
+
+/// class hierarchy
+openllet.isConsistent()
+
+found on 11.02.2025
+
+- mutation
+start new test (229) at Mon Feb 10 05:49:57 PM UTC 2025 
+mutate KG (ontology) ontologies_ore/ore_ont_5742.owl
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+mutation summary:
+numMutations;numDel;numAdd;appliedMutations;affectedSeedNodes
+30;10;34;[DeclareObjectPropMutation(config=SingleStatementConfiguration([[OntObject]newObjectProp:647298883, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2002/07/owl#ObjectProperty])), AddSameIndividualAssertionMutation(random), AddPropertyChainMutation(random), ReplaceClassWithSiblingMutation(random), AddDisjointClassRelationMutation(config=SingleStatementConfiguration([file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E65.Creation, http://www.w3.org/2002/07/owl#disjointWith, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E45.Address])), AddSubDataPropMutation(random), AddIndividualMutation(config=SingleStatementConfiguration([newIndividual:number2038958042, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2002/07/owl#NamedIndividual])), AddHasKeyMutation(random), AddDataPropRangeMutation(random), AddSubclassRelationMutation(config=SingleStatementConfiguration([file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E17.Type_Assignment, http://www.w3.org/2000/01/rdf-schema#subClassOf, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E28.Conceptual_Object])), AddHasKeyMutation(random), AddObjectHasSelfMutation(random), RemoveIndividualMutation(random), AddEquivalentClassRelationMutation(config=SingleStatementConfiguration([file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E4.Period, http://www.w3.org/2002/07/owl#equivalentClass, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E87.Curation_Activity])), RemoveSubclassRelationMutation(random), AddReflexiveObjectPropertyRelationMutation(config=SingleStatementConfiguration([newObjectProp:647298883, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2002/07/owl#ReflexiveProperty])), AddEquivObjectPropMutation(config=SingleStatementConfiguration([newObjectProp:647298883, http://www.w3.org/2000/01/rdf-schema#equivalentProperty, newObjectProp:647298883])), AddDifferentIndividualAssertionMutation(random), AddDisjointClassRelationMutation(config=SingleStatementConfiguration([file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E33.Linguistic_Object, http://www.w3.org/2002/07/owl#disjointWith, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E10.Transfer_of_Custody])), AddObjectHasValueMutation(random), ReplaceClassWithSiblingMutation(random), AddObjectPropDomainMutation(config=SingleStatementConfiguration([newObjectProp:647298883, http://www.w3.org/2000/01/rdf-schema#domain, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E44.Place_Appellation])), RemoveDomainRelationMutation(random), AddObjectPropDomainMutation(config=SingleStatementConfiguration([newObjectProp:647298883, http://www.w3.org/2000/01/rdf-schema#domain, file:/media/owl/Seagate%20Expansion%20Drive/mowlcorp_rep/mowlcorp_2014.10.07_orig/files/c6907ef3-a626-4b34-a474-15a4563b7f29_ish_label.rdfs#E8.Acquisition])), AddObjectSomeValuesFromMutation(random)];[E33.Linguistic_Object,E10.Transfer_of_Custody,E18.Physical_Thing,E28.Conceptual_Object,E4.Period,E87.Curation_Activity,E41.Appellation,E82.Actor_Appellation,Class,E72.Legal_Object,E17.Type_Assignment,E27.Site,E8.Acquisition,E29.Design_or_Procedure,E44.Place_Appellation,E25.Man-Made_Feature,RELAPPROXC170,E73.Information_Object,E65.Creation,E45.Address,E75.Conceptual_Object_Appellation,E90.Symbolic_Object,E48.Place_Name]
+call reasoner oracle
+found anomaly. Saved to fuzzingResults/rdfuzz/fuzzing_2025_02_10_16_55/ont_229.owl.
+
+reported:
+ - already reported, as known bug

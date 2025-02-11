@@ -39,7 +39,7 @@ Exception in thread "main" java.lang.NullPointerException: operands cannot be nu
 
 mutation of ore_ont_15292.owl
 
-found on 23.01.2024
+found on 23.01.2025
 
 
 reported:

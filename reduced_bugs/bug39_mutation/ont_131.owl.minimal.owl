@@ -1,0 +1,44 @@
+Prefix(:=<urn:unnamed:ontology#ont30853683990371>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<urn:unnamed:ontology#ont30853683990371>
+
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0001170>))
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0007116>))
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0007133>))
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0025374>))
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0025377>))
+Declaration(Class(<http://purl.obolibrary.org/obo/PO_0025468>))
+Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/BFO_0000051>))
+Declaration(NamedIndividual(<newIndividual:number633775466>))
+############################
+#   Object Properties
+############################
+
+# Object Property: <http://purl.obolibrary.org/obo/BFO_0000051> (<http://purl.obolibrary.org/obo/BFO_0000051>)
+
+ObjectPropertyDomain(<http://purl.obolibrary.org/obo/BFO_0000051> <http://purl.obolibrary.org/obo/PO_0007116>)
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://purl.obolibrary.org/obo/PO_0007116> (<http://purl.obolibrary.org/obo/PO_0007116>)
+
+SubClassOf(<http://purl.obolibrary.org/obo/PO_0007116> <http://purl.obolibrary.org/obo/PO_0007133>)
+
+# Class: <http://purl.obolibrary.org/obo/PO_0025374> (<http://purl.obolibrary.org/obo/PO_0025374>)
+
+SubClassOf(<http://purl.obolibrary.org/obo/PO_0025374> <http://purl.obolibrary.org/obo/PO_0001170>)
+SubClassOf(<http://purl.obolibrary.org/obo/PO_0025374> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/BFO_0000051> <http://purl.obolibrary.org/obo/PO_0025377>))
+
+
+
+SubClassOf(ObjectOneOf(<newIndividual:number633775466>) <http://purl.obolibrary.org/obo/PO_0025468>)
+)

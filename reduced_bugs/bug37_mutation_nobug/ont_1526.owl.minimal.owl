@@ -1,0 +1,409 @@
+Prefix(:=<urn:unnamed:ontology#ont29622971670900>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<urn:unnamed:ontology#ont29622971670900>
+
+Declaration(Class(<http://lod.taxonconcept.org/ontology/txn.owl#Occurrence>))
+Declaration(Class(<http://lod.taxonconcept.org/ontology/txn.owl#Sex>))
+Declaration(Class(<http://lod.taxonconcept.org/ontology/txn.owl#SpeciesIndividual>))
+Declaration(Class(<http://lod.taxonconcept.org/ontology/txn.owl#TaxonConcept>))
+Declaration(Class(<http://purl.org/NET/c4dm/event.owl#Event>))
+Declaration(Class(<http://purl.org/dc/terms/Location>))
+Declaration(Class(<http://purl.org/ontology/bibo/Webpage>))
+Declaration(Class(<http://purl.org/ontology/bibo/Website>))
+Declaration(Class(<http://rdf.geospecies.org/methods/observationMethod#ArthropodCollectionMethods>))
+Declaration(Class(<http://rdf.geospecies.org/methods/observationMethod#Human_Observation>))
+Declaration(Class(<http://rdf.geospecies.org/methods/observationMethod#Photographed>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBCPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBC_Ecozone>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBC_Freshwater_Habitat>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBC_Marine_Habitat>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BBC_Terrestrial_Habitat>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BasisOfRecord>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Bio2RDFtaxon>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BioLibPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#BugGuidePage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#ClassConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#CoL_LSID>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Continent>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Country>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#County>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#DBpediaResource>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#DarwinPoint>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Ecozone>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#EoLPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#FamilyConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#FreebaseGUID>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#GBIFPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesScheme>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#ITISPage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#IUCN_Habitat_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#IndividualOrganism>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#KingdomConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#LSID>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#LifeForm>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#LifeStage>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Locality>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Location>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Nativeness>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#NomenclaturalCode>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Observation>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#ObservationMethod>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_III_Ecoregion_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_IV_Ecoregion_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#OpenCycConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#OrderConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#PhotoCollection>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#PhylumConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Project>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Sex>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#SpeciesConcept>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#State>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#TaxonRank>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#TaxonomicStatus>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#ThreatStatusIUCN>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#TypeStatus>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#USDA_Growth_Habit>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Jurisdiction_Code>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#UUID>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Ubio_LSID>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#UniprotTaxon>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#WikipediaArticle>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#WikispeciesArticle>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Herbarium_Habitat_Classification>))
+Declaration(Class(<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Natural_Heritage_Inventory_Habitat_Classification>))
+Declaration(Class(<http://www.geonames.org/ontology#Feature>))
+Declaration(Class(<http://www.w3.org/2004/02/skos/core#Concept>))
+Declaration(Class(<http://www.w3.org/2004/02/skos/core#ConceptScheme>))
+Declaration(Class(<http://xmlns.com/foaf/0.1/Document>))
+Declaration(Class(<http://xmlns.com/foaf/0.1/Person>))
+Declaration(Class(<http://xmlns.com/foaf/0.1/Project>))
+Declaration(ObjectProperty(<http://rdf.geospecies.org/ont/geospecies#hasWikipediaArticle>))
+Declaration(DataProperty(<http://rdf.geospecies.org/ont/geospecies#hasGNI>))
+Declaration(NamedIndividual(<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status_Native_Native>))
+############################
+#   Object Properties
+############################
+
+# Object Property: <http://rdf.geospecies.org/ont/geospecies#hasWikipediaArticle> (<http://rdf.geospecies.org/ont/geospecies#hasWikipediaArticle>)
+
+ObjectPropertyDomain(<http://rdf.geospecies.org/ont/geospecies#hasWikipediaArticle> <http://xmlns.com/foaf/0.1/Person>)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: <http://rdf.geospecies.org/ont/geospecies#hasGNI> (<http://rdf.geospecies.org/ont/geospecies#hasGNI>)
+
+DataPropertyDomain(<http://rdf.geospecies.org/ont/geospecies#hasGNI> owl:Nothing)
+
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://lod.taxonconcept.org/ontology/txn.owl#Occurrence> (<http://lod.taxonconcept.org/ontology/txn.owl#Occurrence>)
+
+EquivalentClasses(<http://lod.taxonconcept.org/ontology/txn.owl#Occurrence> <http://rdf.geospecies.org/ont/geospecies#Observation>)
+
+# Class: <http://lod.taxonconcept.org/ontology/txn.owl#SpeciesIndividual> (<http://lod.taxonconcept.org/ontology/txn.owl#SpeciesIndividual>)
+
+EquivalentClasses(<http://lod.taxonconcept.org/ontology/txn.owl#SpeciesIndividual> <http://rdf.geospecies.org/ont/geospecies#IndividualOrganism>)
+
+# Class: <http://lod.taxonconcept.org/ontology/txn.owl#TaxonConcept> (<http://lod.taxonconcept.org/ontology/txn.owl#TaxonConcept>)
+
+EquivalentClasses(<http://lod.taxonconcept.org/ontology/txn.owl#TaxonConcept> owl:Nothing)
+
+# Class: <http://purl.org/ontology/bibo/Webpage> (<http://purl.org/ontology/bibo/Webpage>)
+
+SubClassOf(<http://purl.org/ontology/bibo/Webpage> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://purl.org/ontology/bibo/Website> (<http://purl.org/ontology/bibo/Website>)
+
+SubClassOf(<http://purl.org/ontology/bibo/Website> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/methods/observationMethod#ArthropodCollectionMethods> (<http://rdf.geospecies.org/methods/observationMethod#ArthropodCollectionMethods>)
+
+SubClassOf(<http://rdf.geospecies.org/methods/observationMethod#ArthropodCollectionMethods> <http://rdf.geospecies.org/ont/geospecies#ObservationMethod>)
+
+# Class: <http://rdf.geospecies.org/methods/observationMethod#Human_Observation> (<http://rdf.geospecies.org/methods/observationMethod#Human_Observation>)
+
+SubClassOf(<http://rdf.geospecies.org/methods/observationMethod#Human_Observation> <http://rdf.geospecies.org/ont/geospecies#ObservationMethod>)
+
+# Class: <http://rdf.geospecies.org/methods/observationMethod#Photographed> (<http://rdf.geospecies.org/methods/observationMethod#Photographed>)
+
+SubClassOf(<http://rdf.geospecies.org/methods/observationMethod#Photographed> <http://rdf.geospecies.org/ont/geospecies#ObservationMethod>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBCPage> (<http://rdf.geospecies.org/ont/geospecies#BBCPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBCPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBC_Ecozone> (<http://rdf.geospecies.org/ont/geospecies#BBC_Ecozone>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBC_Ecozone> <http://rdf.geospecies.org/ont/geospecies#Ecozone>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBC_Freshwater_Habitat> (<http://rdf.geospecies.org/ont/geospecies#BBC_Freshwater_Habitat>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBC_Freshwater_Habitat> <http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification> (<http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification> <http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBC_Marine_Habitat> (<http://rdf.geospecies.org/ont/geospecies#BBC_Marine_Habitat>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBC_Marine_Habitat> <http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BBC_Terrestrial_Habitat> (<http://rdf.geospecies.org/ont/geospecies#BBC_Terrestrial_Habitat>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BBC_Terrestrial_Habitat> <http://rdf.geospecies.org/ont/geospecies#BBC_Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BasisOfRecord> (<http://rdf.geospecies.org/ont/geospecies#BasisOfRecord>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BasisOfRecord> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Bio2RDFtaxon> (<http://rdf.geospecies.org/ont/geospecies#Bio2RDFtaxon>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Bio2RDFtaxon> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BioLibPage> (<http://rdf.geospecies.org/ont/geospecies#BioLibPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BioLibPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#BugGuidePage> (<http://rdf.geospecies.org/ont/geospecies#BugGuidePage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#BugGuidePage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#ClassConcept> (<http://rdf.geospecies.org/ont/geospecies#ClassConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#ClassConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#CoL_LSID> (<http://rdf.geospecies.org/ont/geospecies#CoL_LSID>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#CoL_LSID> <http://rdf.geospecies.org/ont/geospecies#LSID>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Continent> (<http://rdf.geospecies.org/ont/geospecies#Continent>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Continent> <http://www.geonames.org/ontology#Feature>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Country> (<http://rdf.geospecies.org/ont/geospecies#Country>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Country> <http://www.geonames.org/ontology#Feature>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#County> (<http://rdf.geospecies.org/ont/geospecies#County>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#County> <http://www.geonames.org/ontology#Feature>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#DBpediaResource> (<http://rdf.geospecies.org/ont/geospecies#DBpediaResource>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#DBpediaResource> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Ecozone> (<http://rdf.geospecies.org/ont/geospecies#Ecozone>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Ecozone> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#EoLPage> (<http://rdf.geospecies.org/ont/geospecies#EoLPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#EoLPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#FamilyConcept> (<http://rdf.geospecies.org/ont/geospecies#FamilyConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#FamilyConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#FreebaseGUID> (<http://rdf.geospecies.org/ont/geospecies#FreebaseGUID>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#FreebaseGUID> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#GBIFPage> (<http://rdf.geospecies.org/ont/geospecies#GBIFPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#GBIFPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#GeoSpeciesPage> (<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#GeoSpeciesScheme> (<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesScheme>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#GeoSpeciesScheme> <http://www.w3.org/2004/02/skos/core#ConceptScheme>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Habitat_Classification> (<http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Habitat_Classification> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#ITISPage> (<http://rdf.geospecies.org/ont/geospecies#ITISPage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#ITISPage> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#IUCN_Habitat_Classification> (<http://rdf.geospecies.org/ont/geospecies#IUCN_Habitat_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#IUCN_Habitat_Classification> <http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#KingdomConcept> (<http://rdf.geospecies.org/ont/geospecies#KingdomConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#KingdomConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#LSID> (<http://rdf.geospecies.org/ont/geospecies#LSID>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#LSID> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#LifeForm> (<http://rdf.geospecies.org/ont/geospecies#LifeForm>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#LifeForm> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#LifeStage> (<http://rdf.geospecies.org/ont/geospecies#LifeStage>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#LifeStage> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Locality> (<http://rdf.geospecies.org/ont/geospecies#Locality>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Locality> <http://www.geonames.org/ontology#Feature>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Location> (<http://rdf.geospecies.org/ont/geospecies#Location>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Location> <http://purl.org/dc/terms/Location>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Nativeness> (<http://rdf.geospecies.org/ont/geospecies#Nativeness>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Nativeness> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#NomenclaturalCode> (<http://rdf.geospecies.org/ont/geospecies#NomenclaturalCode>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#NomenclaturalCode> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Observation> (<http://rdf.geospecies.org/ont/geospecies#Observation>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Observation> <http://purl.org/NET/c4dm/event.owl#Event>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#ObservationMethod> (<http://rdf.geospecies.org/ont/geospecies#ObservationMethod>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#ObservationMethod> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus> (<http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification> (<http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification> <http://rdf.geospecies.org/ont/geospecies#Ecozone>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Omernik_Level_III_Ecoregion_Classification> (<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_III_Ecoregion_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_III_Ecoregion_Classification> <http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Omernik_Level_IV_Ecoregion_Classification> (<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_IV_Ecoregion_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Omernik_Level_IV_Ecoregion_Classification> <http://rdf.geospecies.org/ont/geospecies#Omernik_Ecoregion_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#OpenCycConcept> (<http://rdf.geospecies.org/ont/geospecies#OpenCycConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#OpenCycConcept> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#OrderConcept> (<http://rdf.geospecies.org/ont/geospecies#OrderConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#OrderConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#PhotoCollection> (<http://rdf.geospecies.org/ont/geospecies#PhotoCollection>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#PhotoCollection> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#PhylumConcept> (<http://rdf.geospecies.org/ont/geospecies#PhylumConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#PhylumConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Project> (<http://rdf.geospecies.org/ont/geospecies#Project>)
+
+EquivalentClasses(<http://rdf.geospecies.org/ont/geospecies#Project> <http://xmlns.com/foaf/0.1/Project>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Sex> (<http://rdf.geospecies.org/ont/geospecies#Sex>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Sex> <http://rdf.geospecies.org/ont/geospecies#EoLPage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#SpeciesConcept> (<http://rdf.geospecies.org/ont/geospecies#SpeciesConcept>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#SpeciesConcept> owl:Nothing)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#State> (<http://rdf.geospecies.org/ont/geospecies#State>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#State> <http://www.geonames.org/ontology#Feature>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#TaxonRank> (<http://rdf.geospecies.org/ont/geospecies#TaxonRank>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#TaxonRank> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#TaxonomicStatus> (<http://rdf.geospecies.org/ont/geospecies#TaxonomicStatus>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#TaxonomicStatus> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#ThreatStatusIUCN> (<http://rdf.geospecies.org/ont/geospecies#ThreatStatusIUCN>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#ThreatStatusIUCN> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#TypeStatus> (<http://rdf.geospecies.org/ont/geospecies#TypeStatus>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#TypeStatus> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#USDA_Growth_Habit> (<http://rdf.geospecies.org/ont/geospecies#USDA_Growth_Habit>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#USDA_Growth_Habit> <http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#USDA_Native_Jurisdiction_Code> (<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Jurisdiction_Code>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Jurisdiction_Code> <http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status> (<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status> <http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics> (<http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#USDA_Plant_Characteristics> <http://www.w3.org/2004/02/skos/core#Concept>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Ubio_LSID> (<http://rdf.geospecies.org/ont/geospecies#Ubio_LSID>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Ubio_LSID> <http://rdf.geospecies.org/ont/geospecies#LSID>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#UniprotTaxon> (<http://rdf.geospecies.org/ont/geospecies#UniprotTaxon>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#UniprotTaxon> <http://xmlns.com/foaf/0.1/Document>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#WikipediaArticle> (<http://rdf.geospecies.org/ont/geospecies#WikipediaArticle>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#WikipediaArticle> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#WikispeciesArticle> (<http://rdf.geospecies.org/ont/geospecies#WikispeciesArticle>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#WikispeciesArticle> <http://purl.org/ontology/bibo/Webpage>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Wisconsin_Herbarium_Habitat_Classification> (<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Herbarium_Habitat_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Herbarium_Habitat_Classification> <http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>)
+
+# Class: <http://rdf.geospecies.org/ont/geospecies#Wisconsin_Natural_Heritage_Inventory_Habitat_Classification> (<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Natural_Heritage_Inventory_Habitat_Classification>)
+
+SubClassOf(<http://rdf.geospecies.org/ont/geospecies#Wisconsin_Natural_Heritage_Inventory_Habitat_Classification> <http://rdf.geospecies.org/ont/geospecies#Habitat_Classification>)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: <http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status_Native_Native> (<http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status_Native_Native>)
+
+DataPropertyAssertion(<http://rdf.geospecies.org/ont/geospecies#hasGNI> <http://rdf.geospecies.org/ont/geospecies#USDA_Native_Status_Native_Native> "someText2")
+
+
+)

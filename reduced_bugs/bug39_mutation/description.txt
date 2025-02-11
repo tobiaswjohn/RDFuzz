@@ -1,0 +1,35 @@
+bug in openllet
+
+--> Openllet misses subclass relation
+
+--> renaming solves the issue (see ont_131.owl.minimal.manual.owl)
+
+--> already reported in https://github.com/Galigator/openllet/issues/89
+
+call:
+OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+OWLOntology ont = manager.loadOntologyFromOntologyDocument(source);
+
+OpenlletReasonerFactory rf = new OpenlletReasonerFactory();
+OWLReasoner openllet = rf.createReasoner(ont);
+
+/// class hierarchy
+openllet.isConsistent()
+
+found on 11.02.2025
+
+- mutation
+start new test (131) at Mon Feb 10 05:25:03 PM UTC 2025 
+mutate KG (ontology) ontologies_ore/ore_ont_16626.owl
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+mutation summary:
+numMutations;numDel;numAdd;appliedMutations;affectedSeedNodes
+30;1;29;[AddObjectSomeValuesFromMutation(random), AddDataPropDomainMutation(random), AddClassAssertionMutation(config=SingleStatementConfiguration([_:36628e6f-6f31-4ff1-b5bf-c47662555dcb, emptyAxiomProp, _:0ef04bcd-50ff-49b3-8544-4166ea0e8919])), AddHasKeyMutation(random), AddDisjointClassRelationMutation(config=SingleStatementConfiguration([http://purl.obolibrary.org/obo/PO_0007516, http://www.w3.org/2002/07/owl#disjointWith, http://purl.obolibrary.org/obo/PO_0025504])), AddDataPropRangeMutation(random), AddObjectPropRangeMutation(config=SingleStatementConfiguration([http://purl.obolibrary.org/obo/BFO_0000050, http://www.w3.org/2000/01/rdf-schema#range, http://purl.obolibrary.org/obo/PO_0007135])), AddIndividualMutation(config=SingleStatementConfiguration([newIndividual:number633775466, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2002/07/owl#NamedIndividual])), AddObjectSomeValuesFromMutation(random), AddDifferentIndividualAssertionMutation(config=SingleStatementConfiguration([newIndividual:number633775466, http://www.w3.org/2002/07/owl#differentFrom, newIndividual:number633775466])), AddPropertyChainMutation(random), AddTransitiveObjectPropertyRelationMutation(config=SingleStatementConfiguration([http://purl.obolibrary.org/obo/BFO_0000051, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2002/07/owl#TransitiveProperty])), AddDifferentIndividualAssertionMutation(config=SingleStatementConfiguration([newIndividual:number633775466, http://www.w3.org/2002/07/owl#differentFrom, newIndividual:number633775466])), AddSameIndividualAssertionMutation(config=SingleStatementConfiguration([newIndividual:number633775466, http://www.w3.org/2002/07/owl#sameAs, newIndividual:number633775466])), AddObjectPropDomainMutation(config=SingleStatementConfiguration([http://purl.obolibrary.org/obo/BFO_0000051, http://www.w3.org/2000/01/rdf-schema#domain, http://purl.obolibrary.org/obo/PO_0007116])), AddSubObjectPropMutation(config=SingleStatementConfiguration([http://purl.obolibrary.org/obo/79d082b4-ccb4-4f58-95de-3fc5a1e826dd_po_temporal.obo#preceded_by, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.obolibrary.org/obo/79d082b4-ccb4-4f58-95de-3fc5a1e826dd_po_temporal.obo#develops_from])), AddEquivDataPropMutation(random), RemoveDisjointClassRelationMutation(random), AddELObjectOneOfMutation(random)];[preceded_by,part_of,has_part,BFO_0000051,PO_0007116,PO_0025468,Class,TransitiveProperty,PO_0007516,PO_0025504,PO_0007067,PO_0007510,Restriction,PO_0001012,BFO_0000050,PO_0007615,develops_from,PO_0007620,PO_0007135]
+call reasoner oracle
+found anomaly. Saved to fuzzingResults/rdfuzz/fuzzing_2025_02_10_16_55/ont_131.owl.
+
+reported:
+ - already reported, as known bug

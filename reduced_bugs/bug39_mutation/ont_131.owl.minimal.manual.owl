@@ -1,0 +1,22 @@
+Prefix(:=<http://www.example.org#>)
+
+Ontology(
+
+    Declaration(Class(:A))
+    Declaration(Class(:B))
+    Declaration(Class(:C))
+    Declaration(Class(:D))
+    Declaration(Class(:E))
+    Declaration(Class(:F))
+    Declaration(ObjectProperty(:p))
+    Declaration(NamedIndividual(:i))
+
+
+    ObjectPropertyDomain(:p :B)
+
+    SubClassOf(:B :C)
+    SubClassOf(:D :A)
+    SubClassOf(:D ObjectSomeValuesFrom(:p :E))
+
+    SubClassOf(ObjectOneOf(:i) :F)
+)
