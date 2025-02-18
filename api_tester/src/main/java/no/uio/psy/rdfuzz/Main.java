@@ -6,6 +6,7 @@ import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
+import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
 import org.semanticweb.owlapi.io.FileDocumentSource;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.*;
@@ -95,7 +96,7 @@ public class Main {
             System.out.println("start misc");
 
             // load ontology with Openllet reasoner
-            OWLOntologyDocumentSource source = new FileDocumentSource(ontFile, new FunctionalSyntaxDocumentFormat());
+            OWLOntologyDocumentSource source = new FileDocumentSource(ontFile);
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
             OWLOntology ont = null;
             try {
@@ -104,21 +105,7 @@ public class Main {
                 throw new RuntimeException(e);
             }
 
-            OpenlletReasonerFactory rf = new OpenlletReasonerFactory();
-            OWLReasoner openllet = rf.createReasoner(ont);
-
-            /// class hierarchy
-            InferredSubClassAxiomGenerator subClassGenerator = new InferredSubClassAxiomGenerator();
-            try {
-                if (openllet.isConsistent()) {
-                    openllet.precomputeInferences(InferenceType.CLASS_HIERARCHY);
-                    Set<OWLSubClassOfAxiom> subClassAxioms = subClassGenerator.createAxioms(manager.getOWLDataFactory(), openllet);
-                    for (OWLAxiom a :subClassAxioms)
-                        System.out.println("a: " + a);
-                }
-            } catch (Exception e) {
-                throw e;
-            }
+            System.out.println("Size of ontology: " + ont.axioms().toList().size() + " axioms.");
 
             ///  end class hierarchy
         }
