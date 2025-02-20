@@ -32,3 +32,6 @@ test_cases/ore_2015/instantiation/ontologies/*.owl
 test_cases/rdf_ttl/tobias-HP/generated_2024_12_17_18_54/*
 test_cases/rdf_ttl/tobias-HP/generated_2024_12_17_20_08/*
 anomaly*.txt
+reduced_bugs/temp/*
+testReasonersEL_folder.sh
+temp_reasoners.log
