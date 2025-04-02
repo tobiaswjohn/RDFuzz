@@ -1,5 +1,8 @@
 # Supplementary Material for Paper "Language-Based Testing for Knowledge Graphs"
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14772702.svg)](https://doi.org/10.5281/zenodo.14772702)
+
+
 This repository contains the code for generating random RDF-TTL files and OWL-EL ontologies using [ISLa](https://github.com/rindPHI/isla), a test oracle common for RDF-TTL parsers and OWL-EL reasoners and the test cases and found anomalies documented in the paper.
 
 ## Structure of Repostitory
