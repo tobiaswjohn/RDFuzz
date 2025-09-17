@@ -11,6 +11,7 @@ COPY ./owl-el-campaign.sh ./RDFuzz/owl-el-campaign.sh
 COPY ./owl-el-generator.sh ./RDFuzz/owl-el-generator.sh
 COPY ./rdf-ttl-campaign.sh ./RDFuzz/rdf-ttl-campaign.sh
 COPY ./rdf-ttl-generator.sh ./RDFuzz/rdf-ttl-generator.sh
+COPY ./minimize-ontology.sh ./RDFuzz/minimize-ontology.sh
 
 
 # update system

@@ -23,6 +23,7 @@ RUN mvn clean package
 WORKDIR "/"
 
 COPY ./reasonerOracle.sh ./RDFuzz/reasonerOracle.sh
+COPY ./minimize-ontology.sh ./RDFuzz/minimize-ontology.sh
 
 # two test ontlogies: first: pass; second: fail
 COPY ./test_cases/ore_2015/consistency/temp_anomaly_test5.owl ./RDFuzz/test_cases/ore_2015/consistency/temp_anomaly_test5.owl
